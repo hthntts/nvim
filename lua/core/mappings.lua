@@ -2,7 +2,7 @@ keymap = vim.keymap
 local uv = vim.uv
 
 -- Save key strokes (now we do not need to press shift to enter command mode).
--- keymap.set({ "n", "x" }, ";", ":")
+keymap.set({ "n", "x" }, ";", ":")
 
 -- Turn the word under cursor to upper case
 keymap.set("i", "<c-u>", "<Esc>viwUea")
@@ -11,8 +11,8 @@ keymap.set("i", "<c-u>", "<Esc>viwUea")
 keymap.set("i", "<c-t>", "<Esc>b~lea")
 
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
--- keymap.set("n", "<leader>p", "m`o<ESC>p``", { desc = "paste below current line" })
--- keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" })
+keymap.set("n", "<leader>p", "m`o<ESC>p``", { desc = "Paste below current line" })
+keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "Paste above current line" })
 --
 -- Clear search, diff update and redraw
 keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
@@ -56,7 +56,7 @@ keymap.set("n", "<leader>bd", "<cmd>bd<cr>", {
 -- keymap.set("n", "<leader>bO", function()
 --   local buf_ids = vim.api.nvim_list_bufs()
 --   local cur_buf = vim.api.nvim_win_get_buf(0)
--- 
+--
 --   for _, buf_id in pairs(buf_ids) do
 --     -- do not Delete unlisted buffers, which may lead to unexpected errors
 --     if vim.api.nvim_get_option_value("buflisted", { buf = buf_id }) and buf_id ~= cur_buf then
@@ -73,7 +73,7 @@ keymap.set("n", "<leader>bd", "<cmd>bd<cr>", {
 --   expr = true,
 --   desc = "insert line below",
 -- })
--- 
+--
 -- keymap.set("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", {
 --   expr = true,
 --   desc = "insert line above",
@@ -90,8 +90,8 @@ keymap.set("n", "^", "g^")
 keymap.set("x", "$", "g_")
 
 -- Go to start or end of line easier
--- keymap.set({ "n", "x" }, "H", "^")
--- keymap.set({ "n", "x" }, "L", "g_")
+keymap.set({ "n", "x" }, "H", "^")
+keymap.set({ "n", "x" }, "L", "g_")
 
 -- Continuous visual shifting (does not exit Visual mode), `gv` means
 -- to reselect previous visual area, see https://superuser.com/q/310417/736190
@@ -124,9 +124,6 @@ keymap.set("n", "<leader>br", "printf('`[%s`]', getregtype()[0])", {
 -- Always use very magic mode for searching
 keymap.set("n", "/", [[/\v]])
 
--- Search in selected region
--- xnoremap / :<C-U>call feedkeys('/\%>'.(line("'<")-1).'l\%<'.(line("'>")+1)."l")<CR>
-
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
 keymap.set("n", "<leader>fc", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "Change cd" })
@@ -135,8 +132,8 @@ keymap.set("n", "<leader>fc", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "Change
 keymap.set("t", "<Esc>", [[<c-\><c-n>]])
 
 -- Toggle spell checking
--- keymap.set("n", "<F11>", "<cmd>set spell!<cr>", { desc = "toggle spell" })
--- keymap.set("i", "<F11>", "<c-o><cmd>set spell!<cr>", { desc = "toggle spell" })
+keymap.set("n", "<F11>", "<cmd>set spell!<cr>", { desc = "toggle spell" })
+keymap.set("i", "<F11>", "<c-o><cmd>set spell!<cr>", { desc = "toggle spell" })
 
 -- Change text without putting it into the vim register,
 -- see https://stackoverflow.com/q/54255/6064933
@@ -146,7 +143,7 @@ keymap.set("n", "cc", '"_cc')
 keymap.set("x", "c", '"_c')
 
 -- Remove trailing whitespace characters
--- keymap.set("n", "<leader><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
+keymap.set("n", "<leader>bR", "<cmd>StripTrailingWhitespace<cr>", { desc = "Remove trailing space" })
 
 -- check the syntax group of current cursor position
 keymap.set("n", "<leader>ts", "<cmd>call utils#SynGroup()<cr>", { desc = "Syntax group" })
@@ -158,12 +155,12 @@ keymap.set("n", "<leader>by", "<cmd>%yank<cr>", { desc = "Yank buffer" })
 keymap.set("n", "<leader>tc", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "Cursor column" })
 
 -- Move current line up and down (VSCode)
-keymap.set("n", "<A-up>", '<cmd>call utils#SwitchLine(line("."), "up")<cr>', { desc = "move line up" })
-keymap.set("n", "<A-down>", '<cmd>call utils#SwitchLine(line("."), "down")<cr>', { desc = "move line down" })
+keymap.set("n", "<A-up>", '<cmd>call utils#SwitchLine(line("."), "up")<cr>', { desc = "Move line up" })
+keymap.set("n", "<A-down>", '<cmd>call utils#SwitchLine(line("."), "down")<cr>', { desc = "Move line down" })
 
 -- Move current visual-line selection up and down
--- keymap.set("x", "<A-up>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "move selection up" })
--- keymap.set("x", "<A-down>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "move selection down" })
+-- keymap.set("x", "<A-up>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "Move selection up" })
+-- keymap.set("x", "<A-down>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "Move selection down" })
 
 -- Replace visual selection with text in register, but not contaminate the register,
 -- see also https://stackoverflow.com/q/10723700/6064933.
@@ -194,7 +191,7 @@ keymap.set("n", "<A-D-Left>", '<cmd>call utils#GoToBuffer(v:count, "backward")<c
 keymap.set({ "x", "o" }, "iu", "<cmd>call utils#TextObjURL()<cr>", { desc = "URL text object" })
 
 -- Text objects for entire buffer (VScode)
-keymap.set("n", "<D-a>", "<cmd>call utils#TextObjBuffer()<cr>", { desc = "buffer text object" })
+keymap.set("n", "<D-a>", "<cmd>call utils#TextObjBuffer()<cr>", { desc = "Buffer text object" })
 
 -- Do not move my cursor when joining lines.
 keymap.set("n", "J", function()
@@ -203,7 +200,7 @@ keymap.set("n", "J", function()
       delmarks z
     ]])
 end, {
-  desc = "join lines without moving cursor",
+  desc = "Join lines without moving cursor",
 })
 
 keymap.set("n", "gJ", function()
@@ -213,7 +210,7 @@ keymap.set("n", "gJ", function()
       delmarks z
     ]])
 end, {
-  desc = "join lines without moving cursor",
+  desc = "Join lines without moving cursor",
 })
 
 -- Break inserted text into smaller undo units when we insert some punctuation chars.
