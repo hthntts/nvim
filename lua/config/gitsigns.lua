@@ -25,7 +25,7 @@ gs.setup {
         gs.next_hunk()
       end)
       return "<Ignore>"
-    end, { expr = true, desc = "next hunk" })
+    end, { expr = true, desc = "Next hunk" })
 
     map("n", "[c", function()
       if vim.wo.diff then
@@ -35,13 +35,13 @@ gs.setup {
         gs.prev_hunk()
       end)
       return "<Ignore>"
-    end, { expr = true, desc = "previous hunk" })
+    end, { expr = true, desc = "Previous hunk" })
 
     -- Actions
-    map("n", "<leader>hp", gs.preview_hunk)
-    map("n", "<leader>hb", function()
+    map("n", "<leader>gp", gs.preview_hunk, { expr = true, desc = "Preview hunk" })
+    map("n", "<leader>gB", function()
       gs.blame_line { full = true }
-    end)
+    end, { expr = true, desc = "Blame" })
   end,
 }
 

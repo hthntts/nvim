@@ -34,7 +34,7 @@ keymap.set({ "n", "v" }, "<leader>gy", function()
   gitlinker.get_buf_range_url(mode)
 end, {
   silent = true,
-  desc = "copy link to remote",
+  desc = "Copy link to remote",
 })
 
 keymap.set("n", "<leader>goh", function()
@@ -43,5 +43,5 @@ keymap.set("n", "<leader>goh", function()
   }
 end, {
   silent = true,
-  desc = "browse homepage",
+  desc = "Browse homepage",
 })
