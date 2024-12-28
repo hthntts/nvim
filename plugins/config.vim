@@ -88,7 +88,7 @@ nnoremap <silent> <leader>hh :<C-U>Leaderf help --popup<CR>
 nnoremap <silent> <leader>ss :<C-U>Leaderf line<CR>
 
 " Search tags in current buffer
-nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag --popup<CR>
+nnoremap <silent> <leader>st :<C-U>Leaderf bufTag --popup<CR>
 
 " Switch buffers
 nnoremap <silent> <leader>bb :<C-U>Leaderf buffer --popup<CR>

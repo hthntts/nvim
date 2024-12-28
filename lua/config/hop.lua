@@ -13,7 +13,7 @@ keymap.set({ "n", "v", "o" }, "f", "", {
   callback = function()
     hop.hint_char2()
   end,
-  desc = "nvim-hop char2",
+  desc = "Char2",
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {

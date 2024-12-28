@@ -80,7 +80,7 @@ api.nvim_create_autocmd({ "FocusGained", "CursorHold" }, {
 -- Resize all windows when we resize the terminal
 api.nvim_create_autocmd("VimResized", {
   group = api.nvim_create_augroup("win_autoresize", { clear = true }),
-  desc = "autoresize windows on resizing operation",
+  desc = "Autoresize windows on resizing operation",
   command = "wincmd =",
 })
 
@@ -182,7 +182,7 @@ local number_toggle_group = api.nvim_create_augroup("numbertoggle", { clear = tr
 api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
   pattern = "*",
   group = number_toggle_group,
-  desc = "togger line number",
+  desc = "Togger line number",
   callback = function()
     if vim.wo.number then
       vim.wo.relativenumber = true
@@ -192,7 +192,7 @@ api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }
 
 api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   group = number_toggle_group,
-  desc = "togger line number",
+  desc = "Togger line number",
   callback = function()
     if vim.wo.number then
       vim.wo.relativenumber = false
@@ -248,7 +248,7 @@ api.nvim_create_autocmd("BufEnter", {
 api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
   group = api.nvim_create_augroup("git_repo_check", { clear = true }),
   pattern = "*",
-  desc = "check if we are inside Git repo",
+  desc = "Check if we are inside Git repo",
   command = "call utils#InsideGitRepo()",
 })
 
@@ -256,7 +256,7 @@ api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
 api.nvim_create_autocmd("BufReadPre", {
   group = api.nvim_create_augroup("large_file", { clear = true }),
   pattern = "*",
-  desc = "check if we are inside Git repo",
+  desc = "Check if we are inside Git repo",
   callback = function(ev)
     local file_size_limit = 524288 -- 0.5MB
     local f = ev.file
