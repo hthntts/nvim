@@ -17,7 +17,7 @@ vim.g.logging_level = "info"
 ------------------------------------------------------------------------
 vim.g.loaded_perl_provider = 0 -- Disable perl provider
 vim.g.loaded_ruby_provider = 0 -- Disable ruby provider
-vim.g.loaded_node_provider = 0 -- Disable node provider
+-- vim.g.loaded_node_provider = 0 -- Disable node provider
 vim.g.did_install_default_menus = 1 -- do not load menu
 
 if utils.executable("python3") then
