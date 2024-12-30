@@ -336,13 +336,11 @@ local plugin_specs = {
       cell_header = "# %%",
       tmux_target = "{right-of}",
     },
-
     keys = {
-      { "<leader>rc", ":TunnellCell<CR>",   mode = { "n" }, desc = "Tunnell cell" },
-      { "<leader>rr", ":TunnellRange<CR>",  mode = { "v" }, desc = "Tunnell range" },
-      { "<leader>rC", ":TunnellConfig<CR>", mode = { "n" }, desc = "Tunnell config" },
-    },
-
+      { "<leader>or", ":TunnellCell<CR>",   mode = { "n" }, desc = "REPL cell" },
+      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, desc = "REPL range" },
+      { "<leader>oR", ":TunnellConfig<CR>", mode = { "n" }, desc = "REPL config" },
+ r  },
     cmd = {
       "TunnellCell",
       "TunnellRange",
@@ -387,10 +385,10 @@ local plugin_specs = {
 
   -- Additional powerful text object for vim, this plugin should be studied
   -- carefully to use its full power
-  { "wellle/targets.vim", event = "VeryLazy" },
+  -- { "wellle/targets.vim", event = "VeryLazy" },
 
   -- Plugin to manipulate character pairs quickly
-  { "machakann/vim-sandwich", event = "VeryLazy" },
+  { "machakann/vim-sandwich", event = "VeryLazy" }, -- sa, sd, sr
 
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object", event = "VeryLazy" },
