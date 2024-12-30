@@ -8,6 +8,36 @@ local function spell()
   return ""
 end
 
+    -- ref: https://zenn.dev/glaucus03/articles/ff710d27de4e55
+local function selectionCount()
+    local mode = vim.fn.mode()
+    local start_line, end_line, start_pos, end_pos
+
+    if not (mode:find("[vV\22]") ~= nil) then return "" end
+    start_line = vim.fn.line("v")
+    end_line = vim.fn.line(".")
+
+    if mode == 'V' then
+        start_pos = 1
+        end_pos = vim.fn.strlen(vim.fn.getline(end_line)) + 1
+    else
+        start_pos = vim.fn.col("v")
+        end_pos = vim.fn.col(".")
+    end
+
+    local chars = 0
+    for i = start_line, end_line do
+        local line = vim.fn.getline(i)
+        local line_len = vim.fn.strlen(line)
+        local s_pos = (i == start_line) and start_pos or 1
+        local e_pos = (i == end_line) and end_pos or line_len + 1
+        chars = chars + vim.fn.strchars(line:sub(s_pos, e_pos - 1))
+    end
+
+    local lines = math.abs(end_line - start_line) + 1
+    return tostring(lines) .. " lines, " .. tostring(chars) .. " characters"
+end
+
 --- show indicator for Chinese IME
 local function ime_state()
   if vim.g.is_mac then
@@ -187,6 +217,9 @@ require("lualine").setup {
       {
         ime_state,
         color = { fg = "black", bg = "#f46868" },
+      },
+      {
+        selectionCount,
       },
       {
         get_active_lsp,
