@@ -9,6 +9,8 @@ call utils#Cabbrev('pud', 'Lazy update')
 call utils#Cabbrev('pc', 'Lazy clean')
 call utils#Cabbrev('ps', 'Lazy sync')
 
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                      configurations for vim script plugin                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
