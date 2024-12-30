@@ -167,7 +167,7 @@ function! utils#TextObjURL() abort
   normal! gv
 endfunction
 
-function! utils#TextObjBuffer() abort
+function! utils#MarkWholeBuffer() abort
   let buf_num = bufnr()
 
   call setpos("'<", [buf_num, 1, 1, 0])

@@ -139,7 +139,6 @@ keymap.set("i", "<F11>", "<c-o><cmd>set spell!<cr>", { desc = "toggle spell" })
 -- see https://stackoverflow.com/q/54255/6064933
 keymap.set("n", "c", '"_c')
 keymap.set("n", "C", '"_C')
-keymap.set("n", "cc", '"_cc')
 keymap.set("x", "c", '"_c')
 
 -- Remove trailing whitespace characters
@@ -191,7 +190,8 @@ keymap.set("n", "<A-D-Left>", '<cmd>call utils#GoToBuffer(v:count, "backward")<c
 keymap.set({ "x", "o" }, "iu", "<cmd>call utils#TextObjURL()<cr>", { desc = "URL text object" })
 
 -- Text objects for entire buffer (VScode)
-keymap.set("n", "<D-a>", "<cmd>call utils#TextObjBuffer()<cr>", { desc = "Buffer text object" })
+keymap.set("n", "<c-x>h", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
+keymap.set("n", "<leader>ba", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
 
 -- Do not move my cursor when joining lines.
 keymap.set("n", "J", function()
