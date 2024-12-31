@@ -29,6 +29,7 @@ wk.add({
   { "<leader>gc", group = "Create" },
   { "<leader>go", group = "Open" },
   { "<leader>h", group = "Help" },
+  { "<leader>ht", "<cmd>:Telescope colorscheme<cr>", desc = "Themes" },
   { "<leader>hd", group = "Nvim" },
   { "<leader>hh", "<cmd>Leaderf help<cr>", desc = "Help" },
   { "<leader>l", group = "Line" },
