@@ -10,6 +10,6 @@ neogit.setup {
 }
 
 keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Status" })
-keymap.set("n", "<leader>gS", "<cmd>Gwrite<cr>", { desc = "Stage this file" })
+-- keymap.set("n", "<leader>gS", "<cmd>Gwrite<cr>", { desc = "Stage this file" })
 keymap.set("n", "<leader>gcc", "<cmd>NeogitCommit<cr>", { desc = "Commit" })
 keymap.set("n", "<leader>gF", "<cmd>Neogit fetch<cr>", { desc = "Fetch" })
