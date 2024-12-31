@@ -1,6 +1,7 @@
 local fn = vim.fn
 local api = vim.api
-
+local username = os.getenv("USER") or "haiht"
+local python3_path = "/Users/" .. username .. "/.pyenv/shims/python3"
 local utils = require("core/utils")
 
 ------------------------------------------------------------------------
@@ -20,14 +21,14 @@ vim.g.loaded_ruby_provider = 0 -- Disable ruby provider
 -- vim.g.loaded_node_provider = 0 -- Disable node provider
 vim.g.did_install_default_menus = 1 -- do not load menu
 
-if utils.executable("/Users/haiht/.pyenv/shims/python3") then
+if vim.fn.executable(python3_path) == 1 then
   if vim.g.is_win then
-    vim.g.python3_host_prog = fn.substitute(fn.exepath("python3"), ".exe$", "", "g")
+    vim.g.python3_host_prog = vim.fn.substitute(vim.fn.exepath("python3"), ".exe$", "", "g")
   else
-    vim.g.python3_host_prog = fn.exepath("/Users/haiht/.pyenv/shims/python3")
+    vim.g.python3_host_prog = python3_path
   end
 else
-  api.nvim_err_writeln("Python3 executable not found! You must install Python3 and set its PATH correctly!")
+  vim.api.nvim_err_writeln("Python3 executable not found! You must install Python3 and set its PATH correctly!")
   return
 end
 
@@ -39,8 +40,6 @@ vim.g.vimsyn_embed = "l"
 
 -- Use English as main language
 vim.cmd([[language en_US.UTF-8]])
-
--- Disable loading certain plugins
 
 -- Whether to load netrw by default, see https://github.com/bling/dotvim/issues/4
 vim.g.loaded_netrw = 1
