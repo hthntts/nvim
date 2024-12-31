@@ -310,24 +310,26 @@ local plugin_specs = {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
 
       -- Only one of these is needed.
-      "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
-      "echasnovski/mini.pick",         -- optional
+      "nvim-telescope/telescope.nvim",
+      "ibhagwan/fzf-lua",
+      "echasnovski/mini.pick",
     },
-    config = true,
+    config = function()
+      require("config.neogit")
+    end,
     event = "VeryLazy",
   },
-  {
-    "tpope/vim-fugitive",
-    event = "User InGitRepo",
-    config = function()
-      require("config.fugitive")
-    end,
-  },
+  -- {
+  --   "tpope/vim-fugitive",
+  --   event = "User InGitRepo",
+  --   config = function()
+  --     require("config.fugitive")
+  --   end,
+  -- },
 
   -- Better git log display
   { "rbong/vim-flog", cmd = { "Flog" } },
