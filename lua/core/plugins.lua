@@ -158,6 +158,15 @@ local plugin_specs = {
       require("config.bufferline")
     end,
   },
+
+  -- fancy start screen
+  {
+    "nvimdev/dashboard-nvim",
+    cond = firenvim_not_active,
+    config = function()
+      require("config.dashboard")
+    end,
+  },
   {
     "TaDaa/vimade",
     event = "VeryLazy",
@@ -197,7 +206,7 @@ local plugin_specs = {
   },
 
   -- Highlight URLs inside vim
-  { "itchyny/vim-highlighturl", event = "VeryLazy" },
+  { "itchyny/vim-highlighturl"},
 
   -- notification plugin
   {
