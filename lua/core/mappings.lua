@@ -11,8 +11,8 @@ keymap.set("i", "<c-u>", "<Esc>viwUea")
 keymap.set("i", "<c-t>", "<Esc>b~lea")
 
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
-keymap.set("n", "<leader>p", "m`o<ESC>p``", { desc = "Paste below current line" })
-keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "Paste above current line" })
+keymap.set("n", "<leader>lp", "m`o<ESC>p``", { desc = "Paste below current line" })
+keymap.set("n", "<leader>lP", "m`O<ESC>p``", { desc = "Paste above current line" })
 --
 -- Clear search, diff update and redraw
 keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
@@ -28,22 +28,22 @@ keymap.set("n", "<leader>qq", "<cmd>q<cr>", { silent = true, desc = "Quit Nvim" 
 keymap.set("n", "<leader>qQ", "<cmd>qa!<cr>", { silent = true, desc = "Quit Nvim without saving" })
 
 -- Navigation in the location and quickfix list
-keymap.set("n", "[l", "<cmd>lprevious<cr>zv", { silent = true, desc = "previous location item" })
-keymap.set("n", "]l", "<cmd>lnext<cr>zv", { silent = true, desc = "next location item" })
+keymap.set("n", "[l", "<cmd>lprevious<cr>zv", { silent = true, desc = "Previous location item" })
+keymap.set("n", "]l", "<cmd>lnext<cr>zv", { silent = true, desc = "Next location item" })
 
-keymap.set("n", "[L", "<cmd>lfirst<cr>zv", { silent = true, desc = "first location item" })
-keymap.set("n", "]L", "<cmd>llast<cr>zv", { silent = true, desc = "last location item" })
+keymap.set("n", "[L", "<cmd>lfirst<cr>zv", { silent = true, desc = "First location item" })
+keymap.set("n", "]L", "<cmd>llast<cr>zv", { silent = true, desc = "Last location item" })
 
-keymap.set("n", "[q", "<cmd>cprevious<cr>zv", { silent = true, desc = "previous qf item" })
-keymap.set("n", "]q", "<cmd>cnext<cr>zv", { silent = true, desc = "next qf item" })
+keymap.set("n", "[q", "<cmd>cprevious<cr>zv", { silent = true, desc = "Previous qf item" })
+keymap.set("n", "]q", "<cmd>cnext<cr>zv", { silent = true, desc = "Next qf item" })
 
-keymap.set("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "first qf item" })
-keymap.set("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "last qf item" })
+keymap.set("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "First qf item" })
+keymap.set("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "Last qf item" })
 
 -- Close location list or quickfix list if they are present, see https://superuser.com/q/355325/736190
 keymap.set("n", [[\x]], "<cmd>windo lclose <bar> cclose <cr>", {
   silent = true,
-  desc = "close qf and location list",
+  desc = "Close qf and location list",
 })
 
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
@@ -69,21 +69,20 @@ keymap.set("n", "<leader>bd", "<cmd>bd<cr>", {
 
 -- Insert a blank line below or above current line (do not move the cursor),
 -- see https://stackoverflow.com/a/16136133/6064933
--- keymap.set("n", "<space>o", "printf('m`%so<ESC>``', v:count1)", {
---   expr = true,
---   desc = "insert line below",
--- })
---
--- keymap.set("n", "<space>O", "printf('m`%sO<ESC>``', v:count1)", {
---   expr = true,
---   desc = "insert line above",
--- })
+keymap.set("n", "<space>lo", "printf('m`%so<ESC>``', v:count1)", {
+  expr = true,
+  desc = "Insert blank line below",
+})
+
+keymap.set("n", "<space>lO", "printf('m`%sO<ESC>``', v:count1)", {
+  expr = true,
+  desc = "Insert blank line above",
+})
 
 -- Move the cursor based on physical lines, not the actual lines.
 keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 keymap.set("n", "^", "g^")
--- keymap.set("n", "0", "g0")
 
 -- Do not include white space characters when using $ in visual mode,
 -- see https://vi.stackexchange.com/q/12607/15292
@@ -158,8 +157,8 @@ keymap.set("n", "<A-up>", '<cmd>call utils#SwitchLine(line("."), "up")<cr>', { d
 keymap.set("n", "<A-down>", '<cmd>call utils#SwitchLine(line("."), "down")<cr>', { desc = "Move line down" })
 
 -- Move current visual-line selection up and down
--- keymap.set("x", "<A-up>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "Move selection up" })
--- keymap.set("x", "<A-down>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "Move selection down" })
+keymap.set("x", "<A-up>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "Move selection up" })
+keymap.set("x", "<A-down>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "Move selection down" })
 
 -- Replace visual selection with text in register, but not contaminate the register,
 -- see also https://stackoverflow.com/q/10723700/6064933.
