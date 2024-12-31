@@ -288,6 +288,15 @@ local plugin_specs = {
     event = "VeryLazy",
   },
 
+  -- Move lines and blocks
+  {
+    'fedepujol/move.nvim',
+    config = function()
+      require("config.move")
+    end,
+    event = "VeryLazy",
+  },
+
   -- Handy unix command inside Vim (Rename, Move etc.)
   { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
 

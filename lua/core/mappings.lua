@@ -152,14 +152,6 @@ keymap.set("n", "<leader>by", "<cmd>%yank<cr>", { desc = "Yank buffer" })
 -- Toggle cursor column
 keymap.set("n", "<leader>tc", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "Cursor column" })
 
--- Move current line up and down (VSCode)
-keymap.set("n", "<A-up>", '<cmd>call utils#SwitchLine(line("."), "up")<cr>', { desc = "Move line up" })
-keymap.set("n", "<A-down>", '<cmd>call utils#SwitchLine(line("."), "down")<cr>', { desc = "Move line down" })
-
--- Move current visual-line selection up and down
-keymap.set("x", "<A-up>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "Move selection up" })
-keymap.set("x", "<A-down>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "Move selection down" })
-
 -- Replace visual selection with text in register, but not contaminate the register,
 -- see also https://stackoverflow.com/q/10723700/6064933.
 keymap.set("x", "p", '"_c<Esc>p')
