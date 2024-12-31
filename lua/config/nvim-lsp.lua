@@ -28,30 +28,30 @@ local custom_attach = function(client, bufnr)
     keymap.set(mode, l, r, opts)
   end
 
-  map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-  map("n", "<C-]>", vim.lsp.buf.definition)
+  map("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Jump to definition" })
+  map("n", "<C-]>", vim.lsp.buf.definition, { desc = "Jump to definition" })
   map("n", "K", vim.lsp.buf.hover)
   map("n", "<C-k>", vim.lsp.buf.signature_help)
-  map("n", "<space>rn", vim.lsp.buf.rename, { desc = "Varialbe rename" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
+  map("n", "<space>cr", vim.lsp.buf.rename, { desc = "LSP Rename" })
+  map("n", "<space>cD", vim.lsp.buf.references, { desc = "Jump to references" })
   map("n", "[d", diagnostic.goto_prev, { desc = "Previous diagnostic" })
   map("n", "]d", diagnostic.goto_next, { desc = "Next diagnostic" })
   -- this puts diagnostics from opened files to quickfix
-  map("n", "<space>qw", diagnostic.setqflist, { desc = "Put window diagnostics to qf" })
+  map("n", "<space>cew", diagnostic.setqflist, { desc = "Put window diagnostics to qf" })
   -- this puts diagnostics from current buffer to quickfix
-  map("n", "<space>qb", function()
+  map("n", "<space>ceb", function()
     set_qflist(bufnr)
   end, { desc = "Put buffer diagnostics to qf" })
-  map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-  map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
-  map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder" })
-  map("n", "<space>wl", function()
+  map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP Execute code action" })
+  map("n", "<space>cwa", vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder" })
+  map("n", "<space>cwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder" })
+  map("n", "<space>cwl", function()
     vim.print(vim.lsp.buf.list_workspace_folders())
   end, { desc = "List workspace folder" })
 
   -- Set some key bindings conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider and client.name ~= "lua_ls" then
-    map({ "n", "x" }, "<space>f", vim.lsp.buf.format, { desc = "Format code" })
+    map({ "n", "x" }, "<space>cf", vim.lsp.buf.format, { desc = "Format code" })
   end
 
   -- Uncomment code below to enable inlay hint from language server, some LSP server supports inlay hint,
