@@ -166,6 +166,29 @@ local plugin_specs = {
     end,
   },
   {
+    "coffebar/neovim-project",
+    opts = {
+      projects = { -- define project roots
+        "~/.ghq/github.com/hthntts/*",
+      },
+      picker = {
+        type = "telescope", -- or "fzf-lua"
+      }
+    },
+    init = function()
+      vim.opt.sessionoptions:append("globals")
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
+      { "ibhagwan/fzf-lua" },
+      { "Shatur/neovim-session-manager" },
+    },
+    lazy = false,
+    priority = 100,
+  },
+
+  {
     "TaDaa/vimade",
     event = "VeryLazy",
     config = function()
