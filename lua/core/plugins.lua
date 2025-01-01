@@ -166,36 +166,6 @@ local plugin_specs = {
     end,
   },
   {
-    "coffebar/neovim-project",
-    opts = {
-      projects = { -- define project roots
-        "~/.ghq/github.com/hthntts/*",
-      },
-      picker = {
-        type = "telescope", -- or "fzf-lua"
-      }
-    },
-    init = function()
-      vim.opt.sessionoptions:append("globals")
-    end,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim", tag = "0.1.4" },
-      { "ibhagwan/fzf-lua" },
-      { "Shatur/neovim-session-manager" },
-    },
-    lazy = false,
-    priority = 100,
-  },
-
-  {
-    "TaDaa/vimade",
-    event = "VeryLazy",
-    config = function()
-      require("config.vimade")
-    end,
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     event = "VeryLazy",
     main = "ibl",
@@ -227,7 +197,7 @@ local plugin_specs = {
   },
 
   -- Highlight URLs inside vim
-  { "itchyny/vim-highlighturl"},
+  { "itchyny/vim-highlighturl", event = "VeryLazy" },
 
   -- notification plugin
   {
@@ -242,7 +212,7 @@ local plugin_specs = {
   -- not be possible since we maybe in a server which disables GUI.
   {
     "chrishrb/gx.nvim",
-    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Browse" } },
     cmd = { "Browse" },
     init = function()
       vim.g.netrw_nogx = 1 -- disable netrw gx
@@ -289,7 +259,7 @@ local plugin_specs = {
   { "tpope/vim-commentary", event = "VeryLazy" },
 
   -- Multiple cursor plugin like Sublime Text?
-  { "mg979/vim-visual-multi", event = "VeryLazy" },
+  -- { "mg979/vim-visual-multi", event = "VeryLazy" },
 
   -- Autosave files on certain events
   { "907th/vim-auto-save", event = "InsertEnter" },
@@ -309,15 +279,6 @@ local plugin_specs = {
     event = "VeryLazy",
   },
 
-  -- Move lines and blocks
-  {
-    'fedepujol/move.nvim',
-    config = function()
-      require("config.move")
-    end,
-    event = "VeryLazy",
-  },
-
   -- Handy unix command inside Vim (Rename, Move etc.)
   { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
 
@@ -329,23 +290,6 @@ local plugin_specs = {
   -- Auto format tools
   { "sbdchd/neoformat", cmd = { "Neoformat" } },
 
-  -- Git command inside vim
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-
-      -- Only one of these is needed.
-      "nvim-telescope/telescope.nvim",
-      "ibhagwan/fzf-lua",
-      "echasnovski/mini.pick",
-    },
-    config = function()
-      require("config.neogit")
-    end,
-    event = "VeryLazy",
-  },
   -- {
   --   "tpope/vim-fugitive",
   --   event = "User InGitRepo",
@@ -383,24 +327,6 @@ local plugin_specs = {
     config = function()
       require("config.bqf")
     end,
-  },
-
-  {
-    "sourproton/tunnell.nvim",
-    opts = {
-      cell_header = "# %%",
-      tmux_target = "{right-of}",
-    },
-    keys = {
-      { "<leader>or", ":TunnellCell<CR>",   mode = { "n" }, desc = "REPL cell" },
-      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, desc = "REPL range" },
-      { "<leader>oR", ":TunnellConfig<CR>", mode = { "n" }, desc = "REPL config" },
- r  },
-    cmd = {
-      "TunnellCell",
-      "TunnellRange",
-      "TunnellConfig",
-    },
   },
 
   -- Another markdown plugin
@@ -460,6 +386,7 @@ local plugin_specs = {
       return false
     end,
     ft = { "tmux" },
+    event = "VeryLazy",
   },
   {
     "numToStr/Navigator.nvim",
@@ -511,11 +438,11 @@ local plugin_specs = {
   -- file explorer
   {
     "nvim-tree/nvim-tree.lua",
-    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("config.nvim-tree")
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -546,6 +473,79 @@ local plugin_specs = {
   },
   {
     "Bekaboo/dropbar.nvim",
+  },
+
+  {
+    "TaDaa/vimade",
+    event = "VeryLazy",
+    config = function()
+      require("config.vimade")
+    end,
+  },
+
+  {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'nvimtools/hydra.nvim',
+    },
+    opts = {},
+    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    keys = {
+        {
+          mode = { 'v', 'n' },
+          '<Leader>m',
+          '<cmd>MCstart<cr>',
+          desc = 'Multi Cursors',
+        },
+    },
+    event = "VeryLazy",
+  },
+
+  -- Move lines and blocks
+  {
+    'fedepujol/move.nvim',
+    config = function()
+      require("config.move")
+    end,
+    event = "VeryLazy",
+  },
+
+  -- Git command inside vim
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim",
+      "ibhagwan/fzf-lua",
+      "echasnovski/mini.pick",
+    },
+    config = function()
+      require("config.neogit")
+    end,
+    event = "VeryLazy",
+  },
+
+  {
+    "sourproton/tunnell.nvim",
+    opts = {
+      cell_header = "# %%",
+      tmux_target = "{right-of}",
+    },
+    keys = {
+      { "<leader>or", ":TunnellCell<CR>",   mode = { "n" }, desc = "REPL cell" },
+      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, desc = "REPL range" },
+      { "<leader>oR", ":TunnellConfig<CR>", mode = { "n" }, desc = "REPL config" },
+    },
+    cmd = {
+      "TunnellCell",
+      "TunnellRange",
+      "TunnellConfig",
+    },
+    event = "VeryLazy",
   },
 }
 
