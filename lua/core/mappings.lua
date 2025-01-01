@@ -11,8 +11,8 @@ keymap.set("i", "<c-u>", "<Esc>viwUea")
 keymap.set("i", "<c-t>", "<Esc>b~lea")
 
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
-keymap.set("n", "<leader>lp", "m`o<ESC>p``", { desc = "Paste below current line" })
-keymap.set("n", "<leader>lP", "m`O<ESC>p``", { desc = "Paste above current line" })
+keymap.set("n", "<leader>ip", "m`o<ESC>p``", { desc = "Clipboard below current line" })
+keymap.set("n", "<leader>iP", "m`O<ESC>p``", { desc = "Clipboard above current line" })
 --
 -- Clear search, diff update and redraw
 keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
@@ -69,14 +69,14 @@ keymap.set("n", "<leader>bd", "<cmd>bd<cr>", {
 
 -- Insert a blank line below or above current line (do not move the cursor),
 -- see https://stackoverflow.com/a/16136133/6064933
-keymap.set("n", "<leader>lo", "printf('m`%so<ESC>``', v:count1)", {
+keymap.set("n", "<leader>io", "printf('m`%so<ESC>``', v:count1)", {
   expr = true,
-  desc = "Insert blank line below",
+  desc = "Blank line below",
 })
 
-keymap.set("n", "<leader>lO", "printf('m`%sO<ESC>``', v:count1)", {
+keymap.set("n", "<leader>iO", "printf('m`%sO<ESC>``', v:count1)", {
   expr = true,
-  desc = "Insert blank line above",
+  desc = "Blank line above",
 })
 
 -- Move the cursor based on physical lines, not the actual lines.
