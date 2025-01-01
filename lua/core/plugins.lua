@@ -511,6 +511,15 @@ local plugin_specs = {
     event = "VeryLazy",
   },
 
+  -- Duplicate lines and blocks
+  {
+    'hinell/duplicate.nvim',
+    config = function()
+      require("config.duplicate")
+    end,
+    event = "VeryLazy",
+  },
+
   -- Git command inside vim
   {
     "NeogitOrg/neogit",
@@ -536,9 +545,9 @@ local plugin_specs = {
       tmux_target = "{right-of}",
     },
     keys = {
-      { "<leader>or", ":TunnellCell<CR>",   mode = { "n" }, desc = "REPL cell" },
-      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, desc = "REPL range" },
-      { "<leader>oR", ":TunnellConfig<CR>", mode = { "n" }, desc = "REPL config" },
+      { "<leader>or", ":TunnellCell<CR>",   mode = { "n" }, silent = true, desc = "REPL cell" },
+      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, silent = true, desc = "REPL range" },
+      { "<leader>oR", ":TunnellConfig<CR>", mode = { "n" }, silent = true, desc = "REPL config" },
     },
     cmd = {
       "TunnellCell",
