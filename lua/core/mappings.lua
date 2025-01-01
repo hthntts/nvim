@@ -181,6 +181,7 @@ keymap.set("n", "<A-D-Left>", '<cmd>call utils#GoToBuffer(v:count, "backward")<c
 keymap.set({ "x", "o" }, "iu", "<cmd>call utils#TextObjURL()<cr>", { desc = "URL text object" })
 
 -- Text objects for entire buffer (VScode)
+keymap.set("n", "<M-a>", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
 keymap.set("n", "<c-x>h", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
 keymap.set("n", "<leader>ba", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
 
