@@ -21,9 +21,9 @@ dashboard.setup({
         mru = { limit = 12 },
         shortcut = {
             {
-                desc = icons.ui.Package .. 'Project',
+                desc = icons.ui.Package .. 'Lazy',
                 group = '@property',
-                action = 'NeovimProjectDiscover',
+                action = 'Lazy',
                 key = 'p',
             },
             {
