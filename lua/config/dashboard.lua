@@ -24,7 +24,7 @@ dashboard.setup({
                 desc = icons.ui.Package .. 'Lazy',
                 group = '@property',
                 action = 'Lazy',
-                key = 'p',
+                key = 'l',
             },
             {
                 desc = icons.documents.OpenFolder .. 'Files',
