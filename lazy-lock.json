@@ -15,6 +15,7 @@
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dressing.nvim": { "branch": "master", "commit": "3a45525bb182730fe462325c99395529308f431e" },
   "dropbar.nvim": { "branch": "master", "commit": "e5f9fb998a54c0ec1c2d25de88a3c260c494ffe1" },
+  "duplicate.nvim": { "branch": "main", "commit": "ab057af7872c44e6fbd48df9b03983c8e67c50a7" },
   "edge": { "branch": "master", "commit": "12ff979b43e3660053e14cd65101d5928e56f422" },
   "everforest": { "branch": "master", "commit": "730f9dd8ee698ad166d7abfca5dc06e90d4acf5b" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
