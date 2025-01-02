@@ -1,3 +1,4 @@
+local api = require "nvim-tree.api"
 local keymap = vim.keymap
 local nvim_tree = require("nvim-tree")
 
@@ -102,7 +103,6 @@ nvim_tree.setup {
   },
 }
 
-keymap.set("n", "<M-b>", require("nvim-tree.api").tree.toggle, {
-  silent = true,
-  desc = "Nvim Tree",
-})
+keymap.set("n", "<M-b>", api.tree.toggle, { silent = true, desc = "Nvim Tree", })
+keymap.set("n", "h", api.node.navigate.parent_close, { silent = true, desc = "Close", })
+keymap.set("n", "l", api.node.open.edit, { silent = true, desc = "Open", })
