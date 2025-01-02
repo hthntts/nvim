@@ -556,6 +556,12 @@ local plugin_specs = {
     },
     event = "VeryLazy",
   },
+
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 }
 
 require("lazy").setup {
