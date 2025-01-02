@@ -2,7 +2,43 @@ local api = require "nvim-tree.api"
 local keymap = vim.keymap
 local nvim_tree = require("nvim-tree")
 
+local function on_attach(bufnr)
+    local api = require('nvim-tree.api')
+
+    local function opts(desc)
+        return {
+            desc = 'nvim-tree: ' .. desc,
+            buffer = bufnr,
+            noremap = true,
+            silent = true,
+            nowait = true,
+        }
+    end
+
+    api.config.mappings.default_on_attach(bufnr)
+    vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+    vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+    vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
+    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+    vim.keymap.set('n', '<c-v>', api.node.open.vertical, opts('Open: Vertical Split'))
+    vim.keymap.set('n', '<c-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
+    vim.keymap.set('n', '-', api.tree.change_root_to_parent, opts('Up'))
+    vim.keymap.set('n', 'F', api.tree.reload, opts('Reload'))
+    vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts('Toggle Hidden'))
+    vim.keymap.set('n', 'R', api.fs.remove, opts('Remove'))
+    vim.keymap.set('n', 'Y', api.fs.copy.absolute_path, opts('Copy Relative Path'))
+    vim.keymap.set('n', 'm', api.marks.toggle, opts('Toggle Bookmark'))
+    vim.keymap.set('n', 'n', api.fs.create, opts('New File Or Folder'))
+    vim.keymap.set('n', 'r', api.fs.rename_full, opts('Rename'))
+    vim.keymap.set('n', 'y', api.fs.copy.filename, opts('Copy Relative Path'))
+
+    vim.keymap.set('n', 'c', api.fs.copy.node, opts('Copy'))
+    vim.keymap.set('n', 'x', api.fs.cut, opts('Cut'))
+    vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
+end
+
 nvim_tree.setup {
+  on_attach = on_attach,
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_netrw = true,
@@ -37,7 +73,7 @@ nvim_tree.setup {
     auto_open = true,
   },
   update_focused_file = {
-    enable = false,
+    enable = true,
     update_cwd = false,
     ignore_list = {},
   },
