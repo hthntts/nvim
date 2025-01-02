@@ -558,9 +558,11 @@ local plugin_specs = {
   },
 
   {
-    'stevearc/oil.nvim',
-    opts = {},
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    'lambdalisue/vim-fern',
+    -- config = function()
+    --   require("config.fern")
+    -- end,
+    event = "VeryLazy",
   },
 }
 
