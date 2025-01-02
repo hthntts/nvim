@@ -124,9 +124,15 @@ endfunction
 
 function! utils#MarkWholeBuffer() abort
   let buf_num = bufnr()
-
   call setpos("'<", [buf_num, 1, 1, 0])
   call setpos("'>", [buf_num, line('$'), 1, 0])
   execute 'normal! `<V`>'
 endfunction
 
+" http://stackoverflow.com/a/39348498/2103996
+function! utils#clearregisters() abort
+  let l:regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+  for l:reg in l:regs
+    call setreg(l:reg, [])
+  endfor
+endfunction
