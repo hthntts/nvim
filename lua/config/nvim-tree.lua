@@ -15,7 +15,7 @@ local function on_attach(bufnr)
         }
     end
 
-    api.config.mappings.default_on_attach(bufnr)
+    -- api.config.mappings.default_on_attach(bufnr)
     vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
     vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
     vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
@@ -23,6 +23,7 @@ local function on_attach(bufnr)
     vim.keymap.set('n', '<c-v>', api.node.open.vertical, opts('Open: Vertical Split'))
     vim.keymap.set('n', '<c-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
     vim.keymap.set('n', '-', api.tree.change_root_to_parent, opts('Up'))
+    vim.keymap.set('n', 'E', api.tree.expand_all, opts('Expand Tree All'))
     vim.keymap.set('n', 'F', api.tree.reload, opts('Reload'))
     vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts('Toggle Hidden'))
     vim.keymap.set('n', 'R', api.fs.remove, opts('Remove'))
@@ -35,6 +36,7 @@ local function on_attach(bufnr)
     vim.keymap.set('n', 'c', api.fs.copy.node, opts('Copy'))
     vim.keymap.set('n', 'x', api.fs.cut, opts('Cut'))
     vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
+    vim.keymap.set('n', 'W', api.tree.collapse_all, opts('Collapse Tree All'))
 end
 
 nvim_tree.setup {
@@ -92,7 +94,7 @@ nvim_tree.setup {
     },
   },
   filters = {
-    dotfiles = false,
+    dotfiles = true,
     custom = {},
     exclude = {},
   },
