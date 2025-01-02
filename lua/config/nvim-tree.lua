@@ -104,5 +104,3 @@ nvim_tree.setup {
 }
 
 keymap.set("n", "<M-b>", api.tree.toggle, { silent = true, desc = "Nvim Tree", })
-keymap.set("n", "h", api.node.navigate.parent_close, { silent = true, desc = "Close", })
-keymap.set("n", "l", api.node.open.edit, { silent = true, desc = "Open", })
