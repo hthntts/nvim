@@ -287,3 +287,80 @@ endfunction
 
 """"""""""""""""""""""""""""""vim-auto-save settings""""""""""""""""""""""""""""""
 let g:auto_save = 1  " enable AutoSave on Vim startup
+
+""""""""""""""""""""""""""""""fern settings""""""""""""""""""""""""""""""
+
+" Disable netrw.
+let g:loaded_netrw  = 1
+let g:loaded_netrwPlugin = 1
+let g:loaded_netrwSettings = 1
+let g:loaded_netrwFileHandlers = 1
+
+augroup my-fern-hijack
+  autocmd!
+  autocmd BufEnter * ++nested call s:hijack_directory()
+augroup END
+
+function! s:hijack_directory() abort
+  let path = expand('%:p')
+  if !isdirectory(path)
+    return
+  endif
+  bwipeout %
+  execute printf('Fern %s', fnameescape(path))
+endfunction
+
+" " Custom settings and mappings.
+let g:fern#disable_default_mappings = 1
+let g:fern#disable_drawer_smart_quit = 0
+let g:fern#disable_drawer_auto_restore_focus = 0
+let g:fern#scheme#file#show_absolute_path_on_root_label = 0
+let g:fern#renderer#default#leading = "│ "
+let g:fern#renderer#default#root_symbol = "◓ "
+let g:fern#renderer#default#leaf_symbol = "├─"
+let g:fern#renderer#default#collapsed_symbol = " "
+let g:fern#renderer#default#expanded_symbol = " "
+
+let g:fern#default_exclude = '^\%(\.git\|__pycache__\)$'
+
+"| [FERN] --------------------------------------------------------------------
+nnoremap <silent> <M-g> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+
+function! FernInit() abort
+  set nonumber
+  set norelativenumber
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-open-expand-collapse)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-action-open:select)",
+        \   "\<Plug>(fern-action-expand)",
+        \   "\<Plug>(fern-action-collapse)",
+        \ )
+  nmap <buffer> <2-LeftMouse> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> l <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
+  nmap <buffer> h <Plug>(fern-action-collapse)
+  nmap <buffer> ? <Plug>(fern-action-help)
+  nmap <buffer> <C-v> <Plug>(fern-action-open:vsplit)
+  nmap <buffer> <C-x> <Plug>(fern-action-open:split)
+  nmap <buffer> - <Plug>(fern-action-leave)
+  nmap <buffer> F <Plug>(fern-action-reload)
+  nmap <buffer> H <Plug>(fern-action-hidden:toggle)
+  nmap <buffer> R <Plug>(fern-action-remove)
+  nmap <buffer> Y <Plug>(fern-action-yank)
+  nmap <buffer> m <Plug>(fern-action-mark:toggle)
+  nmap <buffer> n <Plug>(fern-action-new-path)
+  nmap <buffer> r <Plug>(fern-action-rename:split)
+  nmap <buffer> y <Plug>(fern-action-yank:label)
+
+  nmap <buffer> c <Plug>(fern-action-copy)
+  nmap <buffer> x <Plug>(fern-action-move)
+  nmap <buffer> M <Plug>(fern-action-mark:clear)
+  nmap <buffer> a <Plug>(fern-action-choice)
+endfunction
+
+augroup FernGroup
+  autocmd!
+  autocmd FileType fern call FernInit()
+augroup END
+

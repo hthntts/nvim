@@ -46,6 +46,7 @@ wk.add({
   { "<leader>ie", "<cmd>Telescope symbols<cr>", desc = "Emoji" },
   { "<leader>o", group = "Open" },
   { "<leader>oe", "<cmd>NvimTreeToggle<cr>", desc = "Nvim Tree" },
+  { "<leader>of", "<cmd>Fern . -drawer -reveal=% -toggle<cr>", desc = "Fern" },
   { "<leader>om", "<cmd>MarkdownPreview<cr>", desc = "Markdown Preview" },
   { "<leader>os", "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown Preview Stop" },
   { "<leader>q", group = "Quit/Session" },
