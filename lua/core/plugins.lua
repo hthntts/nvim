@@ -108,6 +108,9 @@ local plugin_specs = {
     dependencies = {
       "nvim-telescope/telescope-symbols.nvim",
     },
+    config = function()
+      require("config.telescope")
+    end,
   },
   {
     "ibhagwan/fzf-lua",
@@ -559,9 +562,9 @@ local plugin_specs = {
 
   {
     'lambdalisue/vim-fern',
-    -- config = function()
-    --   require("config.fern")
-    -- end,
+    config = function()
+      require("config.fern")
+    end,
     event = "VeryLazy",
   },
 }

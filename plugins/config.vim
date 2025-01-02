@@ -317,7 +317,7 @@ let g:fern#disable_drawer_auto_restore_focus = 0
 let g:fern#scheme#file#show_absolute_path_on_root_label = 0
 let g:fern#renderer#default#leading = "│ "
 let g:fern#renderer#default#root_symbol = "◓ "
-let g:fern#renderer#default#leaf_symbol = "├─"
+let g:fern#renderer#default#leaf_symbol = "├ "
 let g:fern#renderer#default#collapsed_symbol = " "
 let g:fern#renderer#default#expanded_symbol = " "
 
@@ -344,6 +344,7 @@ function! FernInit() abort
   nmap <buffer> <C-v> <Plug>(fern-action-open:vsplit)
   nmap <buffer> <C-x> <Plug>(fern-action-open:split)
   nmap <buffer> - <Plug>(fern-action-leave)
+  nmap <buffer> E <Plug>(fern-action-expand-tree:in)
   nmap <buffer> F <Plug>(fern-action-reload)
   nmap <buffer> H <Plug>(fern-action-hidden:toggle)
   nmap <buffer> R <Plug>(fern-action-remove)
@@ -357,6 +358,8 @@ function! FernInit() abort
   nmap <buffer> x <Plug>(fern-action-move)
   nmap <buffer> M <Plug>(fern-action-mark:clear)
   nmap <buffer> a <Plug>(fern-action-choice)
+  nmap <buffer> zr <Plug>(fern-action-zoom:reset)
+  nmap <buffer> zf <Plug>(fern-action-zoom:full)
 endfunction
 
 augroup FernGroup
