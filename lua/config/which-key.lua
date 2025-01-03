@@ -61,6 +61,7 @@ wk.add({
   { "<leader>tm", "<cmd>MundoToggle<cr>", desc = "Mundo" },
   { "<leader>ts", "<cmd>Vista!!<cr>", desc = "Symbol" },
   { "<leader>u", group = "Unicode" },
+  { "<leader>ua", "<cmd>UnicodeName<cr>", desc = "Unicode Name" },
   { "<leader>w", proxy = "<c-w>", group = "Windows" },
   { "<leader>z", group = "Folds" },
 })
