@@ -420,11 +420,11 @@ local plugin_specs = {
     cmd = { "OSCYank", "OSCYankReg" },
   },
 
-  -- The missing auto-completion for cmdline!
-  {
-    "gelguy/wilder.nvim",
-    build = ":UpdateRemotePlugins",
-  },
+  -- -- The missing auto-completion for cmdline!
+  -- {
+  --   "gelguy/wilder.nvim",
+  --   build = ":UpdateRemotePlugins",
+  -- },
 
   -- showing keybindings
   {
@@ -567,6 +567,19 @@ local plugin_specs = {
     end,
     event = "VeryLazy",
   },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require("config.noice")
+    end,
+  },
+
 }
 
 require("lazy").setup {
