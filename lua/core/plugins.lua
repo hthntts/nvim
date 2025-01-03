@@ -254,9 +254,7 @@ local plugin_specs = {
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
     keys = {
         {
-          mode = { 'v', 'n' },
-          '<Leader>m',
-          '<cmd>MCstart<cr>',
+          mode = { 'v', 'n' }, '<Leader>m', '<cmd>MCvisual<cr>',
           desc = 'Multi Cursors',
         },
     },
