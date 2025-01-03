@@ -65,6 +65,7 @@ keymap.set("n", "*", "", {
     hlslens.start()
   end,
 })
+
 keymap.set("n", "#", "", {
   callback = function()
     local cursor_word_empty, cursor_word = check_cursor_word()
