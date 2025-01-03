@@ -1,4 +1,5 @@
 local keymap = vim.keymap
+
 local hop = require("hop")
 hop.setup {
   case_insensitive = true,
@@ -13,7 +14,7 @@ keymap.set({ "n", "v", "o" }, "f", "", {
   callback = function()
     hop.hint_char2()
   end,
-  desc = "Char2",
+  desc = "Hop 2 char",
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
