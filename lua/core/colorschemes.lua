@@ -1,5 +1,4 @@
 --- This module will load a random colorscheme on nvim startup process.
-
 local utils = require("core/utils")
 
 local M = {}
@@ -83,5 +82,5 @@ M.rand_colorscheme = function()
 end
 
 -- Load a random colorscheme
--- M.rand_colorscheme()
-vim.cmd("colorscheme catppuccin")
+M.rand_colorscheme()
+-- vim.cmd("colorscheme catppuccin")

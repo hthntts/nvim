@@ -1,3 +1,4 @@
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 require('move').setup({
@@ -18,9 +19,9 @@ require('move').setup({
 })
 
 -- Normal-mode commands
-vim.keymap.set('n', '<A-down>', ':MoveLine(1)<CR>', opts)
-vim.keymap.set('n', '<A-up>', ':MoveLine(-1)<CR>', opts)
+map('n', '<A-down>', ':MoveLine(1)<CR>', opts)
+map('n', '<A-up>', ':MoveLine(-1)<CR>', opts)
 
 -- Visual-mode commands
-vim.keymap.set('v', '<A-down>', ':MoveBlock(1)<CR>', opts)
-vim.keymap.set('v', '<A-up>', ':MoveBlock(-1)<CR>', opts)
+map('v', '<A-down>', ':MoveBlock(1)<CR>', opts)
+map('v', '<A-up>', ':MoveBlock(-1)<CR>', opts)

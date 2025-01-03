@@ -244,6 +244,7 @@ local plugin_specs = {
     submodules = false, -- not needed, submodules are required only for tests
   },
 
+  -- multi cursors
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -278,6 +279,7 @@ local plugin_specs = {
     end,
   },
 
+  -- send to REPL tmux
   {
     "sourproton/tunnell.nvim",
     opts = {
@@ -331,7 +333,7 @@ local plugin_specs = {
     "ruifm/gitlinker.nvim",
     event = "User InGitRepo",
     config = function()
-      require("config.git-linker")
+      require("config.gitlinker")
     end,
   },
 

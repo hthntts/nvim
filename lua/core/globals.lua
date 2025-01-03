@@ -1,6 +1,6 @@
-local utils = require("core/utils")
 local api = vim.api
 local fn = vim.fn
+local utils = require("core/utils")
 local username = os.getenv("USER") or "haiht"
 local python3_path = "/Users/" .. username .. "/.pyenv/shims/python3"
 

@@ -1,4 +1,4 @@
-local keymap = vim.keymap
+local map = vim.keymap.set
 
 local hop = require("hop")
 hop.setup {
@@ -8,7 +8,7 @@ hop.setup {
   match_mappings = { "zh_sc" },
 }
 
-keymap.set({ "n", "v", "o" }, "f", "", {
+map({ "n", "v", "o" }, "f", "", {
   silent = true,
   noremap = true,
   callback = function()

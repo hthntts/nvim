@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local foldedLines = endLnum - lnum
@@ -34,25 +36,25 @@ require("ufo").setup {
   fold_virt_text_handler = handler,
 }
 
-vim.keymap.set("n", "<leader>zo", function()
+map("n", "<leader>zo", function()
   local _ = require("ufo").openAllFolds()
 end, {
   desc = "Open all",
 })
 
-vim.keymap.set("n", "<leader>zc", function()
+map("n", "<leader>zc", function()
   local _ = require("ufo").closeAllFolds()
 end, {
   desc = "Close all",
 })
 
-vim.keymap.set("n", "<leader>ze", function()
+map("n", "<leader>ze", function()
   local _ = require("ufo").openFoldsExceptKinds()
 end, {
   desc = "Except kinds",
 })
 
-vim.keymap.set("n", "<leader>zp", function()
+map("n", "<leader>zp", function()
   local _ = require("ufo").peekFoldedLinesUnderCursor()
 end, {
   desc = "Preview",

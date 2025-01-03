@@ -1,5 +1,5 @@
 local api = vim.api
-local keymap = vim.keymap
+local map = vim.keymap.set
 
 local hlslens = require("hlslens")
 
@@ -23,13 +23,13 @@ local activate_hlslens = function(direction)
   hlslens.start()
 end
 
-keymap.set("n", "n", "", {
+map("n", "n", "", {
   callback = function()
     activate_hlslens("n")
   end,
 })
 
-keymap.set("n", "N", "", {
+map("n", "N", "", {
   callback = function()
     activate_hlslens("N")
   end,
@@ -46,7 +46,7 @@ local check_cursor_word = function()
   return result, cursor_word
 end
 
-keymap.set("n", "*", "", {
+map("n", "*", "", {
   callback = function()
     local cursor_word_empty, cursor_word = check_cursor_word()
     if cursor_word_empty then
@@ -66,7 +66,7 @@ keymap.set("n", "*", "", {
   end,
 })
 
-keymap.set("n", "#", "", {
+map("n", "#", "", {
   callback = function()
     local cursor_word_empty, cursor_word = check_cursor_word()
     if cursor_word_empty then

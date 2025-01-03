@@ -2,7 +2,6 @@ local utils = require("core/utils")
 local fn = vim.fn
 local api = vim.api
 
-
 -- Display a message when the current file is not in utf-8 format.
 -- Note that we need to use `unsilent` command here because of this issue:
 -- https://github.com/vim/vim/issues/4379

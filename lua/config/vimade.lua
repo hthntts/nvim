@@ -1,5 +1,5 @@
 require('vimade').setup({
-  recipe = {'default', {animate = false}},
+  recipe = {'default', {animate = true}},
   ncmode = 'buffers',
   fadelevel = 0.4,
   tint = {},
