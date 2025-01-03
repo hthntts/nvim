@@ -1,3 +1,5 @@
+local opts = { noremap = true, silent = true }
+
 require('move').setup({
   line = {
     enable = true, -- Enables line movement
@@ -15,7 +17,6 @@ require('move').setup({
   }
 })
 
-local opts = { noremap = true, silent = true }
 -- Normal-mode commands
 vim.keymap.set('n', '<A-down>', ':MoveLine(1)<CR>', opts)
 vim.keymap.set('n', '<A-up>', ':MoveLine(-1)<CR>', opts)
