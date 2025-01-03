@@ -67,9 +67,6 @@ keymap.set({ "x", "n" }, ";", ":")
 -- see also https://stackoverflow.com/q/10723700/6064933.
 keymap.set("x", "p", '"_c<Esc>p')
 
--- Text objects for URL.
-keymap.set({ "x", "o" }, "iu", "<cmd>call utils#TextObjURL()<cr>", { desc = "URL text object" })
-
 -- Do not include white space characters when using $ in visual mode.
 -- see https://vi.stackexchange.com/q/12607/15292
 keymap.set("x", "$", "g_")
@@ -140,9 +137,9 @@ keymap.set("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "First qf ite
 keymap.set("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "Last qf item" })
 
 -- Text objects for entire buffer
-keymap.set("n", "<leader>ba", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
-keymap.set("n", "<M-a>", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
-keymap.set("n", "<c-x>h", "<cmd>call utils#MarkWholeBuffer()<cr>", { desc = "Mark whole buffer" })
+keymap.set("n", "<leader>ba", "<cmd>call utils#selectall()<cr>", { desc = "Select All" })
+keymap.set("n", "<M-a>", "<cmd>call utils#selectall()<cr>", { desc = "Select All" })
+keymap.set("n", "<c-x>h", "<cmd>call utils#selectall()<cr>", { desc = "Select All" })
 
 -- Delete a buffer, without closing the window.
 -- see https://stackoverflow.com/q/4465095/6064933
@@ -163,10 +160,10 @@ keymap.set("n", "<leader>bR", "<cmd>StripTrailingWhitespace<cr>", { desc = "Remo
 keymap.set("n", "<leader>bO", delete_other_buffers, { desc = "Delete other buffers"  })
 
 -- Go to a certain buffer.
-keymap.set("n", "<leader>bn", '<cmd>call utils#GoToBuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
-keymap.set("n", "<leader>bp", '<cmd>call utils#GoToBuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
-keymap.set("n", "<A-D-Right>", '<cmd>call utils#GoToBuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
-keymap.set("n", "<A-D-Left>", '<cmd>call utils#GoToBuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
+keymap.set("n", "<leader>bn", '<cmd>call utils#gotobuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
+keymap.set("n", "<leader>bp", '<cmd>call utils#gotobuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
+keymap.set("n", "<A-D-Right>", '<cmd>call utils#gotobuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
+keymap.set("n", "<A-D-Left>", '<cmd>call utils#gotobuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
 
 -- Copy entire buffer.
 keymap.set("n", "<leader>by", "<cmd>%yank<cr>", { desc = "Yank buffer" })
@@ -199,7 +196,7 @@ keymap.set("n", "<leader>tc", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = 
 keymap.set("n", "<leader>tl", toggle_cursor_location, { desc = "Toggle cursor location" })
 
 -- Check the syntax group of current cursor position.
-keymap.set("n", "<leader>ts", "<cmd>call utils#SynGroup()<cr>", { desc = "Syntax group" })
+keymap.set("n", "<leader>ts", "<cmd>call utils#syngroup()<cr>", { desc = "Syntax group" })
 
 -- Quit without saving.
 keymap.set("n", "<leader>qQ", "<cmd>qa!<cr>", { silent = true, desc = "Quit without saving" })
