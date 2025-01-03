@@ -28,9 +28,6 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 " https://jdhao.github.io/2019/04/17/neovim_snippet_s1/ for details.
 let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
 
-"""""""""""""""""""""""""" vlime settings """"""""""""""""""""""""""""""""
-command! -nargs=0 StartVlime call jobstart(printf("sbcl --load %s/vlime/lisp/start-vlime.lisp", g:package_home))
-
 """""""""""""""""""""""""""""LeaderF settings"""""""""""""""""""""
 " Do not use cache file
 let g:Lf_UseCache = 0
@@ -129,62 +126,6 @@ let g:vista_stay_on_open = 0
 
 nnoremap <silent> <leader>ts :<C-U>Vista!!<CR>
 
-""""""""""""""""""""""""vim-mundo settings"""""""""""""""""""""""
-let g:mundo_verbose_graph = 0
-let g:mundo_width = 80
-
-nnoremap <silent> <leader>tm :MundoToggle<CR>
-
-""""""""""""""""""""""""""""better-escape.vim settings"""""""""""""""""""""""""
-let g:better_escape_interval = 200
-
-""""""""""""""""""""""""""""vim-xkbswitch settings"""""""""""""""""""""""""
-let g:XkbSwitchEnabled = 1
-
-"""""""""""""""""""""""""""""" neoformat settings """""""""""""""""""""""
-let g:neoformat_enabled_python = ['black', 'yapf']
-let g:neoformat_cpp_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
-      \ }
-let g:neoformat_c_clangformat = {
-      \ 'exe': 'clang-format',
-      \ 'args': ['--style="{IndentWidth: 4}"']
-      \ }
-
-let g:neoformat_enabled_cpp = ['clangformat']
-let g:neoformat_enabled_c = ['clangformat']
-
-"""""""""""""""""""""""""vim-markdown settings"""""""""""""""""""
-" Disable header folding
-let g:vim_markdown_folding_disabled = 1
-
-" Whether to use conceal feature in markdown
-let g:vim_markdown_conceal = 1
-
-" Disable math tex conceal and syntax highlight
-let g:tex_conceal = ''
-let g:vim_markdown_math = 0
-
-" Support front matter of various format
-let g:vim_markdown_frontmatter = 1  " for YAML format
-let g:vim_markdown_toml_frontmatter = 1  " for TOML format
-let g:vim_markdown_json_frontmatter = 1  " for JSON format
-
-" Let the TOC window autofit so that it doesn't take too much space
-let g:vim_markdown_toc_autofit = 1
-
-"""""""""""""""""""""""""markdown-preview settings"""""""""""""""""""
-" Only setting this for suitable platforms
-if g:is_win || g:is_mac
-  " Do not close the preview tab when switching to other buffers
-  let g:mkdp_auto_close = 0
-
-  " Shortcuts to start and stop markdown previewing
-  nnoremap <silent> <leader>om :<C-U>MarkdownPreview<CR>
-  nnoremap <silent> <leader>os :<C-U>MarkdownPreviewStop<CR>
-endif
-
 """"""""""""""""""""""""vim-grammarous settings""""""""""""""""""""""""""""""
 if g:is_mac
   let g:grammarous#languagetool_cmd = 'languagetool'
@@ -207,9 +148,6 @@ if g:is_mac
   augroup END
 endif
 
-""""""""""""""""""""""""unicode.vim settings""""""""""""""""""""""""""""""
-nmap <silent> <leader>ua <Plug>(UnicodeGA)
-nmap <silent> <leader>un <Plug>(UnicodeSwaCompleteName)
 
 """"""""""""""""""""""""""""vim-sandwich settings"""""""""""""""""""""""""""""
 " Map s to nop since s in used by vim-sandwich. Use cl instead of s.
@@ -239,57 +177,7 @@ if g:is_win
   let g:asyncrun_encs = 'gbk'
 endif
 
-""""""""""""""""""""""""""""""wilder.nvim settings""""""""""""""""""""""""""""""
-" call timer_start(250, { -> s:wilder_init() })
-
-" function! s:wilder_init() abort
-"   try
-"     call wilder#setup({
-"           \ 'modes': [':', '/', '?'],
-"           \ 'next_key': '<Tab>',
-"           \ 'previous_key': '<S-Tab>',
-"           \ 'accept_key': '<C-y>',
-"           \ 'reject_key': '<C-e>'
-"           \ })
-
-"     call wilder#set_option('pipeline', [
-"           \   wilder#branch(
-"           \     wilder#cmdline_pipeline({
-"           \       'language': 'python',
-"           \       'fuzzy': 1,
-"           \       'sorter': wilder#python_difflib_sorter(),
-"           \       'debounce': 30,
-"           \     }),
-"           \     wilder#python_search_pipeline({
-"           \       'pattern': wilder#python_fuzzy_pattern(),
-"           \       'sorter': wilder#python_difflib_sorter(),
-"           \       'engine': 're',
-"           \       'debounce': 30,
-"           \     }),
-"           \   ),
-"           \ ])
-
-"     let l:hl = wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#f4468f'}])
-"     call wilder#set_option('renderer', wilder#popupmenu_renderer({
-"           \ 'highlighter': wilder#basic_highlighter(),
-"           \ 'max_height': 15,
-"           \ 'highlights': {
-"           \   'accent': l:hl,
-"           \ },
-"           \ 'left': [' ', wilder#popupmenu_devicons(),],
-"           \ 'right': [' ', wilder#popupmenu_scrollbar(),],
-"           \ 'apply_incsearch_fix': 0,
-"           \ }))
-"   catch /^Vim\%((\a\+)\)\=:E117/
-"     echohl Error |echomsg "Wilder.nvim missing"| echohl None
-"   endtry
-" endfunction
-
-""""""""""""""""""""""""""""""vim-auto-save settings""""""""""""""""""""""""""""""
-let g:auto_save = 1  " enable AutoSave on Vim startup
-
 """"""""""""""""""""""""""""""fern settings""""""""""""""""""""""""""""""
-
 " Disable netrw.
 let g:loaded_netrw  = 1
 let g:loaded_netrwPlugin = 1
@@ -366,4 +254,3 @@ augroup FernGroup
   autocmd!
   autocmd FileType fern call FernInit()
 augroup END
-
