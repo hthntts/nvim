@@ -55,7 +55,7 @@ local function delete_other_buffers()
 end
 
 -- Use Esc to quit builtin terminal.
-keymap.set("t", "<Esc>", [[<c-\><c-n>]])
+keymap.set("t", "<Esc><Esc>", [[<c-\><c-n>]])
 
 -- Go to beginning of command in command-line mode.
 keymap.set("c", "<C-A>", "<HOME>")

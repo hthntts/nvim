@@ -1,5 +1,6 @@
 require("which-key").setup {
   preset = "classic",
+  delay = 0,
   icons = {
     mappings = false,
   },
