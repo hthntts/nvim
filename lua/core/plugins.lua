@@ -162,7 +162,7 @@ local plugin_specs = {
   -- auto format tools
   { "sbdchd/neoformat",
     config = function()
-      vim.g.better_escape_interval = 200
+      vim.g.neoformat_enabled_python = { 'black', 'yapf' }
     end,
     cmd = { "Neoformat" }
   },
@@ -287,9 +287,9 @@ local plugin_specs = {
       tmux_target = "{right-of}",
     },
     keys = {
-      { "<leader>or", ":TunnellCell<CR>",   mode = { "n" }, silent = true, desc = "REPL cell" },
+      { "<leader>oR", ":TunnellCell<CR>",   mode = { "n" }, silent = true, desc = "REPL cell" },
       { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, silent = true, desc = "REPL range" },
-      { "<leader>oR", ":TunnellConfig<CR>", mode = { "n" }, silent = true, desc = "REPL config" },
+      { "<leader>oT", ":TunnellConfig<CR>", mode = { "n" }, silent = true, desc = "REPL config" },
     },
     cmd = {
       "TunnellCell",
@@ -553,6 +553,17 @@ local plugin_specs = {
     end,
   },
 
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
+    config = function()
+      require("config.mason")
+    end,
+  },
+
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -599,7 +610,7 @@ local plugin_specs = {
   -- showing keybindings
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    event = "VimEnter",
     config = function()
       require("config.which-key")
     end,
@@ -609,7 +620,6 @@ local plugin_specs = {
 
 require("lazy").setup {
   spec = plugin_specs,
-  lockfile = vim.fn.stdpath('config') .. 'lua/core/plugins.json',
   ui = {
     border = "rounded",
     title = "Plugin Manager",
