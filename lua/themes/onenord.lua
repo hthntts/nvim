@@ -1,0 +1,55 @@
+return {
+  "rmehri01/onenord.nvim",
+  lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+  priority = 1000, -- make sure to load this before all the other start plugins
+  config = function()
+    local colors = require("onenord.colors").load()
+    require('onenord').setup({
+      theme = nil,    -- "dark" or "light". Alternatively, remove the option and set vim.o.background instead
+      borders = true, -- Split window borders
+      fade_nc = true, -- Fade non-current windows, making them more distinguishable
+      -- Style that is applied to various groups: see `highlight-args` for options
+      styles = {
+        comments = "italic",
+        strings = "none",
+        keywords = "none",
+        functions = "none",
+        variables = "none",
+        diagnostics = "underline",
+      },
+      disable = {
+        background = false,      -- Disable setting the background color
+        float_background = true, -- Disable setting the background color for floating windows
+        cursorline = false,      -- Disable the cursorline
+        eob_lines = true,        -- Hide the end-of-buffer lines
+      },
+      -- Inverse highlight for different groups
+      inverse = {
+        match_paren = false,
+      },
+      custom_highlights = {
+        MatchParen = { fg = colors.none, bg = colors.none, style = 'bold,underline' },
+
+        GitSignsAddLnInline = { fg = colors.none, bg = colors.none, style = 'underline' },
+        GitSignsChangeLnInline = { fg = colors.none, bg = colors.none, style = 'underline' },
+        GitSignsDeleteLnInline = { fg = colors.purple, bg = colors.none, style = 'bold,underline' },
+
+        TelescopeNormal = { bg = colors.none, fg = colors.none },
+        TelescopeBorder = { bg = colors.none, fg = colors.none },
+        TelescopePromptNormal = { bg = colors.none, fg = colors.none },
+        TelescopePromptBorder = { bg = colors.none, fg = colors.none },
+        TelescopePromptTitle = { bg = colors.purple, fg = colors.bg },
+        TelescopePromptNormal = { bg = colors.none },
+        TelescopePromptBorder = { bg = colors.bg, fg = colors.bg },
+        TelescopePreviewTitle = { bg = colors.green, fg = colors.bg },
+        TelescopePreviewNormal = { bg = colors.none },
+        TelescopePreviewBorder = { bg = colors.bg, fg = colors.bg },
+        TelescopeResultsTitle = { bg = colors.yellow, fg = colors.bg },
+        TelescopeResultsNormal = { bg = colors.none },
+        TelescopeResultsBorder = { bg = colors.bg, fg = colors.bg },
+      },
+      custom_colors = {}, -- Overwrite default colors
+    })
+    vim.cmd([[colorscheme onenord]])
+  end,
+}

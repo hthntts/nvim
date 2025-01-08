@@ -23,11 +23,12 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local nvim_theme = "nord"
+local nvim_theme = "onenord"
 
 local themes = {
   nord = "themes.nord",
   onedark = "themes.onedark",
+  onenord = "themes.onenord",
 }
 
 -- Setup plugins
