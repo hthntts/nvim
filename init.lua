@@ -44,6 +44,7 @@ require("lazy").setup({
   require("git.lazygit"),
   require("plugins.lualine"),
   require("plugins.bufferline"),
+  require("plugins.hlslens"),
   require("plugins.neo-tree"),
   require("plugins.fern"),
   require("plugins.dashboard"),
