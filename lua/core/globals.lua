@@ -4,25 +4,19 @@ local utils = require("core/utils")
 local username = os.getenv("USER")
 local python3_path = "/Users/" .. username .. "/.pyenv/shims/python3"
 
---------------------------------------------------------------------------------------
--- custom variables                                                                 --
---------------------------------------------------------------------------------------
+-- Custom variables                                                                 --
 vim.g.is_win = (utils.has("win32") or utils.has("win64")) and true or false
 vim.g.is_linux = (utils.has("unix") and (not utils.has("macunix"))) and true or false
 vim.g.is_mac = utils.has("macunix") and true or false
 vim.g.logging_level = "info"
 
---------------------------------------------------------------------------------------
--- builtin variables                                                                --
---------------------------------------------------------------------------------------
-vim.g.loaded_perl_provider = 0 -- Disable perl provider
-vim.g.loaded_ruby_provider = 0 -- Disable ruby provider
+-- Builtin variables                                                                --
+vim.g.loaded_perl_provider = 0      -- Disable perl provider
+vim.g.loaded_ruby_provider = 0      -- Disable ruby provider
 -- vim.g.loaded_node_provider = 0 -- Disable node provider
 vim.g.did_install_default_menus = 1 -- do not load menu
 
---------------------------------------------------------------------------------------
--- python3                                                                          --
---------------------------------------------------------------------------------------
+-- Python3                                                                          --
 if vim.fn.executable(python3_path) == 1 then
   if vim.g.is_win then
     vim.g.python3_host_prog = vim.fn.substitute(vim.fn.exepath("python3"), ".exe$", "", "g")
@@ -30,12 +24,9 @@ if vim.fn.executable(python3_path) == 1 then
     vim.g.python3_host_prog = python3_path
   end
 else
-  vim.api.nvim_err_writeln("Python3 executable not found! You must install Python3 and set its PATH correctly!")
+  vim.api.nvim_err_writeln("You must install Python3 and set its PATH correctly!")
   return
 end
-
--- Custom mapping <leader> (see `:h mapleader` for more info)
-vim.g.mapleader = " "
 
 -- Enable highlighting for lua HERE doc inside vim script
 vim.g.vimsyn_embed = "l"

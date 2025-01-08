@@ -1,8 +1,3 @@
-function! utils#Cabbrev(key, value) abort
-  execute printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
-        \ a:key, 1+len(a:key), <SID>Single_quote(a:value), <SID>Single_quote(a:key))
-endfunction
-
 function! s:Single_quote(str) abort
   return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
 endfunction
@@ -17,16 +12,6 @@ function! utils#InsideGitRepo() abort
     doautocmd User InGitRepo
     return v:true
   endif
-endfunction
-
-" Check the syntax group in the current cursor position, see
-" https://stackoverflow.com/q/9464844/6064933 and
-" https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/
-function! utils#syngroup() abort
-  if !exists('*synstack')
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
 " Toggle cursor column

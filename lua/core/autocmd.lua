@@ -21,7 +21,7 @@ api.nvim_create_autocmd({ "TextYankPost" }, {
   pattern = "*",
   group = yank_group,
   callback = function()
-    vim.highlight.on_yank { higroup = "YankColor", timeout = 300 }
+    vim.highlight.on_yank({ higroup = "YankColor", timeout = 300 })
   end,
 })
 
@@ -165,7 +165,11 @@ api.nvim_create_autocmd("FileType", {
         local status, result = pcall(api.nvim_win_set_cursor, 0, mark_pos)
         if not status then
           api.nvim_err_writeln(
-            string.format("Failed to resume cursor position. Context %s, error: %s", vim.inspect(ev), result)
+            string.format(
+              "Failed to resume cursor position. Context %s, error: %s",
+              vim.inspect(ev),
+              result
+            )
           )
         end
       end)
