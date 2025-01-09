@@ -134,51 +134,51 @@ api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- Return to last cursor position when opening a file, note that here we cannot use BufReadPost
--- as event. It seems that when BufReadPost is triggered, FileType event is still not run.
--- So the filetype for this buffer is empty string.
-api.nvim_create_autocmd("FileType", {
-  group = api.nvim_create_augroup("resume_cursor_position", { clear = true }),
-  pattern = "*",
-  callback = function(ev)
-    local mark_pos = api.nvim_buf_get_mark(ev.buf, '"')
-    local last_cursor_line = mark_pos[1]
+-- Return to last cursor position when opening a file
+-- see: https://github.com/ethanholz/nvim-lastplace/blob/main/lua/nvim-lastplace/init.lua
+local ignore_buftype = { "quickfix", "nofile", "help" }
+local ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" }
 
-    local max_line = vim.fn.line("$")
-    local buf_filetype = api.nvim_get_option_value("filetype", { buf = ev.buf })
-    local buftype = api.nvim_get_option_value("buftype", { buf = ev.buf })
+local function run()
+  if vim.tbl_contains(ignore_buftype, vim.bo.buftype) then
+    return
+  end
 
-    -- only handle normal files
-    if buf_filetype == "" or buftype ~= "" then
-      return
+  if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
+    -- reset cursor to first line
+    vim.cmd [[normal! gg]]
+    return
+  end
+
+  -- If a line has already been specified on the command line, we are done
+  --   nvim file +num
+  if vim.fn.line(".") > 1 then
+    return
+  end
+
+  local last_line = vim.fn.line([['"]])
+  local buff_last_line = vim.fn.line("$")
+
+  -- If the last line is set and the less than the last line in the buffer
+  if last_line > 0 and last_line <= buff_last_line then
+    local win_last_line = vim.fn.line("w$")
+    local win_first_line = vim.fn.line("w0")
+    -- Check if the last line of the buffer is the same as the win
+    if win_last_line == buff_last_line then
+      -- Set line to last line edited
+      vim.cmd [[normal! g`"]]
+      -- Try to center
+    elseif buff_last_line - last_line > ((win_last_line - win_first_line) / 2) - 1 then
+      vim.cmd [[normal! g`"zz]]
+    else
+      vim.cmd [[normal! G'"<c-e>]]
     end
+  end
+end
 
-    -- Only resume last cursor position when there is no go-to-line command (something like '+23').
-    if vim.fn.match(vim.v.argv, [[\v^\+(\d){1,}$]]) ~= -1 then
-      return
-    end
-
-    if last_cursor_line > 1 and last_cursor_line <= max_line then
-      -- vim.print(string.format("mark_pos: %s", vim.inspect(mark_pos)))
-      -- it seems that without vim.schedule, the cursor position can not be set correctly
-      vim.schedule(function()
-        local status, result = pcall(api.nvim_win_set_cursor, 0, mark_pos)
-        if not status then
-          api.nvim_err_writeln(
-            string.format(
-              "Failed to resume cursor position. Context %s, error: %s",
-              vim.inspect(ev),
-              result
-            )
-          )
-        end
-      end)
-      -- the following two ways also seem to work,
-      -- ref: https://www.reddit.com/r/neovim/comments/104lc26/how_can_i_press_escape_key_using_lua/
-      -- vim.api.nvim_feedkeys("g`\"", "n", true)
-      -- vim.fn.execute("normal! g`\"")
-    end
-  end,
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'FileType' }, {
+  group    = vim.api.nvim_create_augroup('nvim-lastplace', {}),
+  callback = run
 })
 
 local number_toggle_group = api.nvim_create_augroup("numbertoggle", { clear = true })
