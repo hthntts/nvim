@@ -209,7 +209,6 @@ return {
     pcall(require("telescope").load_extension, "ui-select")
 
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent [f]iles" })
-    vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "Switch [b]uffer" })
     -- vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "[S]earch [M]arks" })
     -- vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
     -- vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search [G]it [C]ommits" })
@@ -228,18 +227,21 @@ return {
         symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Property" },
       })
     end, { desc = "Jump to symbol [i]" })
-    -- vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "[ ] Find existing buffers" })
     vim.keymap.set("n", "<leader>bo", function()
       builtin.live_grep({
         grep_open_files = true,
         prompt_title = "Live Grep in Open Files",
       })
     end, { desc = "[s]each buffer" })
-    vim.keymap.set("n", "<leader>ss", function()
-      -- You can pass additional configuration to telescope to change theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+    vim.keymap.set("n", "<leader>bb", function()
+      builtin.buffers(require("telescope.themes").get_dropdown({
         previewer = false,
       }))
+    end, { desc = "Switch [b]uffer" })
+    vim.keymap.set("n", "<leader>ss", function()
+      builtin.current_buffer_fuzzy_find({
+        previewer = false,
+      })
     end, { desc = "[s]earch buffer" })
   end,
 }
