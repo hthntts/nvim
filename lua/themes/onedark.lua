@@ -14,8 +14,8 @@ return {
       cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
       -- toggle theme style ---
-      toggle_style_key = "<leader>th",                                                     -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-      toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" }, -- List of styles to toggle between
+      -- toggle_style_key = "<leader>th",                                                     -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+      -- toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" }, -- List of styles to toggle between
 
       -- Change code style ---
       -- Options are italic, bold, underline, none
@@ -67,6 +67,30 @@ return {
       onedark.load()
       set_diagnostics_bg_transparency()
     end
+
+    local colors = require("onedark.colors")
+
+    vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.none, fg = colors.none })
+    vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = colors.none, fg = colors.none })
+
+    vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { bg = colors.orange, fg = colors.bg })
+    vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { bg = colors.bg2 })
+    vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { bg = colors.bg2, fg = colors.bg2 })
+
+    vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { bg = colors.green, fg = colors.bg1 })
+    vim.api.nvim_set_hl(0, 'TelescopePreviewNormal', { bg = colors.bg1 })
+    vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { bg = colors.bg1, fg = colors.bg1 })
+
+    vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { bg = colors.yellow, fg = colors.bg1 })
+    vim.api.nvim_set_hl(0, 'TelescopeResultsNormal', { bg = colors.bg1 })
+    vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { bg = colors.bg1, fg = colors.bg1 })
+
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH1Bg', { bg = colors.none, fg = colors.green })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH2Bg', { bg = colors.none, fg = colors.yellow })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH3Bg', { bg = colors.none, fg = colors.purple })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH4Bg', { bg = colors.none, fg = colors.orange })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH5Bg', { bg = colors.none, fg = colors.blue })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH6Bg', { bg = colors.none, fg = colors.cyan })
 
     vim.keymap.set("n", "<leader>tt", toggle_transparency, { noremap = true, silent = true })
   end,

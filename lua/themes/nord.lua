@@ -35,6 +35,30 @@ return {
       -- set_menu_border_transparency()
     end
 
+    local colors = require("nord.colors")
+
+    vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.nord1_gui, fg = colors.nord6_gui })
+    vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = colors.nord1_gui, fg = colors.nord1_gui })
+
+    vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { bg = colors.nord15_gui, fg = colors.nord0_gui })
+    vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { bg = colors.nord3_gui_bright })
+    vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { bg = colors.nord3_gui_bright, fg = colors.nord3_gui_bright })
+
+    vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { bg = colors.nord14_gui, fg = colors.nord0_gui })
+    vim.api.nvim_set_hl(0, 'TelescopePreviewNormal', { bg = colors.nord1_gui })
+    vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { bg = colors.none, fg = colors.none })
+
+    vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { bg = colors.nord13_gui, fg = colors.nord0_gui })
+    vim.api.nvim_set_hl(0, 'TelescopeResultsNormal', { bg = colors.nord1_gui })
+    vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { bg = colors.none, fg = colors.none })
+
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH1Bg', { bg = colors.none, fg = colors.nord14_gui })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH2Bg', { bg = colors.none, fg = colors.nord13_gui })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH3Bg', { bg = colors.none, fg = colors.nord15_gui })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH4Bg', { bg = colors.none, fg = colors.nord9_gui })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH5Bg', { bg = colors.none, fg = colors.nord10_gui })
+    vim.api.nvim_set_hl(0, 'RenderMarkdownH6Bg', { bg = colors.none, fg = colors.nord7_gui })
+
     vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "Toggle [t]ransparent" })
   end,
 }

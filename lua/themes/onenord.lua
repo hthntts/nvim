@@ -55,6 +55,7 @@ return {
         RenderMarkdownH4Bg = { bg = colors.bg, fg = colors.magenta },
         RenderMarkdownH5Bg = { bg = colors.bg, fg = colors.blue },
         RenderMarkdownH6Bg = { bg = colors.bg, fg = colors.cyan },
+
       },
       custom_colors = {}, -- Overwrite default colors
     })
