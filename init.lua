@@ -24,6 +24,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local nvim_theme = "onenord"
+local env_nvim_theme = os.getenv 'NVIM_THEME' or nvim_theme
 
 local themes = {
   nord = "themes.nord",
@@ -33,7 +34,7 @@ local themes = {
 
 -- Setup plugins
 require("lazy").setup({
-  require(themes[nvim_theme]),
+  require(themes[env_nvim_theme]),
   require("plugins.telescope"),
   require("plugins.treesitter"),
   require("plugins.lsp"),
