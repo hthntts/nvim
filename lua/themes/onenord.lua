@@ -36,17 +36,25 @@ return {
 
         TelescopeNormal = { bg = colors.none, fg = colors.none },
         TelescopeBorder = { bg = colors.none, fg = colors.none },
-        TelescopePromptNormal = { bg = colors.none, fg = colors.none },
-        TelescopePromptBorder = { bg = colors.none, fg = colors.none },
+
         TelescopePromptTitle = { bg = colors.purple, fg = colors.bg },
-        TelescopePromptNormal = { bg = colors.none },
-        TelescopePromptBorder = { bg = colors.bg, fg = colors.bg },
+        TelescopePromptNormal = { bg = colors.highlight },
+        TelescopePromptBorder = { bg = colors.highlight, fg = colors.highlight },
+
         TelescopePreviewTitle = { bg = colors.green, fg = colors.bg },
         TelescopePreviewNormal = { bg = colors.none },
         TelescopePreviewBorder = { bg = colors.bg, fg = colors.bg },
+
         TelescopeResultsTitle = { bg = colors.yellow, fg = colors.bg },
         TelescopeResultsNormal = { bg = colors.none },
         TelescopeResultsBorder = { bg = colors.bg, fg = colors.bg },
+
+        RenderMarkdownH1Bg = { bg = colors.bg, fg = colors.green },
+        RenderMarkdownH2Bg = { bg = colors.bg, fg = colors.yellow },
+        RenderMarkdownH3Bg = { bg = colors.bg, fg = colors.purple },
+        RenderMarkdownH4Bg = { bg = colors.bg, fg = colors.magenta },
+        RenderMarkdownH5Bg = { bg = colors.bg, fg = colors.blue },
+        RenderMarkdownH6Bg = { bg = colors.bg, fg = colors.cyan },
       },
       custom_colors = {}, -- Overwrite default colors
     })
