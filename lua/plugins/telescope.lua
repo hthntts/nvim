@@ -225,7 +225,7 @@ return {
           hidden = true,
         },
         buffers = {
-          initial_mode = "normal",
+          -- initial_mode = "normal",
           sort_lastused = true,
           -- sort_mru = true,
           mappings = {
