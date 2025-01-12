@@ -39,7 +39,7 @@ return {
           key = 'f',
         },
         {
-          desc = icons.ui.Search .. 'Search',
+          desc = icons.ui.SearchLeft .. 'Search',
           group = 'Label',
           action = 'Telescope live_grep',
           key = 'g',
