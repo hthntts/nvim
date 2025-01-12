@@ -64,6 +64,7 @@ require("lazy").setup({
   require("plugins.statuscol"),
   require("plugins.which-key"),
   require("plugins.tmux-navigator"),
+  -- require("plugins.avante"),
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
