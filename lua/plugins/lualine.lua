@@ -149,11 +149,11 @@ return {
       color = { fg = colors.magenta, gui = 'bold' },
     }
 
-    -- diff
+    -- -- diff
     -- ins_left {
     --   'diff',
     --   -- Is it me or the symbol for modified us really weird
-    --   symbols = { added = icons.git.Add, modified = icons.git.Mod_alt, removed = icons.git.Remove },
+    --   symbols = { added = icons.git.Add, modified = icons.git.Modified, removed = icons.git.Deleted },
     --   diff_color = {
     --     added = { fg = colors.green },
     --     modified = { fg = colors.blue },
