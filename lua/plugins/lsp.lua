@@ -7,10 +7,10 @@ return { -- LSP Configuration & Plugins
     diagnostics = {
       signs = {
         text = {
-          [vim.diagnostic.severity.ERROR] = "  ",
-          [vim.diagnostic.severity.WARN] = "  ",
-          [vim.diagnostic.severity.HINT] = "  ",
-          [vim.diagnostic.severity.INFO] = "  ",
+          [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+          [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+          [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+          [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
         },
       },
     },
@@ -71,7 +71,7 @@ return { -- LSP Configuration & Plugins
     vim.diagnostic.config {
       underline = false,
       virtual_text = false,
-      signs = true,
+      signs = false,
       severity_sort = true,
     }
 
