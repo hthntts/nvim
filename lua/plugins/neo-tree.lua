@@ -64,6 +64,20 @@ return {
       --       end
       --   end , -- this sorts files and directories descendantly
       default_component_configs = {
+        diagnostics = {
+          symbols = {
+            hint = icons.diagnostics.Hint,
+            info = icons.diagnostics.Information,
+            warn = icons.diagnostics.Warning,
+            error = icons.diagnostics.Error,
+          },
+          highlights = {
+            hint = "DiagnosticSignHint",
+            info = "DiagnosticSignInfo",
+            warn = "DiagnosticSignWarn",
+            error = "DiagnosticSignError",
+          },
+        },
         container = {
           enable_character_fade = true,
         },
@@ -102,16 +116,16 @@ return {
         git_status = {
           symbols = {
             -- Change type
-            added = icons.git.Add,           -- or "✚", but this is redundant info if you use git_status_colors on the name
-            modified = icons.ui.CircleSmall, -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted = icons.git.Remove,      -- this can only be used in the git_status source
-            renamed = icons.git.Rename,      -- this can only be used in the git_status source
+            added = icons.git.Add,        -- or "✚", but this is redundant info if you use git_status_colors on the name
+            modified = icons.ui.Modified, -- or "", but this is redundant info if you use git_status_colors on the name
+            deleted = icons.git.Deleted,  -- this can only be used in the git_status source
+            renamed = icons.git.Rename,   -- this can only be used in the git_status source
             -- Status type
-            untracked = "",
-            ignored = "",
-            unstaged = "󰄱",
-            staged = "",
-            conflict = "",
+            untracked = icons.git.Untracked,
+            ignored = icons.git.Ignore,
+            unstaged = icons.git.Unstaged,
+            staged = icons.git.Staged,
+            conflict = icons.git.Conflict,
           },
         },
         -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
