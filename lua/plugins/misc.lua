@@ -2,10 +2,14 @@
 local utils = require("core/utils")
 
 return {
-  { "gelguy/wilder.nvim" },
+  {
+    "gelguy/wilder.nvim",
+    event = 'VeryLazy'
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    event = "VeryLazy",
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -29,6 +33,8 @@ return {
 
   {
     "utilyre/barbecue.nvim",
+    cmd = "Barbecue",
+    event = { "BufReadPre" },
     name = "barbecue",
     version = "*",
     dependencies = {
@@ -43,49 +49,48 @@ return {
   -- Automatic insertion and deletion of a pair of characters
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = { "BufReadPre", "BufNewFile" },
     config = true,
   },
 
   -- Better ui for some nvim actions
-  { "stevearc/dressing.nvim" },
+  { "stevearc/dressing.nvim",   event = 'BufReadPre', },
 
   -- Highlight URLs inside vim
-  { "itchyny/vim-highlighturl", event = "VeryLazy" },
+  { "itchyny/vim-highlighturl", event = "BufReadPre" },
 
   -- Dimmer inactive buffer
   {
     "TaDaa/vimade",
-    config = function()
-      require('vimade').setup({
-        recipe = { 'default', { animate = true } },
-        ncmode = 'buffers',
-        fadelevel = 0.7,
-        tint = {},
-      })
-    end,
-    event = "VeryLazy",
+    event = 'VeryLazy',
+    opts = {
+      recipe = { 'default', { animate = true } },
+      ncmode = 'buffers',
+      fadelevel = 0.7,
+      tint = {},
+    }
   },
 
   -- Unicode glyphs
   {
     "chrisbra/unicode.vim",
     cmd = { "UnicodeName" },
-    event = "VeryLazy"
+    keys = {
+      { "<leader>un", "<cmd>UnicodeName<cr>", desc = "Unicode name" },
+    }
   },
 
   -- Show and trim trailing whitespaces
   {
     "jdhao/whitespace.nvim",
-    event = "VeryLazy",
+    lazy = true,
   },
 
   -- Syntax for TOML
   {
     "cespare/vim-toml",
-    ft = { "toml" },
     branch = "main",
-    event = "VeryLazy",
+    ft = { "toml" },
   },
 
   -- Syntax for tmux
@@ -98,56 +103,41 @@ return {
       return false
     end,
     ft = { "tmux" },
-    event = "VeryLazy",
   },
 
   -- Asynchronous command execution
   {
     -- :AsyncRun python -u "%"
     "skywind3000/asyncrun.vim",
+    cmd = { "AsyncRun" },
     config = function()
       vim.g.asyncrun_open = 12
     end,
-    cmd = { "AsyncRun" },
-    event = "VeryLazy",
   },
 
   -- Tunnell text from neovim to a tmux
   {
-    -- :TunnellCell
-    -- :TunnellRange
-    -- :TunnellConfig
     "sourproton/tunnell.nvim",
-    opts = {
-      cell_header = "# %%",
-      tmux_target = "{right-of}",
-    },
-    keys = {
-      { "<leader>oR", ":TunnellCell<CR>",   mode = { "n" }, silent = true, desc = "[R]EPL cell" },
-      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, silent = true, desc = "[r]EPL range" },
-      { "<leader>oC", ":TunnellConfig<CR>", mode = { "n" }, silent = true, desc = "REPL [C]onfig" },
-    },
     cmd = {
       "TunnellCell",
       "TunnellRange",
       "TunnellConfig",
     },
-    event = "VeryLazy",
+    keys = {
+      { "<leader>oR", ":TunnellCell<CR>",   mode = { "n" }, silent = true, desc = "REPL cell" },
+      { "<leader>or", ":TunnellRange<CR>",  mode = { "v" }, silent = true, desc = "REPL range" },
+      { "<leader>oC", ":TunnellConfig<CR>", mode = { "n" }, silent = true, desc = "REPL config" },
+    },
+    opts = {
+      cell_header = "# %%",
+      tmux_target = "{right-of}",
+    },
+    event = "BufReadPre",
   },
 
   -- A multi cursor plugin
   {
-    -- :MCstart
-    -- :MCvisual
-    -- :MCclear
-    -- :MCpattern
-    -- :MCvisualPattern
-    -- :MCunderCursor
     "smoka7/multicursors.nvim",
-    dependencies = {
-      'nvimtools/hydra.nvim',
-    },
-    opts = {},
     cmd = {
       'MCstart',
       'MCvisual',
@@ -155,6 +145,9 @@ return {
       'MCpattern',
       'MCvisualPattern',
       'MCunderCursor'
+    },
+    dependencies = {
+      'nvimtools/hydra.nvim',
     },
     keys = {
       {
@@ -164,36 +157,54 @@ return {
         desc = 'Multi Cursors',
       },
     },
-    event = "VeryLazy",
+    opts = {
+      hint_config = {
+        float_opts = {
+          border = 'rounded',
+        },
+        position = 'bottom-right',
+      },
+      generate_hints = {
+        normal = true,
+        insert = true,
+        extend = true,
+        config = {
+          column_count = 1,
+        },
+      }
+    },
   },
 
   -- Show file tags in vim window
   {
-    -- :Vista
     "liuchengxu/vista.vim",
-    enabled = function()
-      if utils.executable("ctags") then
-        return true
-      else
-        return false
-      end
-    end,
+    cmd = "Vista",
+    keys = {
+      { "<leader>ts", "<cmd>Vista!!<cr>", desc = "Toogle symbol" },
+    },
+    -- enabled = function()
+    --   if utils.executable("ctags") then
+    --     return true
+    --   else
+    --     return false
+    --   end
+    -- end,
     config = function()
       vim.g.vista_echo_cursor = 0
       vim.g.vista_stay_on_open = 0
     end,
-    cmd = "Vista",
-    event = "VeryLazy",
   },
 
   -- High-performance color highlighter
   {
-    -- :ColorizerToggle
     "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-    event = "VeryLazy",
+    cmd = {
+      "ColorizerToggle",
+    },
+    keys = {
+      { "<leader>tc", "<cmd>ColorizerToggle<cr>", desc = "Toogle colors" },
+    },
+    opts = {},
   },
 
   -- Highlight todo, notes, etc in comments
@@ -205,17 +216,18 @@ return {
     -- :TodoTelescope keywords=TODO,FIX
     -- :Trouble todo
     "folke/todo-comments.nvim",
-    event = "VimEnter",
+    event = 'BufReadPre',
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
 
   -- Diffs for all modified files
   {
-    -- :DiffviewFileHistory
-    -- :DiffviewOpen
     "sindrets/diffview.nvim",
-    event = "VeryLazy",
+    cmd = {
+      "DiffviewFileHistory",
+      "DiffviewOpen",
+    },
   },
 
   -- Git conflict
@@ -228,20 +240,25 @@ return {
     -- GitConflictPrevConflict — Move to the previous conflict.
     -- GitConflictListQf — Get all conflict to quickfix
     "akinsho/git-conflict.nvim",
+    lazy = true,
+    event = { "BufReadPre" },
     version = "*",
     config = true,
-    event = "VeryLazy",
   },
+
   -- Show undo history visually
   {
-    -- :MundoToggle
-    -- :MundoShow
     "simnalamburt/vim-mundo",
+    cmd = {
+      "MundoToggle",
+      "MundoShow"
+    },
+    keys = {
+      { "<leader>tm", "<cmd>MundoToggle<cr>", desc = "Toggle mundo" },
+    },
     config = function()
       vim.g.mundo_verbose_graph = 0
       vim.g.mundo_width = 60
     end,
-    cmd = { "MundoToggle", "MundoShow" },
-    event = "VeryLazy",
   },
 }

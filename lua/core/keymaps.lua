@@ -40,13 +40,13 @@ local function join_lines()
     ]])
 end
 
-local function reload_nvim()
-  vim.cmd([[
-      update $MYVIMRC
-      source $MYVIMRC
-    ]])
-  vim.notify("Nvim config successfully reloaded!", vim.log.levels.INFO, { title = "nvim-config" })
-end
+-- local function reload_nvim()
+--   vim.cmd([[
+--       update $MYVIMRC
+--       source $MYVIMRC
+--     ]])
+--   vim.notify("Nvim config successfully reloaded!", vim.log.levels.INFO, { title = "nvim-config" })
+-- end
 
 local function delete_other_buffers()
   local buf_ids = vim.api.nvim_list_bufs()
@@ -158,80 +158,80 @@ map("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "First qf item" })
 map("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "Last qf item" })
 
 -- Text objects for entire buffer
-map("n", "<leader>ba", "<cmd>call utils#selectall()<cr>", { desc = "Select [a]ll" })
-map("n", "<M-a>", "<cmd>call utils#selectall()<cr>", { desc = "Select All" })
+map("n", "<leader>ba", "<cmd>call utils#selectall()<cr>", { desc = "Mark whole buffer" })
+map("n", "<M-a>", "<cmd>call utils#selectall()<cr>", { desc = "Mark whole buffer" })
 
 -- Delete a buffer, without closing the window.
 -- see https://stackoverflow.com/q/4465095/6064933
-map("n", "<leader>bd", "<cmd>bprevious <bar> bdelete #<cr>", { silent = true, desc = "Kill buffer [d]" })
+map("n", "<leader>bd", "<cmd>bprevious <bar> bdelete #<cr>", { silent = true, desc = "Kill buffer" })
 -- map("n", "<leader>bd", "<cmd>bd<cr>", { silent = true, desc = "Kill buffer" })
 
 -- Reselect the text that has just been pasted.
 -- see https://stackoverflow.com/a/4317090/6064933.
-map("n", "<leader>br", "printf('`[%s`]', getregtype()[0])", { expr = true, desc = "[r]eselect last pasted area" })
-map("n", "<leader>bs", "<cmd>update<cr>", { silent = true, desc = "[s]ave buffer" })
+map("n", "<leader>br", "printf('`[%s`]', getregtype()[0])", { expr = true, desc = "Reselect last pasted area" })
+map("n", "<leader>bs", "<cmd>update<cr>", { silent = true, desc = "Save buffer" })
 
 -- Remove trailing whitespace characters
-map("n", "<leader>cw", "<cmd>StripTrailingWhitespace<cr>", { desc = "LSP: Delete trailing [w]hitespace" })
+map("n", "<leader>cw", "<cmd>StripTrailingWhitespace<cr>", { desc = "LSP: Delete trailing whitespace" })
 
 -- Delete other buffers.
-map("n", "<leader>bO", delete_other_buffers, { desc = "Kill [O]ther buffers" })
+map("n", "<leader>bO", delete_other_buffers, { desc = "Kill other buffers" })
 
--- Go to a certain buffer.
-map("n", "<leader>bn", '<cmd>call utils#gotobuffer(v:count, "forward")<cr>', { desc = "[n]ext buffer" })
-map("n", "<leader>bp", '<cmd>call utils#gotobuffer(v:count, "backward")<cr>', { desc = "[p]revious buffer" })
-map("n", "<A-D-Right>", '<cmd>call utils#gotobuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
-map("n", "<A-D-Left>", '<cmd>call utils#gotobuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
+-- -- Go to a certain buffer.
+-- map("n", "<leader>bn", '<cmd>call utils#gotobuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
+-- map("n", "<leader>bp", '<cmd>call utils#gotobuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
+-- map("n", "<A-D-Right>", '<cmd>call utils#gotobuffer(v:count, "forward")<cr>', { desc = "Next buffer" })
+-- map("n", "<A-D-Left>", '<cmd>call utils#gotobuffer(v:count, "backward")<cr>', { desc = "Previous buffer" })
 
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
-map("n", "<leader>bk", "<cmd>Bdelete!<CR>", { desc = "[k]ill buffer" })
-map("n", "<leader>bN", "<cmd>enew<CR>", { desc = "[N]ew empty buffer" })
+map("n", "<leader>bk", "<cmd>Bdelete!<CR>", { desc = "Kill buffer" })
+map("n", "<leader>bN", "<cmd>enew<CR>", { desc = "New empty buffer" })
 
 -- Copy entire buffer.
-map("n", "<leader>by", "<cmd>%yank<cr>", { desc = "[y]ank buffer" })
+map("n", "<leader>by", "<cmd>%yank<cr>", { desc = "Yank buffer" })
 
 -- Change current working directory locally and print cwd after that.
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
-map("n", "<leader>fc", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "Change [c]d" })
+map("n", "<leader>fc", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "Change cd current file" })
 
 -- Shortcut for faster save and quit.
-map("n", "<leader>fs", "<cmd>update<cr>", { silent = true, desc = "[s]ave file" })
+map("n", "<leader>fs", "<cmd>update<cr>", { silent = true, desc = "Save file" })
 
--- Reload config.
-map("n", "<leader>hdr", reload_nvim, { silent = true, desc = "[r]eload config" })
+-- -- Reload config.
+-- map("n", "<leader>hdr", reload_nvim, { silent = true, desc = "Reload config" })
 
 -- Paste non-linewise text above or below current line.
 -- see https://stackoverflow.com/a/1346777/6064933
-map("n", "<leader>ip", "m`o<ESC>p``", { desc = "Cli[p]board below current line" })
-map("n", "<leader>iP", "m`O<ESC>p``", { desc = "Cli[P]board above current line" })
+map("n", "<leader>ip", "m`o<ESC>p``", { desc = "Clipboard below current line" })
+map("n", "<leader>iP", "m`O<ESC>p``", { desc = "CliPboard above current line" })
 
 -- Insert a blank line below or above current line (do not move the cursor).
 -- see https://stackoverflow.com/a/16136133/6064933
-map("n", "<leader>io", "printf('m`%so<ESC>``', v:count1)", { expr = true, desc = "Blank line bel[o]w" })
-map("n", "<leader>iO", "printf('m`%sO<ESC>``', v:count1)", { expr = true, desc = "Blank line ab[O]ve" })
+map("n", "<leader>io", "printf('m`%so<ESC>``', v:count1)", { expr = true, desc = "Blank line below" })
+map("n", "<leader>iO", "printf('m`%sO<ESC>``', v:count1)", { expr = true, desc = "Blank line above" })
 
 -- Save and load session
-map("n", "<leader>rs", "<cmd>mksession! .session.vim<CR>", { noremap = true, silent = false, desc = "[s]ave Session" })
-map("n", "<leader>rl", "<cmd>source .session.vim<CR>", { noremap = true, silent = false, desc = "[l]oad Session" })
+map("n", "<leader>rs", "<cmd>mksession! .session.vim<CR>", { noremap = true, silent = false, desc = "Save Session" })
+map("n", "<leader>rl", "<cmd>source .session.vim<CR>", { noremap = true, silent = false, desc = "Load Session" })
 
 -- Toggle cursor column.
-map("n", "<leader>to", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "Toogle cursor c[o]lumn" })
+map("n", "<leader>to", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "Toogle cursor column" })
 
 -- Toggle cursor location.
-map("n", "<leader>tl", toggle_cursor_location, { desc = "Toggle cursor [l]ocation" })
+map("n", "<leader>tl", toggle_cursor_location, { desc = "Toggle cursor location" })
 
 -- Toggle line wrapping.
-map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle line [w]rap" })
+map("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle line wrap" })
 
 -- Quit without saving.
-map("n", "<leader>qQ", "<cmd>qa!<cr>", { silent = true, desc = "[Q]uit without saving" })
+map("n", "<leader>qQ", "<cmd>qa!<cr>", { silent = true, desc = "Quit without saving" })
 
 -- Quit file.
-map("n", "<leader>qq", "<cmd>q<cr>", { silent = true, desc = "[q]uit" })
+map("n", "<leader>qq", "<cmd>q<cr>", { silent = true, desc = "Quit" })
 
 -- Save file without auto-formatting
-map("n", "<leader>fS", "<cmd>noautocmd w <CR>", { silent = true, desc = "[S]ave file without auto-formatting" })
+map("n", "<leader>fS", "<cmd>noautocmd w <CR>", { silent = true, desc = "Save file without auto-formatting" })
 
 -- Close location list or quickfix list if they are present.
 -- see https://superuser.com/q/355325/736190
@@ -252,10 +252,10 @@ end
 -- map("n", "<Up>", "<C-W>k")
 -- map("n", "<Down>", "<C-W>j")
 
-map("n", "<leader>td", toogle_diagnostic, { desc = "Toogle [d]iagnostic" })
+map("n", "<leader>td", toogle_diagnostic, { desc = "Toogle diagnostic" })
 
 -- Diagnostic keymaps
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-map("n", "<leader>cqf", vim.diagnostic.open_float, { desc = "Open [f]loating diagnostic message" })
-map("n", "<leader>cqq", vim.diagnostic.setloclist, { desc = "Open diagnostics list [q]" })
+map("n", "<leader>cqf", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+map("n", "<leader>cqq", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })

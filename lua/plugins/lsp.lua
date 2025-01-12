@@ -1,5 +1,20 @@
+local icons = require('core/icons')
+
 return { -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",
+  event = 'BufReadPre',
+  opts = {
+    diagnostics = {
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "  ",
+          [vim.diagnostic.severity.WARN] = "  ",
+          [vim.diagnostic.severity.HINT] = "  ",
+          [vim.diagnostic.severity.INFO] = "  ",
+        },
+      },
+    },
+  },
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for neovim
     "williamboman/mason.nvim",
@@ -32,9 +47,9 @@ return { -- LSP Configuration & Plugins
           focusable = false,
           close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
           -- single double rounded solid shadow none
-          border = "single",
+          border = "none",
           source = "always", -- show source in diagnostic popup window
-          prefix = " ",
+          prefix = icons.ui.ChevronRight .. " ",
         }
 
         if not vim.b.diagnostics_pos then
@@ -72,48 +87,48 @@ return { -- LSP Configuration & Plugins
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-T>.
-        map("<leader>cd", require("telescope.builtin").lsp_definitions, "Jump to [d]efinition")
+        map("<leader>cd", require("telescope.builtin").lsp_definitions, "Jump to definition")
 
         -- Find references for the word under your cursor.
-        map("<leader>cD", require("telescope.builtin").lsp_references, "Jump to references [D]")
+        map("<leader>cD", require("telescope.builtin").lsp_references, "Jump to references")
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map("<leader>ci", require("telescope.builtin").lsp_implementations, "Find [i]mplementation")
+        map("<leader>ci", require("telescope.builtin").lsp_implementations, "Find implementation")
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Find [t]ype definition")
+        map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Find type definition")
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map("<leader>cj", require("telescope.builtin").lsp_document_symbols, "[j]ump to symbols")
+        map("<leader>cj", require("telescope.builtin").lsp_document_symbols, "Jump to symbols")
 
         -- Fuzzy find all the symbols in your current workspace
         --  Similar to document symbols, except searches over your whole project.
-        map("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[S]ymbols")
+        map("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Symbols")
 
         -- Rename the variable under your cursor
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>cr", vim.lsp.buf.rename, "[r]ename")
+        map("<leader>cr", vim.lsp.buf.rename, "Rename")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map("<leader>ca", vim.lsp.buf.code_action, "Execute code [a]ction")
+        map("<leader>ca", vim.lsp.buf.code_action, "Execute code action")
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap
         map("K", vim.lsp.buf.hover, "Hover Documentation")
 
         -- WARN: This is not Jump Definition, this is Jump Declaration.
-        -- map("<leader>cD", vim.lsp.buf.declaration, "Jump to [D]eclaration")
+        -- map("<leader>cD", vim.lsp.buf.declaration, "Jump to declaration")
 
-        map("<leader>pa", vim.lsp.buf.add_workspace_folder, "Project [a]dd Folder")
-        map("<leader>pr", vim.lsp.buf.remove_workspace_folder, "Project [r]emove Folder")
+        map("<leader>pa", vim.lsp.buf.add_workspace_folder, "Project add Folder")
+        map("<leader>pr", vim.lsp.buf.remove_workspace_folder, "Project remove Folder")
         map("<leader>pl", function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, "Project [l]ist Folders")
+        end, "Project list Folders")
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

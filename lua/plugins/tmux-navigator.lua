@@ -15,5 +15,4 @@ return {
     { "<M-l>", "<cmd>TmuxNavigateRight<cr>" },
     -- { "<M-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
   },
-  event = "VeryLazy",
 }

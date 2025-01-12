@@ -1,9 +1,10 @@
--- Set lualine as statusline
+local icons = require("core/icons")
+
 return {
   "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
   config = function()
     local lualine = require('lualine')
-    local icons = require("core/icons")
     local colors = {
       bg       = '#202328',
       fg       = '#bbc2cf',
@@ -69,6 +70,15 @@ return {
           normal = { c = { fg = colors.fg, bg = colors.bar } },
           inactive = { c = { fg = colors.fg, bg = colors.bar } },
         },
+        disabled_filetypes = {
+          "dashboard",
+          "lazygit",
+          "lazy",
+          "NeogitStatus",
+          "fern",
+          "neo-tree",
+        },
+        extensions = { 'quickfix' }
       },
       sections = {
         -- these are to remove the defaults

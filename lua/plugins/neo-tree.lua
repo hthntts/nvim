@@ -28,14 +28,14 @@ return {
         })
       end,
       keys = {
-        { "<leader>of", ":Neotree toggle float<CR>",         silent = true, desc = "[f]loat File Explorer" },
-        { "<leader>oe", ":Neotree toggle position=left<CR>", silent = true, desc = "File [e]xplorer" },
-        { "<M-b>",      ":Neotree toggle position=left<CR>", silent = true, desc = "File [e]xplorer" },
+        { "<leader>of", ":Neotree toggle float<CR>",         silent = true, desc = "Float File Explorer" },
+        { "<leader>oe", ":Neotree toggle position=left<CR>", silent = true, desc = "File explorer" },
+        { "<M-b>",      ":Neotree toggle position=left<CR>", silent = true, desc = "File explorer" },
         {
           "<leader>ge",
           ":Neotree float git_status<CR>",
           silent = true,
-          desc = "Open N[e]otree",
+          desc = "Open Neotree",
         },
       },
     },

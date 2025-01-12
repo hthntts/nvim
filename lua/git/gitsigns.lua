@@ -1,9 +1,9 @@
 -- Adds git related signs to the gutter, as well as utilities for managing changes
 return {
   "lewis6991/gitsigns.nvim",
+  event = 'BufReadPre',
   config = function()
     local gs = require("gitsigns")
-
     gs.setup({
       signs = {
         add = { text = "+" },
@@ -42,23 +42,20 @@ return {
         end, { expr = true, desc = "Previous hunk" })
 
         -- Actions
-        map("n", "<leader>gp", gs.preview_hunk, { expr = true, desc = "[p]review hunk" })
-        map("n", "<leader>gb", function()
-          gs.blame_line({ full = true })
-        end, { expr = true, desc = "[b]lame line" })
-        -- map('n', '<leader>gshD', function() gs.diffthis('~') end)
-        -- map('n', '<leader>gshR', gs.reset_buffer)
-        -- map('n', '<leader>gshS', gs.stage_buffer)
-        -- map('n', '<leader>gshb', function() gs.blame_line { full = true } end)
-        -- map('n', '<leader>gshd', gs.diffthis)
-        -- map('n', '<leader>gshp', gs.preview_hunk)
-        -- map('n', '<leader>gshr', gs.reset_hunk)
-        -- map('n', '<leader>gshs', gs.stage_hunk)
-        -- map('n', '<leader>gshu', gs.undo_stage_hunk)
-        -- map('n', '<leader>gstb', gs.toggle_current_line_blame)
-        -- map('n', '<leader>gstd', gs.toggle_deleted)
-        -- map('v', '<leader>gshr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        -- map('v', '<leader>gshs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
+        map("n", "<leader>gB", gs.blame, { expr = true, desc = "Blame" })
+        map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, { expr = true, desc = "Blame line" })
+        map("n", "<leader>gp", gs.preview_hunk, { expr = true, desc = "Preview hunk" })
+        map('n', '<leader>gd', function() gs.diffthis('~') end, { expr = true, desc = "Different current file" })
+        map('n', '<leader>tb', gs.toggle_current_line_blame, { expr = true, desc = "Toggle (git) line blame" })
+        map('n', '<leader>td', gs.toggle_deleted, { expr = true, desc = "Toggle (git) line delete" })
+        -- map('n', '<leader>gf', gs.diffthis)
+        -- map('n', '<leader>gf', gs.reset_buffer)
+        -- map('n', '<leader>gf', gs.reset_hunk)
+        -- map('n', '<leader>gf', gs.stage_buffer)
+        -- map('n', '<leader>gf', gs.stage_hunk)
+        -- map('n', '<leader>gf', gs.undo_stage_hunk)
+        -- map('v', '<leader>gf', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
+        -- map('v', '<leader>gf', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
       end,
     })
 

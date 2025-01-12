@@ -38,6 +38,7 @@ local icons = require("core/icons")
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
+  cmd = "Telescope",
   dependencies = {
     "nvim-lua/plenary.nvim",
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -55,6 +56,53 @@ return {
     -- Useful for getting pretty icons, but requires a Nerd Font.
     "nvim-tree/nvim-web-devicons",
     "nvim-telescope/telescope-symbols.nvim",
+  },
+  keys = {
+    { "<leader><leader>", "<cmd>Telescope find_files<cr>",  desc = "Find file in project" },
+    { "<leader>/",        "<cmd>Telescope live_grep<cr>",   desc = "Search project" },
+    { "<leader>cx",       "<cmd>Telescope diagnostics<cr>", desc = "LSP: List errors" },
+    { "<leader>ff",       "<cmd>Telescope find_files<cr>",  desc = "Find file in project" },
+    { "<leader>fr",       "<cmd>Telescope oldfiles<cr>",    desc = "Recent files" },
+    { "<leader>fw",       "<cmd>Telescope grep_string<cr>", desc = "Find current word" },
+    { "<leader>hh",       "<cmd>Telescope help_tags<cr>",   desc = "Help" },
+    { "<leader>hk",       "<cmd>Telescope keymaps<cr>",     desc = "Keymaps" },
+    { "<leader>ht",       "<cmd>Telescope colorscheme<cr>", desc = "Themes" },
+    { "<leader>ie",       "<cmd>Telescope symbols<cr>",     desc = "Emoji" },
+
+    -- { "<leader>sm",       "<cmd>Telescope marks<cr>",          desc = "Search marks," },
+    -- { "<leader>gf",       "<cmd>Telescope git_files<cr>",      desc = "Search git files," },
+    -- { "<leader>gc",       "<cmd>Telescope git_commits<cr>",    desc = "Search git commits," },
+    -- { "<leader>gcf",      "<cmd>Telescope git_bcommits<cr>",   desc = "Search git commits for current file," },
+    -- { "<leader>gb",       "<cmd>Telescope git_branches<cr>",   desc = "Search git branches," },
+    -- { "<leader>gs",       "<cmd>Telescope git_status<cr>",     desc = "Search git status (diff view)," },
+    -- { "<leader>sr",       "<cmd>Telescope resume<cr>",         desc = "Search resume" },
+
+    {
+      "<leader>si",
+      "<cmd>lua require'telescope.builtin'.lsp_document_symbols({symbols={'Class','Function','Method','Constructor','Interface','Module','Property'},})<cr>",
+      desc = "Jump to symbol"
+    },
+    {
+      "<leader>bo",
+      "<cmd>lua require'telescope.builtin'.live_grep({grep_open_files=true,prompt_title='Live Grep in Open Files'})<cr>",
+      desc = "Seach open buffer"
+    },
+    {
+      "<leader>bb",
+      "<cmd>lua require'telescope.builtin'.buffers(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      desc = "Switch buffer"
+    },
+    {
+      "<leader>,",
+      "<cmd>lua require'telescope.builtin'.buffers(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      desc = "Switch buffer"
+    },
+    {
+      "<leader>ss",
+      "<cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find({previewer=false})<cr>",
+      desc = "Search buffer"
+    },
+
   },
   config = function()
     local telescope = require("telescope")
@@ -173,7 +221,7 @@ return {
       },
       pickers = {
         find_files = {
-          file_ignore_patterns = { "node_modules", ".git", ".venv" },
+          file_ignore_patterns = { "^node_modules", "^.git/", "^.venv" },
           hidden = true,
         },
         buffers = {
@@ -189,7 +237,7 @@ return {
         },
       },
       live_grep = {
-        file_ignore_patterns = { "node_modules", ".git", ".venv" },
+        file_ignore_patterns = { "^node_modules", "^.git/", "^.venv" },
         additional_args = function(_)
           return { "--hidden" }
         end,
@@ -207,41 +255,5 @@ return {
     -- Enable telescope fzf native, if installed
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
-
-    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent [f]iles" })
-    -- vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "[S]earch [M]arks" })
-    -- vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
-    -- vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search [G]it [C]ommits" })
-    -- vim.keymap.set("n", "<leader>gcf", builtin.git_bcommits, { desc = "Search [G]it [C]ommits for current [F]ile" })
-    -- vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Search [G]it [B]ranches" })
-    -- vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Search [G]it [S]tatus (diff view)" })
-    vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Find file in project" })
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find [f]ile in project" })
-    vim.keymap.set("n", "<leader>hh", builtin.help_tags, { desc = "[h]elp" })
-    vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find current [w]ord" })
-    vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Search project" })
-    vim.keymap.set("n", "<leader>cx", builtin.diagnostics, { desc = "LSP: List errors [x]" })
-    -- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]resume" })
-    vim.keymap.set("n", "<leader>si", function()
-      builtin.lsp_document_symbols({
-        symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Property" },
-      })
-    end, { desc = "Jump to symbol [i]" })
-    vim.keymap.set("n", "<leader>bo", function()
-      builtin.live_grep({
-        grep_open_files = true,
-        prompt_title = "Live Grep in Open Files",
-      })
-    end, { desc = "[s]each buffer" })
-    vim.keymap.set("n", "<leader>bb", function()
-      builtin.buffers(require("telescope.themes").get_dropdown({
-        previewer = false,
-      }))
-    end, { desc = "Switch [b]uffer" })
-    vim.keymap.set("n", "<leader>ss", function()
-      builtin.current_buffer_fuzzy_find({
-        previewer = false,
-      })
-    end, { desc = "[s]earch buffer" })
   end,
 }

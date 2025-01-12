@@ -1,7 +1,7 @@
 return {
   "kevinhwang91/nvim-ufo",
-  dependencies = "kevinhwang91/promise-async",
   event = "VeryLazy",
+  dependencies = "kevinhwang91/promise-async",
   opts = {},
   init = function()
     vim.o.foldcolumn = "1" -- '0' is not bad
@@ -51,25 +51,25 @@ return {
     map("n", "<leader>zo", function()
       local _ = require("ufo").openAllFolds()
     end, {
-      desc = "[o]pen all",
+      desc = "Open all",
     })
 
     map("n", "<leader>zc", function()
       local _ = require("ufo").closeAllFolds()
     end, {
-      desc = "[c]lose all",
+      desc = "Close all",
     })
 
     map("n", "<leader>ze", function()
       local _ = require("ufo").openFoldsExceptKinds()
     end, {
-      desc = "[e]xcept kinds",
+      desc = "Except kinds",
     })
 
     map("n", "<leader>zp", function()
       local _ = require("ufo").peekFoldedLinesUnderCursor()
     end, {
-      desc = "[p]review",
+      desc = "Preview",
     })
   end,
 }

@@ -59,6 +59,6 @@ return {
     vim.api.nvim_set_hl(0, 'RenderMarkdownH5Bg', { bg = colors.none, fg = colors.nord10_gui })
     vim.api.nvim_set_hl(0, 'RenderMarkdownH6Bg', { bg = colors.none, fg = colors.nord7_gui })
 
-    vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "Toggle [t]ransparent" })
+    vim.keymap.set("n", "<leader>tt", toggle_transparency, { desc = "Toggle transparent" })
   end,
 }
