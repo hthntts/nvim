@@ -1,71 +1,67 @@
 vim.loader.enable()
 local utils = require("core/utils")
-local expected_version = "0.10.2"
-utils.is_compatible_version(expected_version)
+local use = utils.use
+utils.is_compatible_version("0.10.2")
 
 require("core.globals")
 require("core.options")
 require("core.autocmd")
 require("core.keymaps")
+require("core.plugins")
 
--- Install package manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-
-vim.opt.rtp:prepend(lazypath)
-
-local nvim_theme = "onenord"
-local env_nvim_theme = os.getenv 'NVIM_THEME' or nvim_theme
-
-local themes = {
-  nord = "themes.nord",
-  onedark = "themes.onedark",
-  onenord = "themes.onenord",
+local plugins = {
+  'folke/lazy.nvim',
+  use 'onenord',
+  use 'eunuch',
+  use 'easy-align',
+  use 'windows',
+  use 'telescope',
+  use 'treesitter',
+  use 'lsp',
+  use 'autocompletion',
+  use 'none-ls',
+  use 'neogit',
+  use 'git-conflict',
+  use 'gitsigns',
+  use 'gitlinker',
+  use 'lazygit',
+  use 'lualine',
+  use 'bufferline',
+  use 'hlslens',
+  use 'neo-tree',
+  use 'fern',
+  use 'oil',
+  use 'dashboard',
+  use 'indent-blankline',
+  use 'comment',
+  use 'debug',
+  use 'database',
+  use 'misc',
+  use 'gx',
+  use 'move',
+  use 'duplicate',
+  use 'multicursors',
+  use 'navbuddy',
+  use 'toggleterm',
+  use 'ufo',
+  use 'markdown',
+  use 'notify',
+  use 'statuscol',
+  use 'which-key',
+  use 'tmux',
+  -- use 'avante',
 }
 
--- Setup plugins
-require("lazy").setup({
-  require(themes[env_nvim_theme]),
-  require("plugins.telescope"),
-  require("plugins.treesitter"),
-  require("plugins.lsp"),
-  require("plugins.autocompletion"),
-  require("plugins.none-ls"),
-  require("git.neogit"),
-  require("git.gitsigns"),
-  require("git.gitlinker"),
-  require("git.lazygit"),
-  require("plugins.lualine"),
-  require("plugins.bufferline"),
-  require("plugins.hlslens"),
-  require("plugins.neo-tree"),
-  require("plugins.fern"),
-  require("plugins.dashboard"),
-  require("plugins.indent-blankline"),
-  require("plugins.comment"),
-  require("plugins.debug"),
-  require("plugins.database"),
-  require("plugins.misc"),
-  require("plugins.gx"),
-  require("plugins.move"),
-  require("plugins.duplicate"),
-  require("plugins.ufo"),
-  require("plugins.markdown"),
-  require("plugins.notify"),
-  require("plugins.statuscol"),
-  require("plugins.which-key"),
-  require("plugins.tmux-navigator"),
-  -- require("plugins.avante"),
-}, {
+require('lazy').setup({
+  spec = plugins,
+  install = {
+    colorscheme = { 'onenord' },
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = { 'netrwPlugin', 'tutor' },
+    },
+  },
   ui = {
     icons = vim.g.have_nerd_font and {} or {
       loaded = " ",
@@ -74,26 +70,10 @@ require("lazy").setup({
   },
 })
 
--- Function to check if a file exists
-local function file_exists(file)
-  local f = io.open(file, "r")
-  if f then
-    f:close()
-    return true
-  else
-    return false
-  end
-end
-
--- Path to the session file
 local session_file = ".session.vim"
-
--- Check if the session file exists in the current directory
-if file_exists(session_file) then
-  -- Source the session file
+if utils.file_exists(session_file) then
   vim.cmd("source " .. session_file)
 end
--- The line beneath this is called `modeline`. See `:help modeline`
 
-vim.cmd("source ~/.config/nvim/plugins/config.vim")
--- vim: ts=2 sts=2 sw=2 et
+local config_file = "~/.config/nvim/plugins/config.vim"
+vim.cmd("source " .. config_file)
