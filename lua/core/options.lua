@@ -22,8 +22,8 @@ local options = {
   mouse = "a",                           -- allow the mouse to be used in neovim
   number = true,                         -- set numbered lines
   numberwidth = 4,                       -- set number column width to 2 {default 4}
-  pumblend = 10,                         -- popup blen
-  pumheight = 10,                        -- popup menu height
+  -- pumblend = 10,                         -- popup blen
+  pumheight = 20,                        -- popup menu height
   relativenumber = true,                 -- set relative numbered lines
   scrolloff = 10,                        -- is one of my fav
   shiftround = true,                     -- round indent
@@ -60,6 +60,10 @@ local options = {
 vim.opt.path:append({ "**" })
 vim.opt.shortmess:append({ W = true, I = true, c = true })
 vim.opt.splitkeep = "screen"
+
+-- Enable spell check
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
