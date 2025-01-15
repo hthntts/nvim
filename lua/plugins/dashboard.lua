@@ -1,8 +1,9 @@
 local icons = require('core/icons')
+local map = require('core/utils').map
 
 return {
   "nvimdev/dashboard-nvim",
-  event = "VeryLazy",
+  event = 'VimEnter',
   cmd = "Dashboard",
   keys = {
     { "<leader>hd", "<cmd>Dashboard<cr>", desc = "Dashboard" },
