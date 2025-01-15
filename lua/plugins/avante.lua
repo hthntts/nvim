@@ -1,6 +1,12 @@
 return {
   'yetone/avante.nvim',
   event = 'VeryLazy',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'stevearc/dressing.nvim',
+    'nvim-lua/plenary.nvim',
+    'MunifTanjim/nui.nvim',
+  },
   build = 'make',
   opts = {
     provider = 'claude',
@@ -20,11 +26,5 @@ return {
       max_tokens = 4096,
       api_key_name = "",
     },
-  },
-  dependencies = {
-    'nvim-tree/nvim-web-devicons',
-    'stevearc/dressing.nvim',
-    'nvim-lua/plenary.nvim',
-    'MunifTanjim/nui.nvim',
   },
 }
