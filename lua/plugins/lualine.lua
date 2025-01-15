@@ -1,4 +1,4 @@
-local icons = require("core/icons")
+local icons = require('core.icons')
 
 return {
   "nvim-lualine/lualine.nvim",

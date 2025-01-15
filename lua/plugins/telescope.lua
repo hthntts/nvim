@@ -1,4 +1,4 @@
-local icons = require("core/icons")
+local icons = require('core.icons')
 
 -- local function normalize_path(path)
 --   return path:gsub("\\", "/")
@@ -112,9 +112,9 @@ return {
 
   },
   config = function()
-    local telescope = require("telescope")
-    local actions = require("telescope.actions")
-    local builtin = require("telescope.builtin")
+    local telescope = require('telescope')
+    local actions = require('telescope.actions')
+    local builtin = require('telescope.builtin')
 
     require("telescope").setup({
       defaults = {

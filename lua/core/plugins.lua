@@ -1,4 +1,4 @@
-local map = require('core/utils').map
+local map = require('core.utils').map
 
 -- Install lazy.nvim if it's missing
 local lazy_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'

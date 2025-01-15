@@ -8,7 +8,7 @@ return {
     local api = vim.api
     local map = vim.keymap.set
 
-    local hlslens = require("hlslens")
+    local hlslens = require('hlslens')
 
     hlslens.setup {
       calm_down = true,

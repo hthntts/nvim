@@ -3,7 +3,7 @@ return {
   version = '*', -- `main` is unstable
   event = 'VeryLazy',
   config = function()
-    local map = require('core/utils').map
+    local map = require('core.utils').map
 
     require('git-conflict').setup({
       default_mappings = false,

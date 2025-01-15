@@ -11,7 +11,7 @@ return {
       },
     }
 
-    local wk = require("which-key")
+    local wk = require('which-key')
     wk.add({
       { "<leader>b",  group = "Buffers" },
       { "<leader>c",  group = "Code" },

@@ -46,7 +46,7 @@
 --       },
 --     }
 
---     local onedark = require("onedark")
+--     local onedark = require('onedark')
 --     onedark.setup(config)
 --     onedark.load()
 
@@ -67,7 +67,7 @@
 --       set_diagnostics_bg_transparency()
 --     end
 
---     local colors = require("onedark.colors")
+--     local colors = require('onedark.colors')
 
 --     vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = colors.none, fg = colors.none })
 --     vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = colors.none, fg = colors.none })

@@ -1,5 +1,5 @@
-local icons = require('core/icons')
-local map = require('core/utils').map
+local icons = require('core.icons')
+local map = require('core.utils').map
 
 return {
   "nvimdev/dashboard-nvim",

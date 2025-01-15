@@ -29,10 +29,10 @@ return {
     "rafamadriz/friendly-snippets",
   },
   config = function()
-    local cmp = require("cmp")
+    local cmp = require('cmp')
     require("luasnip.loaders.from_vscode").lazy_load()
-    require("luasnip.loaders.from_vscode").load({ paths = "./my-snippets" })
-    local luasnip = require("luasnip")
+    require('luasnip.loaders.from_vscode').load({ paths = "./my-snippets" })
+    local luasnip = require('luasnip')
     luasnip.config.setup({})
 
     local kind_icons = {

@@ -1,4 +1,4 @@
-local map = require('core/utils').map
+local map = require('core.utils').map
 
 return {
   -- Highlight todo, notes, etc in comments

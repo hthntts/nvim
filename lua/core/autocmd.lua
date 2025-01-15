@@ -1,4 +1,4 @@
-local utils = require("core/utils")
+local utils = require('core.utils')
 local fn = vim.fn
 local api = vim.api
 

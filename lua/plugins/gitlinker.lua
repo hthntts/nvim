@@ -1,4 +1,4 @@
-local map = require('core/utils').map
+local map = require('core.utils').map
 
 return {
   "ruifm/gitlinker.nvim",
@@ -7,7 +7,7 @@ return {
     callbacks = {
       ["dev.azure.com"] = function(url_data)
         vim.print(url_data)
-        local url = require("gitlinker.hosts").get_base_https_url(url_data)
+        local url = require('gitlinker.hosts').get_base_https_url(url_data)
 
         if url_data.lstart then
           if url_data.lend == nil then
@@ -31,7 +31,7 @@ return {
     mappings = nil,
   },
   config = function()
-    local gitlinker = require("gitlinker")
+    local gitlinker = require('gitlinker')
 
     map({ "n", "v" }, "<leader>gy", function()
       local mode = string.lower(vim.fn.mode())

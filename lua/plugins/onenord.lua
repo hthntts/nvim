@@ -3,7 +3,7 @@ return {
   -- lazy = false, -- make sure we load this during startup if it is your main colorscheme
   -- priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
-    local colors = require("onenord.colors").load()
+    local colors = require('onenord.colors').load()
     require('onenord').setup({
       theme = nil,     -- "dark" or "light". Alternatively, remove the option and set vim.o.background instead
       borders = false, -- Split window borders

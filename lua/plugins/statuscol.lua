@@ -2,8 +2,8 @@ return {
   "luukvbaal/statuscol.nvim",
   event = 'BufReadPre',
   config = function()
-    local builtin = require("statuscol.builtin")
-    local ffi = require("statuscol.ffidef")
+    local builtin = require('statuscol.builtin')
+    local ffi = require('statuscol.ffidef')
     local C = ffi.C
 
     -- only show fold level up to this level

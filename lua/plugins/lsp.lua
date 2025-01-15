@@ -1,4 +1,4 @@
-local icons = require('core/icons')
+local icons = require('core.icons')
 
 return { -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",

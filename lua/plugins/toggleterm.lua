@@ -9,7 +9,7 @@ return {
     'ToggleTermSendVisualSelection',
   },
   config = function()
-    local toggleterm, utils = require('toggleterm'), require('core/utils')
+    local toggleterm, utils = require('toggleterm'), require('core.utils')
     local map = utils.map
     local api = vim.api
 

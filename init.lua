@@ -1,13 +1,13 @@
 vim.loader.enable()
-local utils = require("core/utils")
+local utils = require('core.utils')
 local use = utils.use
-utils.is_compatible_version("0.10.2")
+utils.is_compatible_version('0.10.2')
 
-require("core.globals")
-require("core.options")
-require("core.autocmd")
-require("core.keymaps")
-require("core.plugins")
+require('core.globals')
+require('core.options')
+require('core.autocmd')
+require('core.keymaps')
+require('core.plugins')
 
 local plugins = {
   'folke/lazy.nvim',
@@ -64,16 +64,16 @@ require('lazy').setup({
   },
   ui = {
     icons = vim.g.have_nerd_font and {} or {
-      loaded = " ",
-      not_loaded = " ",
+      loaded = ' ',
+      not_loaded = ' ',
     },
   },
 })
 
 local session_file = ".session.vim"
 if utils.file_exists(session_file) then
-  vim.cmd("source " .. session_file)
+  vim.cmd('source ' .. session_file)
 end
 
-local config_file = "~/.config/nvim/plugins/config.vim"
-vim.cmd("source " .. config_file)
+local config_file = '~/.config/nvim/plugins/config.vim'
+vim.cmd('source ' .. config_file)

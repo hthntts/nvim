@@ -1,4 +1,4 @@
-local map = require('core/utils').map
+local map = require('core.utils').map
 
 return {
   "kevinhwang91/nvim-ufo",
@@ -12,7 +12,7 @@ return {
     vim.o.foldenable = true
   end,
   config = function()
-    local ufo = require("ufo")
+    local ufo = require('ufo')
     local handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
       local foldedLines = endLnum - lnum
