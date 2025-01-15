@@ -1,4 +1,5 @@
-return { -- Autocompletion
+-- Autocompletion
+return {
   "hrsh7th/nvim-cmp",
   event = 'BufReadPre',
   dependencies = {
@@ -20,8 +21,6 @@ return { -- Autocompletion
     "saadparwaiz1/cmp_luasnip",
 
     -- Adds other completion capabilities.
-    --  nvim-cmp does not ship with all sources by default. They are split
-    --  into multiple repos for maintenance purposes.
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
@@ -71,22 +70,18 @@ return { -- Autocompletion
         end,
       },
       completion = { completeopt = "menu,menuone,noinsert" },
-      -- window = {
-      --     completion = cmp.config.window.bordered(),
-      --     documentation = cmp.config.window.bordered(),
-      -- },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
       mapping = cmp.mapping.preset.insert({
-        ["<C-j>"] = cmp.mapping.select_next_item(),        -- Select the [n]ext item
-        ["<C-k>"] = cmp.mapping.select_prev_item(),        -- Select the [p]revious item
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept the completion with Enter.
-        ["<C-c>"] = cmp.mapping.complete({}),              -- Manually trigger a completion from nvim-cmp.
+        ["<C-j>"] = cmp.mapping.select_next_item(),        -- Select the next item
+        ["<C-k>"] = cmp.mapping.select_prev_item(),        -- Select the previous item
+        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+        ["<C-c>"] = cmp.mapping.complete({}), -- Manually trigger a completion from nvim-cmp.
 
-        -- Think of <c-l> as moving to the right of your snippet expansion.
-        --  So if you have a snippet that's like:
-        --  function $name($args)
-        --    $body
-        --  end
-        --
         -- <c-l> will move you to the right of each of the expansion locations.
         -- <c-h> is similar, except moving you backwards.
         ["<C-l>"] = cmp.mapping(function()
@@ -120,12 +115,14 @@ return { -- Autocompletion
           end
         end, { "i", "s" }),
       }),
+
       sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
       },
+
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
@@ -141,6 +138,7 @@ return { -- Autocompletion
           return vim_item
         end,
       },
+
     })
   end,
 }
