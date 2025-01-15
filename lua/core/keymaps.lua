@@ -138,8 +138,8 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map("n", "^", "g^")
 
--- Always use very magic mode for searching.
-map("n", "/", [[/\v]])
+-- -- Always use very magic mode for searching.
+-- map("n", "/", [[/\v]])
 
 -- Join lines.
 map("n", "J", join_lines, { desc = "Join lines without moving cursor" })
