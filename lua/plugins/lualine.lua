@@ -70,14 +70,14 @@ return {
           normal = { c = { fg = colors.fg, bg = colors.bar } },
           inactive = { c = { fg = colors.fg, bg = colors.bar } },
         },
-        disabled_filetypes = {
-          "dashboard",
-          "lazygit",
-          "lazy",
-          "NeogitStatus",
-          "fern",
-          "neo-tree",
-        },
+        -- disabled_filetypes = {
+        --   "dashboard",
+        --   "lazygit",
+        --   "lazy",
+        --   "NeogitStatus",
+        --   "fern",
+        --   "neo-tree",
+        -- },
         extensions = { 'quickfix' }
       },
       sections = {
@@ -142,6 +142,7 @@ return {
     ins_left {
       symbols = {
         readonly = icons.ui.Lock,
+        unnamed = 'Empty',
       },
       'filename',
       path = 4,
