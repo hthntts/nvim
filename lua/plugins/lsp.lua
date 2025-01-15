@@ -22,7 +22,6 @@ return { -- LSP Configuration & Plugins
     "WhoIsSethDaniel/mason-tool-installer.nvim",
 
     -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     {
       "j-hui/fidget.nvim",
       tag = "v1.4.0",
@@ -35,43 +34,45 @@ return { -- LSP Configuration & Plugins
         notification = {
           window = {
             winblend = 0, -- Background color opacity in the notification window
+            max_height = 4,
+            normal_hl = 'FidgetNormal',
           },
         },
       },
     },
   },
   config = function()
-    vim.api.nvim_create_autocmd("CursorHold", {
-      callback = function()
-        local float_opts = {
-          focusable = false,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-          -- single double rounded solid shadow none
-          border = "none",
-          source = "always", -- show source in diagnostic popup window
-          prefix = icons.ui.ChevronRight .. " ",
-        }
-
-        if not vim.b.diagnostics_pos then
-          vim.b.diagnostics_pos = { nil, nil }
-        end
-
-        local cursor_pos = vim.api.nvim_win_get_cursor(0)
-        if
-            (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-            and #vim.diagnostic.get() > 0
-        then
-          vim.diagnostic.open_float(nil, float_opts)
-        end
-
-        vim.b.diagnostics_pos = cursor_pos
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("CursorHold", {
+    --   callback = function()
+    --     local float_opts = {
+    --       focusable = false,
+    --       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    --       -- single double rounded solid shadow none
+    --       border = "none",
+    --       source = "always", -- show source in diagnostic popup window
+    --       prefix = icons.ui.ChevronRight .. " ",
+    --     }
+    --
+    --     if not vim.b.diagnostics_pos then
+    --       vim.b.diagnostics_pos = { nil, nil }
+    --     end
+    --
+    --     local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    --     if
+    --         (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+    --         and #vim.diagnostic.get() > 0
+    --     then
+    --       vim.diagnostic.open_float(nil, float_opts)
+    --     end
+    --
+    --     vim.b.diagnostics_pos = cursor_pos
+    --   end,
+    -- })
 
     vim.diagnostic.config {
       underline = false,
-      virtual_text = false,
-      signs = false,
+      virtual_text = true,
+      signs = true,
       severity_sort = true,
     }
 
@@ -121,9 +122,7 @@ return { -- LSP Configuration & Plugins
         --  See `:help K` for why this keymap
         map("K", vim.lsp.buf.hover, "Hover Documentation")
 
-        -- WARN: This is not Jump Definition, this is Jump Declaration.
         -- map("<leader>cD", vim.lsp.buf.declaration, "Jump to declaration")
-
         map("<leader>pa", vim.lsp.buf.add_workspace_folder, "Project add Folder")
         map("<leader>pr", vim.lsp.buf.remove_workspace_folder, "Project remove Folder")
         map("<leader>pl", function()
