@@ -1,3 +1,5 @@
+local map = require('core/utils').map
+
 return {
   "kevinhwang91/nvim-ufo",
   event = "VeryLazy",
@@ -10,8 +12,7 @@ return {
     vim.o.foldenable = true
   end,
   config = function()
-    local map = vim.keymap.set
-
+    local ufo = require("ufo")
     local handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
       local foldedLines = endLnum - lnum
@@ -47,29 +48,5 @@ return {
     require("ufo").setup {
       fold_virt_text_handler = handler,
     }
-
-    map("n", "<leader>zo", function()
-      local _ = require("ufo").openAllFolds()
-    end, {
-      desc = "Open all",
-    })
-
-    map("n", "<leader>zc", function()
-      local _ = require("ufo").closeAllFolds()
-    end, {
-      desc = "Close all",
-    })
-
-    map("n", "<leader>ze", function()
-      local _ = require("ufo").openFoldsExceptKinds()
-    end, {
-      desc = "Except kinds",
-    })
-
-    map("n", "<leader>zp", function()
-      local _ = require("ufo").peekFoldedLinesUnderCursor()
-    end, {
-      desc = "Preview",
-    })
   end,
 }
