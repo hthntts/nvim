@@ -1,4 +1,4 @@
-local map = vim.keymap.set
+local map = require('core/utils').map
 
 return {
   "ruifm/gitlinker.nvim",
@@ -36,18 +36,12 @@ return {
     map({ "n", "v" }, "<leader>gy", function()
       local mode = string.lower(vim.fn.mode())
       gitlinker.get_buf_range_url(mode)
-    end, {
-      silent = true,
-      desc = "Copy link to remote",
-    })
+    end, "Copy link to remote")
 
     map("n", "<leader>goh", function()
       gitlinker.get_repo_url {
         action_callback = gitlinker.actions.open_in_browser,
       }
-    end, {
-      silent = true,
-      desc = "Browse homepage",
-    })
+    end, "Browse homepage")
   end,
 }

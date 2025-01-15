@@ -1,5 +1,7 @@
 return {
   "kdheepak/lazygit.nvim",
+  event = 'VeryLazy',
+  dependencies = "nvim-lua/plenary.nvim",
   cmd = {
     "LazyGit",
     "LazyGitConfig",
@@ -7,12 +9,9 @@ return {
     "LazyGitFilter",
     "LazyGitFilterCurrentFile",
   },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
   keys = {
     {
-      "<leader>gl",
+      "<leader>oG",
       "<cmd>LazyGit<cr><cmd>hi LazyGitFloat guibg=NONE guifg=NONE<cr><cmd>setlocal winhl=NormalFloat:LazyGitFloat<cr>",
       desc = "LazyGit",
     },
