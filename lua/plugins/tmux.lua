@@ -44,7 +44,7 @@ return {
       "nvim-telescope/telescope.nvim"
     },
     config = function()
-      require("tmutils").setup({})
+      require('tmutils').setup({})
       map("n", "<leader>oC", ":TmutilsConfig<CR>", "Tmutils config")
       map("n", "<leader>oc", ":TmutilsCapture newbuffer<CR>", "Tmutils capture")
       map("n", "<leader>os", ":.TmutilsSend<CR>", "Tmutils send")

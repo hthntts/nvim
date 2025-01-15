@@ -98,7 +98,7 @@ api.nvim_create_autocmd("VimResized", {
 --   vim.cmd.bw(data.buf)
 --
 --   -- open the tree
---   require("nvim-tree.api").tree.open()
+--   require('nvim-tree.api').tree.open()
 -- end
 -- api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 

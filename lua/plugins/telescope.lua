@@ -116,7 +116,7 @@ return {
     local actions = require('telescope.actions')
     local builtin = require('telescope.builtin')
 
-    require("telescope").setup({
+    require('telescope').setup({
       defaults = {
         -- Full
         -- layout_strategy = "horizontal",
@@ -256,7 +256,7 @@ return {
           disable_icons = false,
         },
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown(),
+          require('telescope.themes').get_dropdown(),
         },
       },
       git_files = {
@@ -265,8 +265,8 @@ return {
     })
 
     -- Enable telescope fzf native, if installed
-    pcall(require("telescope").load_extension, "fzf")
-    pcall(require("telescope").load_extension, "ui-select")
-    pcall(require("telescope").load_extension, "remote-sshfs")
+    pcall(require('telescope').load_extension, 'fzf')
+    pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension, 'remote-sshfs')
   end,
 }

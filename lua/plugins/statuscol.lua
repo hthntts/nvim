@@ -17,7 +17,7 @@ return {
       return builtin.foldfunc(args)
     end
 
-    require("statuscol").setup {
+    require('statuscol').setup {
       relculright = false,
       segments = {
         { text = { "%s" },                  click = "v:lua.ScSa" },

@@ -18,7 +18,7 @@ return {
     local dap = require('dap')
     local dapui = require('dapui')
 
-    require("mason-nvim-dap").setup({
+    require('mason-nvim-dap').setup({
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
@@ -79,6 +79,6 @@ return {
 
     -- Install golang specific config
     -- require('dap-go').setup()
-    require("dap-python").setup()
+    require('dap-python').setup()
   end,
 }

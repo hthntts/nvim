@@ -45,7 +45,7 @@ return {
       return newVirtText
     end
 
-    require("ufo").setup {
+    require('ufo').setup {
       fold_virt_text_handler = handler,
     }
   end,

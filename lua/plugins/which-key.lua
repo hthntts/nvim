@@ -2,7 +2,7 @@ return {
   "folke/which-key.nvim",
   event = 'BufReadPre',
   config = function()
-    require("which-key").setup {
+    require('which-key').setup {
       -- classic, modern, helix
       preset = "modern",
       delay = 0,

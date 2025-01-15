@@ -13,7 +13,7 @@ return {
       "s1n7ax/nvim-window-picker",
       version = "2.*",
       config = function()
-        require("window-picker").setup({
+        require('window-picker').setup({
           filter_rules = {
             include_current_win = false,
             autoselect_one = true,
@@ -47,7 +47,7 @@ return {
     vim.fn.sign_define("DiagnosticSignInfo", { text = icons.diagnostics.Information, texthl = "DiagnosticSignInfo" })
     vim.fn.sign_define("DiagnosticSignHint", { text = icons.diagnostics.Hint, texthl = "DiagnosticSignHint" })
 
-    require("neo-tree").setup({
+    require('neo-tree').setup({
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = "rounded",
       enable_git_status = true,
