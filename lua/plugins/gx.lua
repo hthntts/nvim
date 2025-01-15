@@ -1,9 +1,14 @@
 return {
   "chrishrb/gx.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  cmd = { "Browse" },
+  event = 'VeryLazy',
+  dependencies = "nvim-lua/plenary.nvim",
+  cmd = "Browse",
   keys = {
-    { "gx", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Browse" },
+    { "gx", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open link (search current word)" },
+  },
+  opts = {
+    handlers = { search = true },
+    -- handler_options = { search_engine = 'duckduckgo' },
   },
   init = function()
     vim.g.netrw_nogx = 1 -- disable netrw gx
