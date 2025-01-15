@@ -1,6 +1,7 @@
--- Easily comment visual regions/lines
 return {
   "numToStr/Comment.nvim",
-  lazy = true,
-  opts = {},
+  event = 'VeryLazy',
+  opts = {
+    ignore = '^$', -- Ignore empty lines
+  },
 }
