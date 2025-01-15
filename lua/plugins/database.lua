@@ -1,8 +1,7 @@
 return {
-  -- Database
   {
     "tpope/vim-dadbod",
-    lazy = true,
+    event = 'VeryLazy',
     dependencies = {
       "kristijanhusak/vim-dadbod-ui",
       "kristijanhusak/vim-dadbod-completion",
