@@ -1,4 +1,20 @@
+local map = require('core/utils').map
+
 return {
+  -- Highlight todo, notes, etc in comments
+  {
+    -- :TodoLocList
+    -- :TodoQuickFix
+    -- :TodoTelescope
+    -- :TodoTelescope cwd=~/projects/foobar
+    -- :TodoTelescope keywords=TODO,FIX
+    -- :Trouble todo
+    "folke/todo-comments.nvim",
+    event = 'BufReadPre',
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
+  },
+
   {
     "preservim/vim-markdown",
     config = function()
@@ -26,6 +42,8 @@ return {
   {
     "iamcco/markdown-preview.nvim",
     enabled = function()
+      map("n", "<leader>mo", "<cmd>MarkdownPreview<cr>", "Markdown preview Open")
+      map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<cr>", "Markdown preview Stop")
       if vim.g.is_win or vim.g.is_mac then
         vim.g.mkdp_auto_close = 0
         return true
@@ -49,7 +67,7 @@ return {
         signs = { '󰫎 ' },
       },
       indent = {
-        enabled = true,
+        enabled = false,
       },
       latex = { enabled = false }
     },
