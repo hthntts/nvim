@@ -1,4 +1,3 @@
--- Fuzzy Finder (files, lsp, etc)
 local icons = require("core/icons")
 
 -- local function normalize_path(path)
@@ -58,25 +57,33 @@ return {
     "nvim-telescope/telescope-symbols.nvim",
   },
   keys = {
-    { "<leader><leader>", "<cmd>Telescope find_files<cr>",  desc = "Find file in project" },
-    { "<leader>/",        "<cmd>Telescope live_grep<cr>",   desc = "Search project" },
-    { "<leader>cx",       "<cmd>Telescope diagnostics<cr>", desc = "LSP: List errors" },
-    { "<leader>ff",       "<cmd>Telescope find_files<cr>",  desc = "Find file in project" },
-    { "<leader>fr",       "<cmd>Telescope oldfiles<cr>",    desc = "Recent files" },
-    { "<leader>fw",       "<cmd>Telescope grep_string<cr>", desc = "Find current word" },
-    { "<leader>hh",       "<cmd>Telescope help_tags<cr>",   desc = "Help" },
-    { "<leader>hk",       "<cmd>Telescope keymaps<cr>",     desc = "Keymaps" },
-    { "<leader>ht",       "<cmd>Telescope colorscheme<cr>", desc = "Themes" },
-    { "<leader>ie",       "<cmd>Telescope symbols<cr>",     desc = "Emoji" },
+    { "<leader><leader>", "<cmd>Telescope find_files<cr>",      desc = "Find file in project" },
+    { "<leader>/",        "<cmd>Telescope live_grep<cr>",       desc = "Search project" },
+    { "<leader>cx",       "<cmd>Telescope diagnostics<cr>",     desc = "LSP: List errors" },
+    { "<leader>ff",       "<cmd>Telescope find_files<cr>",      desc = "Find file in project" },
+    { "<leader>fr",       "<cmd>Telescope oldfiles<cr>",        desc = "Recent files" },
+    { "<leader>fw",       "<cmd>Telescope grep_string<cr>",     desc = "Find current word" },
 
-    -- { "<leader>sm",       "<cmd>Telescope marks<cr>",          desc = "Search marks," },
-    -- { "<leader>gf",       "<cmd>Telescope git_files<cr>",      desc = "Search git files," },
-    -- { "<leader>gc",       "<cmd>Telescope git_commits<cr>",    desc = "Search git commits," },
-    -- { "<leader>gcf",      "<cmd>Telescope git_bcommits<cr>",   desc = "Search git commits for current file," },
-    -- { "<leader>gb",       "<cmd>Telescope git_branches<cr>",   desc = "Search git branches," },
-    -- { "<leader>gs",       "<cmd>Telescope git_status<cr>",     desc = "Search git status (diff view)," },
+    { "<leader>gC",       "<cmd>Telescope git_commits<cr>",     desc = "Git commits" },
+    { "<leader>gb",       "<cmd>Telescope git_branches<cr>",    desc = "Git branches" },
+    { "<leader>gs",       "<cmd>Telescope git_status<cr>",      desc = "Git status (diff view)" },
+
+    { "<leader>hb",       "<cmd>Telescope builtin<cr>",         desc = "Telescope builtin" },
+    { "<leader>hc",       "<cmd>Telescope command_history<cr>", desc = "Command history" },
+    { "<leader>hh",       "<cmd>Telescope help_tags<cr>",       desc = "Help" },
+    { "<leader>hk",       "<cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
+    { "<leader>ht",       "<cmd>Telescope colorscheme<cr>",     desc = "Themes" },
+
+    { "<leader>ie",       "<cmd>Telescope symbols<cr>",         desc = "Emoji" },
+
     -- { "<leader>sr",       "<cmd>Telescope resume<cr>",         desc = "Search resume" },
+    -- { "<leader>sm",       "<cmd>Telescope marks<cr>",          desc = "Search marks" },
 
+    {
+      "<leader>sh",
+      "<cmd>lua require'telescope.builtin'.search_history(require('telescope.themes').get_dropdown({previewer=false}))<cr>",
+      desc = "Search history"
+    },
     {
       "<leader>si",
       "<cmd>lua require'telescope.builtin'.lsp_document_symbols({symbols={'Class','Function','Method','Constructor','Interface','Module','Property'},})<cr>",
@@ -148,6 +155,7 @@ return {
             preview_cutoff = 40,
           },
         },
+
         -- path_display = path_display,
         path_display = { "absolute" },
         sorting_strategy = "ascending",
@@ -157,18 +165,18 @@ return {
         mappings = {
           i = {
             ["<esc>"] = actions.close,
-            ["<C-n>"] = actions.cycle_history_next,
-            ["<C-p>"] = actions.cycle_history_prev,
+            ["<C-l>"] = actions.cycle_history_next,
+            ["<C-h>"] = actions.cycle_history_prev,
 
+            ["<C-c>"] = actions.close,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
 
-            ["<C-c>"] = actions.close,
-
             ["<Down>"] = actions.move_selection_next,
             ["<Up>"] = actions.move_selection_previous,
 
             ["<CR>"] = actions.select_default,
+
             ["<C-x>"] = actions.select_horizontal,
             ["<C-v>"] = actions.select_vertical,
             ["<C-t>"] = actions.select_tab,
@@ -183,31 +191,27 @@ return {
             ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
             ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
             ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["<C-l>"] = actions.complete_tag,
+            ["<C-g>"] = actions.complete_tag,
           },
           n = {
             ["q"] = actions.close,
+            ["gg"] = actions.move_to_top,
+            ["G"] = actions.move_to_bottom,
+            ["?"] = actions.which_key,
             ["<esc>"] = actions.close,
-            ["<CR>"] = actions.select_default,
-            ["<C-x>"] = actions.select_horizontal,
-            ["<C-v>"] = actions.select_vertical,
-            ["<C-t>"] = actions.select_tab,
 
-            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-            ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
+            ["<C-c>"] = actions.close,
             ["j"] = actions.move_selection_next,
             ["k"] = actions.move_selection_previous,
-            ["H"] = actions.move_to_top,
-            ["M"] = actions.move_to_middle,
-            ["L"] = actions.move_to_bottom,
 
             ["<Down>"] = actions.move_selection_next,
             ["<Up>"] = actions.move_selection_previous,
-            ["gg"] = actions.move_to_top,
-            ["G"] = actions.move_to_bottom,
+
+            ["<CR>"] = actions.select_default,
+
+            ["<C-x>"] = actions.select_horizontal,
+            ["<C-v>"] = actions.select_vertical,
+            ["<C-t>"] = actions.select_tab,
 
             ["<C-u>"] = actions.preview_scrolling_up,
             ["<C-d>"] = actions.preview_scrolling_down,
@@ -215,7 +219,10 @@ return {
             ["<PageUp>"] = actions.results_scrolling_up,
             ["<PageDown>"] = actions.results_scrolling_down,
 
-            ["?"] = actions.which_key,
+            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
       },
@@ -243,6 +250,11 @@ return {
         end,
       },
       extensions = {
+        tmuxinator = {
+          select_action = 'switch', -- | 'stop' | 'kill'
+          stop_action = 'stop',     -- | 'kill'
+          disable_icons = false,
+        },
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),
         },
@@ -255,5 +267,6 @@ return {
     -- Enable telescope fzf native, if installed
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
+    pcall(require("telescope").load_extension, "remote-sshfs")
   end,
 }
