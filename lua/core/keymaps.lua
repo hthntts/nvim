@@ -79,8 +79,8 @@ map("t", "<Esc><Esc", [[<c-\><c-n>]])
 -- Go to beginning of command in command-line mode.
 map("c", "<C-A>", "<HOME>")
 
--- Save key strokes (do not need to press shift to enter command mode).
-map({ "x", "n" }, ";", ":")
+-- -- Save key strokes (do not need to press shift to enter command mode).
+-- map({ "x", "n" }, ";", ":")
 
 -- Replace visual selection with text in register, but not contaminate the register.
 -- see also https://stackoverflow.com/q/10723700/6064933.
