@@ -4,26 +4,24 @@ local plugin_is_loaded = require('core.utils').plugin_is_loaded
 local icons = require('core.icons')
 
 local function mode_colors()
-  local get_mode_color = require('core.colorscheme').get_mode_color
   return {
-    NORMAL        = get_mode_color('normal'),
-    OP            = get_mode_color('normal'),
-    INSERT        = get_mode_color('insert'),
-    COMMAND       = get_mode_color('command'),
-    VISUAL        = get_mode_color('visual'),
-    LINES         = get_mode_color('visual'),
-    BLOCK         = get_mode_color('visual'),
-    REPLACE       = get_mode_color('replace'),
-    TERM          = get_mode_color('terminal'),
-    ['V-REPLACE'] = get_mode_color('replace'),
-    SELECT        = get_mode_color('select'),
+    NORMAL        = '#b4befe',
+    OP            = '#89dceb',
+    INSERT        = '#a6e3a1',
+    COMMAND       = '#f2cdcd',
+    VISUAL        = '#f5e0dc',
+    LINES         = '#f9e2af',
+    BLOCK         = '#f9e2af',
+    REPLACE       = '#cba6f7',
+    TERM          = '#a6adc8',
+    ['V-REPLACE'] = '#74c7ec',
+    SELECT        = '#f5c2e7',
     ENTER         = 'skyblue',
     MORE          = 'skyblue',
     SHELL         = 'skyblue',
     NONE          = 'skyblue',
   }
 end
-
 
 local components = { active = { {}, {}, {} } }
 
@@ -421,10 +419,6 @@ table.insert(active_right, {
   priority = 9,
 })
 
------------
--- Setup --
------------
-
 -- fg:           text foreground on regular components
 -- line_bg:      background of regular statusline components
 -- middle_bg:    background of middle section
@@ -448,6 +442,7 @@ table.insert(active_right, {
 -- visual_mode:  visual mode color
 -- replace_mode: replace mode color
 -- term_mode:    term mode color
+
 local function setup(config)
   if not config or not config.theme then
     error('Statusline: no theme provided')
