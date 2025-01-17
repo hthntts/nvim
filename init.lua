@@ -41,7 +41,7 @@ local plugins = {
   use 'debug',
   use 'database',
   use 'misc',
-  -- use 'eyeliner',
+  use 'eyeliner',
   use 'gx',
   use 'move',
   use 'duplicate',

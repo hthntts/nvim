@@ -82,6 +82,8 @@ return {
           NavbuddyOperator           = { fg = colors.sky },
           NavbuddyTypeParameter      = { fg = colors.yellow },
 
+          EyelinerPrimary            = { fg = colors.red, underline = true, bold = true },
+          EyelinerSecondary          = { fg = colors.sky, underline = true, bold = true },
         }
       end
     })
