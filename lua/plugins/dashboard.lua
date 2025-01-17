@@ -2,11 +2,11 @@ local icons = require('core.icons')
 local map = require('core.utils').map
 
 return {
-  "nvimdev/dashboard-nvim",
+  'nvimdev/dashboard-nvim',
   event = 'VimEnter',
-  cmd = "Dashboard",
+  cmd = 'Dashboard',
   keys = {
-    { "<leader>hd", "<cmd>Dashboard<cr>", desc = "Dashboard" },
+    { '<leader>hd', '<cmd>Dashboard<cr>', desc = 'Dashboard' },
   },
   opts = {
     theme = 'hyper',

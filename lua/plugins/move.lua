@@ -1,16 +1,16 @@
 return {
-  "fedepujol/move.nvim",
+  'fedepujol/move.nvim',
   event = 'VeryLazy',
   cmd = {
-    "MoveLine",
-    "MoveBlock"
+    'MoveLine',
+    'MoveBlock'
   },
   keys = {
-    { "<A-up>",   ":MoveLine(-1)<CR>",  mode = "n" },
-    { "<A-down>", ":MoveLine(1)<CR>",   mode = "n" },
+    { '<A-up>',   ':MoveLine(-1)<CR>',  mode = 'n' },
+    { '<A-down>', ':MoveLine(1)<CR>',   mode = 'n' },
 
-    { "<A-up>",   ":MoveBlock(-1)<CR>", mode = "v" },
-    { "<A-down>", ":MoveBlock(1)<CR>",  mode = "v" },
+    { '<A-up>',   ':MoveBlock(-1)<CR>', mode = 'v' },
+    { '<A-down>', ':MoveBlock(1)<CR>',  mode = 'v' },
   },
 
   opts = {

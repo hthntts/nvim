@@ -1,5 +1,5 @@
 return {
-  "lewis6991/gitsigns.nvim",
+  'lewis6991/gitsigns.nvim',
   event = 'VeryLazy',
   config = function()
     local gs = require('gitsigns')
@@ -67,45 +67,45 @@ return {
         end
 
         -- Navigation
-        map("n", "<leader>g]", function()
+        map('n', '<leader>g]', function()
           if vim.wo.diff then
-            return "<leader>g]"
+            return '<leader>g]'
           end
           vim.schedule(function()
             gs.nav_hunk('next')
           end)
-          return "<Ignore>"
-        end, { expr = true, desc = "Jump to next hunk" })
+          return '<Ignore>'
+        end, { expr = true, desc = 'Jump to next hunk' })
 
-        map("n", "<leader>g[", function()
+        map('n', '<leader>g[', function()
           if vim.wo.diff then
-            return "<leader>g["
+            return '<leader>g['
           end
           vim.schedule(function()
             gs.nav_hunk('prev')
           end)
-          return "<Ignore>"
-        end, { expr = true, desc = "Jump to previous hunk" })
+          return '<Ignore>'
+        end, { expr = true, desc = 'Jump to previous hunk' })
 
         -- Actions
-        map("n", "<leader>gB", gs.blame, { expr = true, desc = "Git blame" })
-        map('n', '<leader>gd', function() gs.diffthis('~') end, { expr = true, desc = "Git file (diff)" })
-        map('n', '<leader>tD', gs.toggle_deleted, { expr = true, desc = "Toggle (git) line delete" })
-        map('n', '<leader>tb', gs.toggle_current_line_blame, { expr = true, desc = "Toggle (git) line blame" })
-        -- map("n", "<leader>gf", gs.preview_hunk)
+        map('n', '<leader>gB', gs.blame, { expr = true, desc = 'Git blame' })
+        map('n', '<leader>gd', function() gs.diffthis('~') end, { expr = true, desc = 'Git file (diff)' })
+        map('n', '<leader>tD', gs.toggle_deleted, { expr = true, desc = 'Toggle (git) line delete' })
+        map('n', '<leader>tb', gs.toggle_current_line_blame, { expr = true, desc = 'Toggle (git) line blame' })
+        -- map('n', '<leader>gf', gs.preview_hunk)
         -- map('n', '<leader>gf', gs.reset_buffer)
         -- map('n', '<leader>gf', gs.reset_hunk)
         -- map('n', '<leader>gf', gs.stage_buffer)
         -- map('n', '<leader>gf', gs.stage_hunk)
         -- map('n', '<leader>gf', gs.undo_stage_hunk)
-        -- map("n", "<leader>gf", function() gs.blame_line({ full = true }) end)
+        -- map('n', '<leader>gf', function() gs.blame_line({ full = true }) end)
         -- map('v', '<leader>gf', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
         -- map('v', '<leader>gf', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
       end,
     })
 
-    vim.api.nvim_create_autocmd("ColorScheme", {
-      pattern = "*",
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      pattern = '*',
       callback = function()
         vim.cmd([[
       hi GitSignsChangeInline gui=reverse

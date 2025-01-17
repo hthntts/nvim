@@ -1,10 +1,10 @@
 return {
-  "chrishrb/gx.nvim",
+  'chrishrb/gx.nvim',
   event = 'VeryLazy',
-  dependencies = "nvim-lua/plenary.nvim",
-  cmd = "Browse",
+  dependencies = 'nvim-lua/plenary.nvim',
+  cmd = 'Browse',
   keys = {
-    { "gx", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open link (search current word)" },
+    { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' }, desc = 'Open link (search current word)' },
   },
   opts = {
     handlers = { search = true },

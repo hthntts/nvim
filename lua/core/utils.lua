@@ -27,6 +27,12 @@ function M.executable(name)
   return false
 end
 
+function M.plugin_is_loaded(plugin)
+  -- Checking with `require` and `pcall` will cause Lazy to load the plugin
+  local plugins = require('lazy.core.config').plugins
+  return not not plugins[plugin] and plugins[plugin]._.loaded
+end
+
 --- check file exist
 function M.file_exists(file)
   local f = io.open(file, "r")
@@ -74,6 +80,11 @@ function M.rand_element(seq)
   local idx = M.rand_int(1, #seq)
 
   return seq[idx]
+end
+
+function M.noice_is_loaded()
+  local success, _ = pcall(require, 'noice.config')
+  return success and require('noice.config')._running
 end
 
 --- check if the current nvim version is compatible with the allowed version

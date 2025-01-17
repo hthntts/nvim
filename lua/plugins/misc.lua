@@ -1,31 +1,10 @@
 -- Standalone plugins with less than 10 lines of config go here
 
 return {
-  -- Collection of various small independent plugins/modules
-  {
-    'echasnovski/mini.nvim',
-    event = "VeryLazy",
-    config = function()
-      -- Better Around/Inside textobjects
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
-
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
-
-      require('mini.cursorword').setup { delay = 100 }
-    end,
-  },
-
   -- Automatic insertion and deletion of a pair of characters
   {
-    "windwp/nvim-autopairs",
-    event = { "BufReadPre", "BufNewFile" },
+    'windwp/nvim-autopairs',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = true,
   },
 
@@ -42,78 +21,51 @@ return {
     },
   },
 
-  -- Establish good command workflow and quit bad habit
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = "MunifTanjim/nui.nvim",
-    opts = {}
-  },
-
   -- Better ui for some nvim actions
-  { "stevearc/dressing.nvim",   event = 'BufReadPre', },
+  { 'stevearc/dressing.nvim',   event = 'BufReadPre', },
 
   -- Highlight URLs inside vim
-  { "itchyny/vim-highlighturl", event = "BufReadPre" },
+  { 'itchyny/vim-highlighturl', event = 'BufReadPre' },
 
-  -- Adventurous wildmenu
-  { "gelguy/wilder.nvim",       event = 'VeryLazy', },
+  -- -- Adventurous wildmenu
+  -- { 'gelguy/wilder.nvim',       event = 'VeryLazy', },
 
   -- Show and trim trailing whitespaces
-  { "jdhao/whitespace.nvim",    lazy = true, },
+  { 'jdhao/whitespace.nvim' },
 
   -- Breadcrumbs plugin
   {
-    "utilyre/barbecue.nvim",
-    event = "BufReadPre",
-    cmd = "Barbecue",
-    name = "barbecue",
-    version = "*",
+    'utilyre/barbecue.nvim',
+    event = 'BufReadPre',
+    cmd = 'Barbecue',
+    name = 'barbecue',
+    version = '*',
     dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
+      'SmiteshP/nvim-navic',
+      'nvim-tree/nvim-web-devicons', -- optional dependency
     },
     opts = {
-      exclude_filetypes = { "netrw", "toggleterm" },
+      exclude_filetypes = { 'netrw', 'toggleterm', 'neo-tree', 'fern', 'oil' },
     },
-  },
-
-  -- Show file tags in vim window
-  {
-    "liuchengxu/vista.vim",
-    cmd = "Vista",
-    keys = {
-      { "<leader>ts", "<cmd>Vista!!<cr>", desc = "Toogle symbol" },
-    },
-    -- enabled = function()
-    --   if utils.executable("ctags") then
-    --     return true
-    --   else
-    --     return false
-    --   end
-    -- end,
-    config = function()
-      vim.g.vista_echo_cursor = 0
-      vim.g.vista_stay_on_open = 0
-    end,
   },
 
   -- High-performance color highlighter
   {
-    "norcalli/nvim-colorizer.lua",
+    'norcalli/nvim-colorizer.lua',
     event = 'VeryLazy',
 
     cmd = {
-      "ColorizerToggle",
+      'ColorizerToggle',
     },
     keys = {
-      { "<leader>tc", "<cmd>ColorizerToggle<cr>", desc = "Toogle colors" },
+      { '<leader>tc', '<cmd>ColorizerToggle<cr>', desc = 'Toogle colors' },
     },
     opts = {},
   },
 
   -- Dimmer inactive buffer
   {
-    "TaDaa/vimade",
+    'TaDaa/vimade',
     event = 'VeryLazy',
     opts = {
       recipe = { 'default', { animate = true } },
@@ -125,32 +77,33 @@ return {
 
   -- Diffs for all modified files
   {
-    "sindrets/diffview.nvim",
+    'sindrets/diffview.nvim',
     event = 'VeryLazy',
     cmd = {
-      "DiffviewFileHistory",
-      "DiffviewOpen",
+      'DiffviewFileHistory',
+      'DiffviewOpen',
     },
   },
 
   -- Unicode glyphs
   {
-    "chrisbra/unicode.vim",
-    cmd = { "UnicodeName" },
+    'chrisbra/unicode.vim',
+    cmd = { 'UnicodeName' },
     keys = {
-      { "<leader>un", "<cmd>UnicodeName<cr>", desc = "Unicode name" },
+      { '<leader>su', '<cmd>UnicodeName<cr>',            desc = 'Unicode characters' },
+      { '<leader>un', '<PLug>(UnicodeSwapCompleteName)', mode = { 'n', 'x' },        desc = 'Toggle Unicode Complete Name' },
     }
   },
 
   -- Show undo history visually
   {
-    "simnalamburt/vim-mundo",
+    'simnalamburt/vim-mundo',
     cmd = {
-      "MundoToggle",
-      "MundoShow"
+      'MundoToggle',
+      'MundoShow'
     },
     keys = {
-      { "<leader>tm", "<cmd>MundoToggle<cr>", desc = "Toggle mundo" },
+      { '<leader>tm', '<cmd>MundoToggle<cr>', desc = 'Toggle mundo' },
     },
     config = function()
       vim.g.mundo_verbose_graph = 0
@@ -160,9 +113,9 @@ return {
 
   -- Asynchronous command execution
   {
-    -- :AsyncRun python -u "%"
-    "skywind3000/asyncrun.vim",
-    cmd = { "AsyncRun" },
+    -- :AsyncRun python -u '%'
+    'skywind3000/asyncrun.vim',
+    cmd = { 'AsyncRun' },
     config = function()
       vim.g.asyncrun_open = 12
     end,
@@ -170,10 +123,19 @@ return {
 
   -- Remote (sshfs)
   {
-    "nosduco/remote-sshfs.nvim",
+    'nosduco/remote-sshfs.nvim',
     event = 'VeryLazy',
-    dependencies = "nvim-telescope/telescope.nvim",
-    opts = {
-    },
+    dependencies = 'nvim-telescope/telescope.nvim',
+    config = function()
+      require('telescope').load_extension('remote-sshfs')
+    end
   },
+
+  -- Establish good command workflow and quit bad habit
+  {
+    'm4xshen/hardtime.nvim',
+    dependencies = 'MunifTanjim/nui.nvim',
+    opts = {}
+  },
+
 }

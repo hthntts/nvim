@@ -1,7 +1,9 @@
 local icons = require('core.icons')
+local lsp = vim.lsp
 
-return { -- LSP Configuration & Plugins
-  "neovim/nvim-lspconfig",
+-- LSP Configuration & Plugins
+return {
+  'neovim/nvim-lspconfig',
   event = 'BufReadPre',
   opts = {
     diagnostics = {
@@ -17,18 +19,18 @@ return { -- LSP Configuration & Plugins
   },
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for neovim
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
 
     -- Useful status updates for LSP.
     {
-      "j-hui/fidget.nvim",
-      tag = "v1.4.0",
+      'j-hui/fidget.nvim',
+      tag = 'v1.4.0',
       opts = {
         progress = {
           display = {
-            done_icon = "✓", -- Icon shown when all LSP progress tasks are complete
+            done_icon = '✓', -- Icon shown when all LSP progress tasks are complete
           },
         },
         notification = {
@@ -42,15 +44,15 @@ return { -- LSP Configuration & Plugins
     },
   },
   config = function()
-    -- vim.api.nvim_create_autocmd("CursorHold", {
+    -- vim.api.nvim_create_autocmd('CursorHold', {
     --   callback = function()
     --     local float_opts = {
     --       focusable = false,
-    --       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    --       close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
     --       -- single double rounded solid shadow none
-    --       border = "none",
-    --       source = "always", -- show source in diagnostic popup window
-    --       prefix = icons.ui.ChevronRight .. " ",
+    --       border = 'none',
+    --       source = 'always', -- show source in diagnostic popup window
+    --       prefix = icons.ui.ChevronRight .. ' ',
     --     }
     --
     --     if not vim.b.diagnostics_pos then
@@ -70,19 +72,19 @@ return { -- LSP Configuration & Plugins
     -- })
 
     vim.diagnostic.config {
-      underline = false,
-      virtual_text = true,
+      underline = true,
+      virtual_text = false,
       signs = true,
       severity_sort = true,
     }
 
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       -- Create a function that lets us more easily define mappings specific LSP related items.
       -- It sets the mode, buffer and description for us each time.
       callback = function(event)
         local map = function(keys, func, desc)
-          vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
         -- Jump to the definition of the word under your cursor.
@@ -112,22 +114,22 @@ return { -- LSP Configuration & Plugins
 
         -- Rename the variable under your cursor
         --  Most Language Servers support renaming across files, etc.
-        map("<leader>cr", vim.lsp.buf.rename, "Rename")
+        map('<leader>cr', vim.lsp.buf.rename, 'Rename')
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map("<leader>ca", vim.lsp.buf.code_action, "Execute code action")
+        map('<leader>ca', vim.lsp.buf.code_action, 'Execute code action')
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap
-        map("K", vim.lsp.buf.hover, "Hover Documentation")
+        map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
-        -- map("<leader>cD", vim.lsp.buf.declaration, "Jump to declaration")
-        map("<leader>pa", vim.lsp.buf.add_workspace_folder, "Project add Folder")
-        map("<leader>pr", vim.lsp.buf.remove_workspace_folder, "Project remove Folder")
-        map("<leader>pl", function()
+        -- map('<leader>cD', vim.lsp.buf.declaration, 'Jump to declaration')
+        map('<leader>pa', vim.lsp.buf.add_workspace_folder, 'Project add Folder')
+        map('<leader>pr', vim.lsp.buf.remove_workspace_folder, 'Project remove Folder')
+        map('<leader>pl', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, "Project list Folders")
+        end, 'Project list Folders')
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
@@ -136,12 +138,12 @@ return { -- LSP Configuration & Plugins
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
             callback = vim.lsp.buf.document_highlight,
           })
 
-          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = event.buf,
             callback = vim.lsp.buf.clear_references,
           })
@@ -154,7 +156,7 @@ return { -- LSP Configuration & Plugins
 
     -- Enable the following language servers
     local servers = {
-      html = { filetypes = { "html", "twig", "hbs" } },
+      html = { filetypes = { 'html', 'twig', 'hbs' } },
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
       -- tsserver = {},
       lua_ls = {
@@ -163,23 +165,23 @@ return { -- LSP Configuration & Plugins
         -- capabilities = {},
         settings = {
           Lua = {
-            runtime = { version = "LuaJIT" },
+            runtime = { version = 'LuaJIT' },
             workspace = {
               checkThirdParty = false,
               -- Tells lua_ls where to find all the Lua files that you have loaded
               -- for your neovim configuration.
               library = {
-                "${3rd}/luv/library",
-                unpack(vim.api.nvim_get_runtime_file("", true)),
+                '${3rd}/luv/library',
+                unpack(vim.api.nvim_get_runtime_file('', true)),
               },
               -- If lua_ls is really slow on your computer, you can try this instead:
               -- library = { vim.env.VIMRUNTIME },
             },
             completion = {
-              callSnippet = "Replace",
+              callSnippet = 'Replace',
             },
             telemetry = { enable = false },
-            diagnostics = { disable = { "missing-fields" } },
+            diagnostics = { disable = { 'missing-fields' } },
           },
         },
       },
@@ -224,35 +226,35 @@ return { -- LSP Configuration & Plugins
           RuffAutofix = {
             function()
               vim.lsp.buf.execute_command({
-                command = "ruff.applyAutofix",
+                command = 'ruff.applyAutofix',
                 arguments = {
                   { uri = vim.uri_from_bufnr(0) },
                 },
               })
             end,
-            description = "Ruff: Fix all auto-fixable problems",
+            description = 'Ruff: Fix all auto-fixable problems',
           },
           RuffOrganizeImports = {
             function()
               vim.lsp.buf.execute_command({
-                command = "ruff.applyOrganizeImports",
+                command = 'ruff.applyOrganizeImports',
                 arguments = {
                   { uri = vim.uri_from_bufnr(0) },
                 },
               })
             end,
-            description = "Ruff: Format imports",
+            description = 'Ruff: Format imports',
           },
         },
       },
       -- rust_analyzer = {
-      --   ["rust-analyzer"] = {
+      --   ['rust-analyzer'] = {
       --     cargo = {
-      --       features = "all",
+      --       features = 'all',
       --     },
       --     checkOnSave = true,
       --     check = {
-      --       command = "clippy",
+      --       command = 'clippy',
       --     },
       --   },
       -- },
@@ -275,7 +277,7 @@ return { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      "stylua", -- Used to format lua code
+      'stylua', -- Used to format lua code
     })
     require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
@@ -286,7 +288,7 @@ return { -- LSP Configuration & Plugins
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           require('lspconfig')[server_name].setup(server)
         end,
       },

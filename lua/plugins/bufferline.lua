@@ -1,30 +1,30 @@
 local icons = require('core.icons')
 
 return {
-  "akinsho/bufferline.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  'akinsho/bufferline.nvim',
+  event = { 'BufReadPre', 'BufNewFile' },
   cmd = {
-    "BufferLinePick",
-    "BufferLineCycleNext",
-    "BufferLineCyclePrev"
+    'BufferLinePick',
+    'BufferLineCycleNext',
+    'BufferLineCyclePrev'
   },
   keys = {
-    { "<leader>bP",  "<cmd>BufferLinePick<cr>",       desc = "Bufferline Pick" },
-    { "<leader>bn",  "<cmd>:BufferLineCycleNext<cr>", desc = "Next buffer" },
-    { "<leader>bp",  "<cmd>:BufferLineCyclePrev<cr>", desc = "Previous buffer" },
-    { "<A-D-Right>", "<cmd>:BufferLineCycleNext<cr>", desc = "Next buffer" },
-    { "<A-D-Left>",  "<cmd>:BufferLineCyclePrev<cr>", desc = "Previous buffer" },
+    { '<leader>bP',  '<cmd>BufferLinePick<cr>',       desc = 'Bufferline Pick' },
+    { '<leader>bn',  '<cmd>:BufferLineCycleNext<cr>', desc = 'Next buffer' },
+    { '<leader>bp',  '<cmd>:BufferLineCyclePrev<cr>', desc = 'Previous buffer' },
+    { '<A-D-Right>', '<cmd>:BufferLineCycleNext<cr>', desc = 'Next buffer' },
+    { '<A-D-Left>',  '<cmd>:BufferLineCyclePrev<cr>', desc = 'Previous buffer' },
   },
   opts = {
     options = {
-      numbers = "none",
-      close_command = "bdelete! %d",
+      numbers = 'none',
+      close_command = 'bdelete! %d',
       right_mouse_command = nil,
-      left_mouse_command = "buffer %d",
+      left_mouse_command = 'buffer %d',
       middle_mouse_command = nil,
       indicator = {
-        icon = "▎",
-        style = "icon",
+        icon = '▎',
+        style = 'icon',
       },
 
       buffer_close_icon = icons.ui.Close,
@@ -37,7 +37,7 @@ return {
       tab_size = 10,
       diagnostics = false,
       custom_filter = function(bufnr)
-        local exclude_ft = { "qf", "fugitive", "git" }
+        local exclude_ft = { 'qf', 'fugitive', 'git' }
         local cur_ft = vim.bo[bufnr].filetype
         local should_filter = vim.tbl_contains(exclude_ft, cur_ft)
 
@@ -53,10 +53,10 @@ return {
       show_close_icon = true,
       show_tab_indicators = true,
       persist_buffer_sort = true,
-      separator_style = "bar",
+      separator_style = 'bar',
       enforce_regular_tabs = false,
-      always_show_bufferline = false,
-      sort_by = "id",
+      always_show_bufferline = true,
+      sort_by = 'id',
     },
   },
 }

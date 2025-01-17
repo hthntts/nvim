@@ -9,14 +9,14 @@ return {
     -- :TodoTelescope cwd=~/projects/foobar
     -- :TodoTelescope keywords=TODO,FIX
     -- :Trouble todo
-    "folke/todo-comments.nvim",
+    'folke/todo-comments.nvim',
     event = 'BufReadPre',
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },
 
   {
-    "preservim/vim-markdown",
+    'preservim/vim-markdown',
     config = function()
       -- Disable header folding
       vim.g.vim_markdown_folding_disabled = 1
@@ -36,31 +36,31 @@ return {
       -- Let the TOC window autofit so that it doesn't take too much space
       vim.g.vim_markdown_toc_autofit = 1
     end,
-    ft = { "markdown" }
+    ft = { 'markdown' }
   },
 
   {
-    "iamcco/markdown-preview.nvim",
+    'iamcco/markdown-preview.nvim',
     enabled = function()
-      map("n", "<leader>mo", "<cmd>MarkdownPreview<cr>", "Markdown preview Open")
-      map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<cr>", "Markdown preview Stop")
+      map('n', '<leader>mo', '<cmd>MarkdownPreview<cr>', 'Markdown preview Open')
+      map('n', '<leader>ms', '<cmd>MarkdownPreviewStop<cr>', 'Markdown preview Stop')
       if vim.g.is_win or vim.g.is_mac then
         vim.g.mkdp_auto_close = 0
         return true
       end
       return false
     end,
-    build = "cd app && npm install",
-    ft = { "markdown" },
+    build = 'cd app && npm install',
+    ft = { 'markdown' },
   },
 
   {
-    "MeanderingProgrammer/markdown.nvim",
+    'MeanderingProgrammer/markdown.nvim',
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'
     },
-    main = "render-markdown",
+    main = 'render-markdown',
     opts = {
       heading = {
         icons = { '󰎥 ', '󰎨 ', '󰎫 ', '󰎲 ', '󰎯 ', '󰎴 ' },
@@ -71,6 +71,6 @@ return {
       },
       latex = { enabled = false }
     },
-    ft = { "markdown" }
+    ft = { 'markdown' }
   },
 }

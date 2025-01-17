@@ -11,10 +11,11 @@ require('core.plugins')
 
 local plugins = {
   'folke/lazy.nvim',
-  use 'onenord',
+  use 'catppuccin',
   use 'eunuch',
   use 'easy-align',
   use 'windows',
+  use 'capslock',
   use 'telescope',
   use 'treesitter',
   use 'lsp',
@@ -26,21 +27,26 @@ local plugins = {
   use 'gitlinker',
   use 'lazygit',
   use 'lualine',
+  -- use 'feline',
   use 'bufferline',
   use 'hlslens',
   use 'neo-tree',
   use 'fern',
   use 'oil',
   use 'dashboard',
+  use 'noice',
   use 'indent-blankline',
+  use 'mini',
   use 'comment',
   use 'debug',
   use 'database',
   use 'misc',
+  -- use 'eyeliner',
   use 'gx',
   use 'move',
   use 'duplicate',
   use 'multicursors',
+  use 'spectre',
   use 'navbuddy',
   use 'toggleterm',
   use 'ufo',
@@ -54,9 +60,6 @@ local plugins = {
 
 require('lazy').setup({
   spec = plugins,
-  install = {
-    colorscheme = { 'onenord' },
-  },
   performance = {
     rtp = {
       disabled_plugins = { 'netrwPlugin', 'tutor' },
@@ -70,7 +73,7 @@ require('lazy').setup({
   },
 })
 
-local session_file = ".session.vim"
+local session_file = '.session.vim'
 if utils.file_exists(session_file) then
   vim.cmd('source ' .. session_file)
 end

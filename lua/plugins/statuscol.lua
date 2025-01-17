@@ -1,5 +1,5 @@
 return {
-  "luukvbaal/statuscol.nvim",
+  'luukvbaal/statuscol.nvim',
   event = 'BufReadPre',
   config = function()
     local builtin = require('statuscol.builtin')
@@ -11,7 +11,7 @@ return {
     local function foldfunc(args)
       local foldinfo = C.fold_info(args.wp, args.lnum)
       if foldinfo.level > fold_level_limit then
-        return " "
+        return ' '
       end
 
       return builtin.foldfunc(args)
@@ -20,9 +20,9 @@ return {
     require('statuscol').setup {
       relculright = false,
       segments = {
-        { text = { "%s" },                  click = "v:lua.ScSa" },
-        { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-        { text = { foldfunc, " " },         condition = { true, builtin.not_empty }, click = "v:lua.ScFa" },
+        { text = { '%s' },                  click = 'v:lua.ScSa' },
+        { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+        { text = { foldfunc, ' ' },         condition = { true, builtin.not_empty }, click = 'v:lua.ScFa' },
       },
     }
   end,

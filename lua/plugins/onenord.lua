@@ -59,6 +59,6 @@ return {
       },
       custom_colors = {}, -- Overwrite default colors
     })
-    -- vim.cmd([[colorscheme onenord]])
+    vim.cmd([[colorscheme onenord]])
   end,
 }

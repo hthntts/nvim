@@ -1,24 +1,24 @@
 local map = require('core.utils').map
 
 return {
-  "SmiteshP/nvim-navbuddy",
+  'SmiteshP/nvim-navbuddy',
   event = 'VeryLazy',
   dependencies = {
-    "SmiteshP/nvim-navic",
-    "MunifTanjim/nui.nvim"
+    'SmiteshP/nvim-navic',
+    'MunifTanjim/nui.nvim'
   },
   opts = {
     window = {
-      border = "rounded",
+      border = 'rounded',
       size = { height = '40%', width = '100%' },
       position = { row = '96%', col = '50%' },
     },
     node_markers = {
       enabled = true,
       icons = {
-        leaf          = "  ",
-        leaf_selected = " → ",
-        branch        = "  ",
+        leaf          = '  ',
+        leaf_selected = ' → ',
+        branch        = '  ',
       },
     },
     icons = {
@@ -51,5 +51,5 @@ return {
     },
     lsp = { auto_attach = true },
   },
-  map("n", "<leader>nb", "<cmd>Navbuddy<cr>", "Navbuddy"),
+  map('n', '<leader>sn', '<cmd>Navbuddy<cr>', 'Navbuddy'),
 }
