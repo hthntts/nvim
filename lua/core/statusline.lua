@@ -146,7 +146,7 @@ table.insert(active_left, {
 
 -- Readonly indicator
 table.insert(active_left, {
-  provider = " " .. icons.ui.Lock,
+  provider = ' ' .. icons.ui.Lock,
   hl = { bg = 'line_bg' },
   enabled = function() return bo.readonly and bo.buftype ~= 'help' end,
   truncate_hide = true,
@@ -163,6 +163,31 @@ table.insert(active_left, {
   icon = icons.documents.Folder,
   truncate_hide = true,
   priority = 9
+})
+
+-- -- File size
+-- table.insert(active_left, {
+--   -- provider = 'file_size',
+--   hl = function() return { fg = mode_color(), bg = 'line_bg' } end,
+--   left_sep = { str = ' ', hl = { bg = 'line_bg', fg = 'separator_bg' } },
+--   right_sep = { str = '', hl = { fg = 'line_bg', bg = 'separator_bg' } },
+--   truncate_hide = true,
+-- })
+
+-- Trailingspace
+table.insert(active_left, {
+  provider = function()
+    local space = vim.fn.search([[\s\+$]], 'nwc')
+    return space ~= 0 and ' ' .. space or ''
+    -- return space ~= 0 and 'tw:' .. space or ''
+  end,
+  icon = {
+    str = icons.ui.CircleSmall,
+    hl = function() return { fg = 'orange' } end,
+  },
+  hl = { bg = 'line_bg' },
+  left_sep = left_sect.left_sep,
+  right_sep = left_sect.right_sep,
 })
 
 -- Search count
@@ -207,6 +232,47 @@ table.insert(active_left, {
   end,
 })
 
+-- Selectioncount
+table.insert(active_left, {
+  provider = function()
+    local mode = vim.fn.mode()
+    local start_line, end_line, start_pos, end_pos
+
+    if not (mode:find('[vV\22]') ~= nil) then
+      return ''
+    end
+    start_line = vim.fn.line('v')
+    end_line = vim.fn.line('.')
+
+    if mode == 'V' then
+      start_pos = 1
+      end_pos = vim.fn.strlen(vim.fn.getline(end_line)) + 1
+    else
+      start_pos = vim.fn.col('v')
+      end_pos = vim.fn.col('.')
+    end
+
+    local chars = 0
+    for i = start_line, end_line do
+      local line = vim.fn.getline(i)
+      local line_len = vim.fn.strlen(line)
+      local s_pos = (i == start_line) and start_pos or 1
+      local e_pos = (i == end_line) and end_pos or line_len + 1
+      chars = chars + vim.fn.strchars(line:sub(s_pos, e_pos - 1))
+    end
+
+    local lines = math.abs(end_line - start_line) + 1
+    return tostring(lines) .. ' lines | ' .. tostring(chars) .. ' characters'
+  end,
+  icon = {
+    str = icons.ui.BoldPencil,
+    hl = function() return { fg = mode_color() } end,
+  },
+  hl = { bg = 'line_bg' },
+  left_sep = left_sect.left_sep,
+  right_sep = left_sect.right_sep,
+})
+
 table.insert(active_left, {
   provider = left_sect.left_sep.str,
   hl = { fg = 'middle_bg', bg = 'separator_bg' },
@@ -230,7 +296,7 @@ table.insert(active_left, {
   enabled = function() return next(vim.lsp.get_clients()) ~= nil end,
   icon = function()
     return {
-      str = icons.ui.Gear .. " ",
+      str = icons.ui.Gear .. ' ',
       hl = { fg = mode_color() }
     }
   end,
@@ -240,25 +306,25 @@ table.insert(active_left, {
 
 table.insert(active_left, {
   provider = 'diagnostic_errors',
-  icon = " " .. icons.diagnostics.Error,
+  icon = ' ' .. icons.diagnostics.Error,
   hl = { fg = 'error' },
 })
 
 table.insert(active_left, {
   provider = 'diagnostic_warnings',
-  icon = " " .. icons.diagnostics.Warning,
+  icon = ' ' .. icons.diagnostics.Warning,
   hl = { fg = 'warning' },
 })
 
 table.insert(active_left, {
   provider = 'diagnostic_info',
-  icon = " " .. icons.diagnostics.Information,
+  icon = ' ' .. icons.diagnostics.Information,
   hl = { fg = 'info' },
 })
 
 table.insert(active_left, {
   provider = 'diagnostic_hints',
-  icon = " " .. icons.diagnostics.Hint,
+  icon = ' ' .. icons.diagnostics.Hint,
   hl = { fg = 'hint' },
 })
 
@@ -283,26 +349,55 @@ table.insert(active_mid, {
   },
 })
 
+-- venv
+table.insert(active_mid, {
+  use_default_icon = false,
+  provider = function()
+    if vim.bo.filetype ~= 'python' then
+      return ''
+    end
+    local conda_env = os.getenv('CONDA_DEFAULT_ENV')
+    local venv_path = os.getenv('VIRTUAL_ENV')
+
+    if venv_path == nil then
+      if conda_env == nil then
+        return ''
+      else
+        return string.format('conda:%s', conda_env)
+      end
+    else
+      local venv_name = vim.fn.fnamemodify(venv_path, ':t')
+      return string.format('env:%s', venv_name)
+    end
+  end,
+  left_sep = ' ',
+  icon = {
+    str = icons.ui.Rocket .. ' ',
+    hl = { fg = 'dark_text' },
+  },
+  truncate_hide = true,
+})
+
 -------------------
 -- Right section --
 -------------------
 table.insert(active_right, {
   provider = 'git_diff_added',
-  icon = " " .. icons.git.Add,
+  icon = ' ' .. icons.git.Add,
   hl = { fg = 'git_add' },
   truncate_hide = true
 })
 
 table.insert(active_right, {
   provider = 'git_diff_changed',
-  icon = " " .. icons.git.Modified,
+  icon = ' ' .. icons.git.Modified,
   hl = { fg = 'git_change' },
   truncate_hide = true
 })
 
 table.insert(active_right, {
   provider = 'git_diff_removed',
-  icon = " " .. icons.git.Deleted,
+  icon = ' ' .. icons.git.Deleted,
   hl = { fg = 'git_remove' },
   right_sep = '',
   truncate_hide = true
@@ -417,6 +512,28 @@ table.insert(active_right, {
   end,
   icon = ' ',
   priority = 9,
+})
+
+table.insert(active_right, {
+  provider = function()
+    local chars = setmetatable({
+      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    }, { __index = function() return ' ' end })
+    local line_ratio = vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0)
+    local position = math.floor(line_ratio * 100)
+
+    local icon = chars[math.floor(line_ratio * #chars)] .. position .. ' '
+    if position <= 5 then
+      icon = ' TOP '
+    elseif position >= 95 then
+      icon = ' BOT '
+    end
+    return icon
+  end,
+  hl = function()
+    return { fg = 'line_bg', bg = mode_color() }
+  end,
 })
 
 -- fg:           text foreground on regular components
