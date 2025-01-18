@@ -53,7 +53,7 @@ local options = {
   -- timeoutlen = 300,                      -- time to wait for a mapped sequence to complete (in milliseconds)
   grepformat = "%f:%l:%c:%m",
   grepprg = "rg --vimgrep",
-  listchars = { trail = "", tab = "", nbsp = "_", extends = ">", precedes = "<" },
+  listchars = { trail = "⋅", space = "⋅", tab = "", nbsp = "_", extends = ">", precedes = "<" },
   sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal",
 }
 
