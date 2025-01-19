@@ -4,7 +4,7 @@ return {
   config = function()
     require('which-key').setup {
       -- classic, modern, helix
-      preset = 'modern',
+      preset = 'classic',
       delay = 0,
       icons = {
         mappings = false,
