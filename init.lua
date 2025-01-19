@@ -35,7 +35,7 @@ local plugins = {
   use 'fern',
   use 'oil',
   use 'dashboard',
-  use 'noice',
+  -- use 'noice',
   use 'indent-blankline',
   use 'mini',
   use 'comment',
