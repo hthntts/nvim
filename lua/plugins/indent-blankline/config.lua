@@ -2,9 +2,11 @@ return {
   disabled_filetypes = {
     'dashboard',
     'neo-tree',
-    'alpha',
+    'fern',
     'help',
     'lazy',
+    'lazygit',
+    'navbuddy',
     'markdown',
     'mason',
     'noice',
