@@ -76,7 +76,7 @@ return {
           'fern',
           'help',
           'lazy',
-          'lazygit'
+          'lazygit',
           'navbuddy',
           'markdown',
           'mason',

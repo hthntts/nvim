@@ -13,6 +13,7 @@ local plugins = {
   'folke/lazy.nvim',
   use 'catppuccin',
   use 'eunuch',
+  use 'treesj',
   use 'easy-align',
   use 'windows',
   use 'capslock',
