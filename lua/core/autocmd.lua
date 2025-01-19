@@ -215,7 +215,7 @@ api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "Cursor2", { fg = "red", bg = "red" })
 
     -- For floating windows border highlight
-    vim.api.nvim_set_hl(0, "FloatBorder", { fg = "LightGreen" })
+    -- vim.api.nvim_set_hl(0, "FloatBorder", { fg = "LightGreen" })
 
     -- highlight for matching parentheses
     vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true })
@@ -247,6 +247,25 @@ api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- Show cursorline only on active windows
+vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
+  callback = function()
+    if vim.w.auto_cursorline then
+      vim.wo.cursorline = true
+      vim.w.auto_cursorline = false
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
+  callback = function()
+    if vim.wo.cursorline then
+      vim.w.auto_cursorline = true
+      vim.wo.cursorline = false
+    end
+  end,
+})
+
 api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
   group = api.nvim_create_augroup("git_repo_check", { clear = true }),
   pattern = "*",
@@ -273,4 +292,69 @@ api.nvim_create_autocmd("BufReadPre", {
       vim.bo.undolevels = -1
     end
   end,
+})
+
+vim.api.nvim_create_autocmd('CmdlineEnter', {
+  group = vim.api.nvim_create_augroup(
+    'gmr_cmdheight_1_on_cmdlineenter',
+    { clear = true }
+  ),
+  desc = 'Don\'t hide the status line when typing a command',
+  command = ':set cmdheight=1',
+})
+
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  group = vim.api.nvim_create_augroup(
+    'gmr_cmdheight_0_on_cmdlineleave',
+    { clear = true }
+  ),
+  desc = 'Hide cmdline when not typing a command',
+  command = ':set cmdheight=0',
+})
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = vim.api.nvim_create_augroup(
+    'gmr_hide_message_after_write',
+    { clear = true }
+  ),
+  desc = 'Get rid of message after writing a file',
+  pattern = { '*' },
+  command = 'redrawstatus',
+})
+
+
+vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
+  desc = "Remove hl search when enter Insert",
+  callback = vim.schedule_wrap(function()
+    vim.cmd.nohlsearch()
+  end),
+})
+
+-- Create an autocmd group to avoid duplicate autocmds
+vim.api.nvim_create_augroup('SpectrePanelSettings', { clear = true })
+
+-- Add an autocmd to disable relative numbers for the spectre_panel filetype
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'SpectrePanelSettings',
+  pattern = 'spectre_panel',
+  callback = function()
+    vim.wo.relativenumber = false -- Disable relative numbers for this buffer
+    vim.wo.number = false         -- Disable numbers for this buffer
+  end
+})
+
+-- Updates scrolloff on startup and when window is resized
+-- https://github.com/tonymajestro/smart-scrolloff.nvim/
+vim.api.nvim_create_autocmd({ "WinResized" }, {
+  group = vim.api.nvim_create_augroup("smart-scrolloff", { clear = true }),
+  callback = function()
+    local scrolloffPercentage = 0.2
+    vim.opt.scrolloff = math.floor(vim.o.lines * scrolloffPercentage)
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Automatically Split help Buffers to the right",
+  pattern = "help",
+  command = "wincmd L",
 })
