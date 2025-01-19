@@ -29,28 +29,30 @@ return {
       custom_highlights = function(colors)
         return {
           -- TelescopeBorder            = { fg = colors.blue },
-          -- TelescopeMatching          = { fg = colors.flamingo },
-          -- TelescopeSelection         = { fg = colors.text, bg = colors.surface0, bold = true },
-          -- TelescopePromptPrefix      = { bg = colors.surface0 },
-          -- TelescopePromptNormal      = { bg = colors.surface0 },
-          -- TelescopeResultsNormal     = { bg = colors.mantle },
-          -- TelescopePreviewNormal     = { bg = colors.mantle },
-          -- TelescopePromptBorder      = { bg = colors.surface0, fg = colors.surface0 },
-          -- TelescopeResultsBorder     = { bg = colors.mantle, fg = colors.mantle },
-          -- TelescopePreviewBorder     = { bg = colors.mantle, fg = colors.mantle },
-          -- TelescopePromptTitle       = { bg = colors.pink, fg = colors.mantle },
-          -- TelescopeResultsTitle      = { fg = colors.mantle },
-          -- TelescopePreviewTitle      = { bg = colors.green, fg = colors.mantle },
+          TelescopeMatching          = { fg = colors.flamingo },
+          TelescopeSelection         = { fg = colors.text, bg = colors.surface0, bold = true },
+          TelescopePromptPrefix      = { bg = colors.surface0 },
+          TelescopePromptNormal      = { bg = colors.surface0 },
+          TelescopeResultsNormal     = { bg = colors.mantle },
+          TelescopePreviewNormal     = { bg = colors.mantle },
+          TelescopePromptBorder      = { bg = colors.surface0, fg = colors.surface0 },
+          TelescopeResultsBorder     = { bg = colors.mantle, fg = colors.mantle },
+          TelescopePreviewBorder     = { bg = colors.mantle, fg = colors.mantle },
+          TelescopePromptTitle       = { bg = colors.pink, fg = colors.mantle },
+          TelescopeResultsTitle      = { fg = colors.mantle },
+          TelescopePreviewTitle      = { bg = colors.green, fg = colors.mantle },
 
           -- FloatBorder                = { fg = colors.mantle, bg = colors.mantle },
           -- NeotreeFloatBorder         = { fg = colors.mantle, bg = colors.mantle },
           -- NeotreeFloatNormal         = { fg = colors.cyan, bg = colors.surface0 },
           -- NeoTreeFloatTitle          = { fg = colors.yellow, bg = colors.bg },
 
+          -- Neogit
           NeogitDiffContextHighlight = { fg = colors.fg, bg = colors.mantle },
 
           Pmenu                      = { bg = colors.mantle },
 
+          -- Navbuddy
           -- NavbuddyName               = { fg = colors.mantle },
           -- NavbuddyScope              = { fg = colors.rosewater },
           NavbuddyFloatBorder        = { fg = colors.cyan, bg = colors.mantle },
@@ -82,8 +84,11 @@ return {
           NavbuddyOperator           = { fg = colors.sky },
           NavbuddyTypeParameter      = { fg = colors.yellow },
 
+          -- Eyeliner
           EyelinerPrimary            = { fg = colors.red, underline = true, bold = true },
           EyelinerSecondary          = { fg = colors.sky, underline = true, bold = true },
+
+          MiniIndentScopeSymbol      = { fg = '#39536c', bold = true },
         }
       end
     })
