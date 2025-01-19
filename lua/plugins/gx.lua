@@ -4,7 +4,7 @@ return {
   dependencies = 'nvim-lua/plenary.nvim',
   cmd = 'Browse',
   keys = {
-    { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' }, desc = 'Open link (search current word)' },
+    { '<leader>ob', '<cmd>Browse<cr>', mode = { 'n', 'x' }, desc = 'Open link (search current word)' },
   },
   opts = {
     handlers = { search = true },
