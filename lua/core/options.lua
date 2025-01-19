@@ -62,7 +62,7 @@ vim.opt.shortmess:append({ W = true, I = true, c = true })
 vim.opt.splitkeep = "screen"
 
 -- Enable spell check
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = { "en_us" }
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
