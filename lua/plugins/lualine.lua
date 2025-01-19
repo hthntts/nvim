@@ -1,8 +1,8 @@
 local icons = require('core.icons')
 
 return {
-  "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+  'nvim-lualine/lualine.nvim',
+  event = 'VeryLazy',
   config = function()
     local lualine = require('lualine')
     local colors = {
@@ -17,7 +17,7 @@ return {
       magenta  = '#c678dd',
       blue     = '#51afef',
       red      = '#ec5f67',
-      bar      = "#383F4E"
+      bar      = '#383F4E'
     }
 
     local mode_color = {
@@ -70,14 +70,19 @@ return {
           normal = { c = { fg = colors.fg, bg = colors.bar } },
           inactive = { c = { fg = colors.fg, bg = colors.bar } },
         },
-        -- disabled_filetypes = {
-        --   "dashboard",
-        --   "lazygit",
-        --   "lazy",
-        --   "NeogitStatus",
-        --   "fern",
-        --   "neo-tree",
-        -- },
+        disabled_filetypes = {
+          'dashboard',
+          'neo-tree',
+          'fern',
+          'help',
+          'lazy',
+          'lazygit'
+          'navbuddy',
+          'markdown',
+          'mason',
+          'noice',
+          'toggleterm',
+        },
         extensions = { 'quickfix' }
       },
       sections = {
@@ -172,10 +177,10 @@ return {
     -- trailing_space
     ins_left {
       function()
-        local space = vim.fn.search([[\s\+$]], "nwc")
-        return space ~= 0 and "tw:" .. space or ""
+        local space = vim.fn.search([[\s\+$]], 'nwc')
+        return space ~= 0 and 'tw:' .. space or ''
       end,
-      color = { fg = colors.red, gui = "bold" },
+      color = { fg = colors.red, gui = 'bold' },
     }
 
     -- selectioncount
@@ -184,18 +189,18 @@ return {
         local mode = vim.fn.mode()
         local start_line, end_line, start_pos, end_pos
 
-        if not (mode:find("[vV\22]") ~= nil) then
-          return ""
+        if not (mode:find('[vV\22]') ~= nil) then
+          return ''
         end
-        start_line = vim.fn.line("v")
-        end_line = vim.fn.line(".")
+        start_line = vim.fn.line('v')
+        end_line = vim.fn.line('.')
 
-        if mode == "V" then
+        if mode == 'V' then
           start_pos = 1
           end_pos = vim.fn.strlen(vim.fn.getline(end_line)) + 1
         else
-          start_pos = vim.fn.col("v")
-          end_pos = vim.fn.col(".")
+          start_pos = vim.fn.col('v')
+          end_pos = vim.fn.col('.')
         end
 
         local chars = 0
@@ -208,9 +213,9 @@ return {
         end
 
         local lines = math.abs(end_line - start_line) + 1
-        return tostring(lines) .. " lines, " .. tostring(chars) .. " characters"
+        return tostring(lines) .. ' lines, ' .. tostring(chars) .. ' characters'
       end,
-      color = { fg = colors.green, gui = "bold" },
+      color = { fg = colors.green, gui = 'bold' },
     }
 
     -- Insert mid section. You can make any number of sections in neovim :)
@@ -246,28 +251,28 @@ return {
         return msg
       end,
       icon = icons.ui.Gear,
-      color = { fg = colors.fg, gui = "bold" },
+      color = { fg = colors.fg, gui = 'bold' },
     }
 
     -- Add components to right sections
     -- virtual_env
     ins_right {
       function()
-        if vim.bo.filetype ~= "python" then
-          return ""
+        if vim.bo.filetype ~= 'python' then
+          return ''
         end
-        local conda_env = os.getenv("CONDA_DEFAULT_ENV")
-        local venv_path = os.getenv("VIRTUAL_ENV")
+        local conda_env = os.getenv('CONDA_DEFAULT_ENV')
+        local venv_path = os.getenv('VIRTUAL_ENV')
 
         if venv_path == nil then
           if conda_env == nil then
-            return ""
+            return ''
           else
-            return string.format("conda:%s", conda_env)
+            return string.format('conda:%s', conda_env)
           end
         else
-          local venv_name = vim.fn.fnamemodify(venv_path, ":t")
-          return string.format("venv:%s", venv_name)
+          local venv_name = vim.fn.fnamemodify(venv_path, ':t')
+          return string.format('venv:%s', venv_name)
         end
       end,
       color = { fg = colors.violet },
@@ -277,18 +282,18 @@ return {
     ins_right {
       'fileformat',
       symbols = {
-        unix = "LF",
-        dos = "CRLF",
-        mac = "CR",
+        unix = 'LF',
+        dos = 'CRLF',
+        mac = 'CR',
       },
-      color = { fg = colors.cyan, gui = "bold" },
+      color = { fg = colors.cyan, gui = 'bold' },
     }
 
     -- filetype
     ins_right {
-      "filetype",
+      'filetype',
       icon_only = false,
-      color = { fg = colors.blue, gui = "bold" }
+      color = { fg = colors.blue, gui = 'bold' }
     }
 
     -- branch
@@ -301,7 +306,7 @@ return {
     -- diagnostics
     ins_right {
       'diagnostics',
-      sources = { "nvim_lsp", "nvim_diagnostic", "nvim_workspace_diagnostic" },
+      sources = { 'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic' },
       symbols = {
         error = icons.diagnostics.Error,
         warn = icons.diagnostics.Warning,
