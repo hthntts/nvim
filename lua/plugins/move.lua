@@ -6,11 +6,11 @@ return {
     'MoveBlock'
   },
   keys = {
-    { '<A-up>',   ':MoveLine(-1)<CR>',  mode = 'n' },
-    { '<A-down>', ':MoveLine(1)<CR>',   mode = 'n' },
+    { '<A-up>',   ':MoveLine(-1)<CR>',  mode = 'n', noremap = true, silent = true },
+    { '<A-down>', ':MoveLine(1)<CR>',   mode = 'n', noremap = true, silent = true },
 
-    { '<A-up>',   ':MoveBlock(-1)<CR>', mode = 'v' },
-    { '<A-down>', ':MoveBlock(1)<CR>',  mode = 'v' },
+    { '<A-up>',   ':MoveBlock(-1)<CR>', mode = 'v', noremap = true, silent = true },
+    { '<A-down>', ':MoveBlock(1)<CR>',  mode = 'v', noremap = true, silent = true },
   },
 
   opts = {
