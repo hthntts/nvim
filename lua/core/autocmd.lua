@@ -156,7 +156,7 @@ local function run()
 end
 
 autocmd({ 'BufWinEnter', 'FileType' }, {
-  group    = augroup('nvim-lastplace', {}),
+  group    = augroup('nvim_lastplace', {}),
   callback = run
 })
 
@@ -298,7 +298,7 @@ autocmd({ 'InsertEnter', 'CmdlineEnter' }, {
 
 autocmd({ 'WinResized' }, {
   desc = 'Updates scrolloff on startup and when window is resized',
-  group = augroup('smart-scrolloff', { clear = true }),
+  group = augroup('smart_scrolloff', { clear = true }),
   callback = function()
     local scrolloffPercentage = 0.2
     vim.opt.scrolloff = math.floor(vim.o.lines * scrolloffPercentage)
@@ -307,7 +307,7 @@ autocmd({ 'WinResized' }, {
 
 autocmd('FileType', {
   desc = 'Add an autocmd to disable relative numbers for the special filetype',
-  group = augroup('spectial-filetype', { clear = true }),
+  group = augroup('spectial_filetype', { clear = true }),
   pattern = { 'spectre_panel', 'qf', 'vim' },
   callback = function()
     vim.wo.relativenumber = false
@@ -336,4 +336,12 @@ autocmd('FileType', {
   desc = 'Automatically Split help Buffers to the right',
   pattern = 'help',
   command = 'wincmd L',
+})
+
+autocmd({ "FileType" }, {
+  group = augroup('wrap_spell', { clear = true }),
+  pattern = { "text", "gitcommit", "markdown", "conf" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
 })
