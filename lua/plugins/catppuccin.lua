@@ -28,6 +28,7 @@ return {
 
       custom_highlights = function(colors)
         return {
+          -- Telescope
           -- TelescopeBorder            = { fg = colors.blue },
           TelescopeMatching          = { fg = colors.flamingo },
           TelescopeSelection         = { fg = colors.text, bg = colors.surface0, bold = true },
@@ -43,52 +44,58 @@ return {
           TelescopePreviewTitle      = { bg = colors.green, fg = colors.mantle },
 
           -- FloatBorder                = { fg = colors.mantle, bg = colors.mantle },
-          -- NeotreeFloatBorder         = { fg = colors.mantle, bg = colors.mantle },
-          -- NeotreeFloatNormal         = { fg = colors.cyan, bg = colors.surface0 },
-          -- NeoTreeFloatTitle          = { fg = colors.yellow, bg = colors.bg },
+
+          -- NeoTree
+          NeotreeFloatBorder         = { fg = colors.mantle, bg = colors.mantle },
+          NeotreeFloatNormal         = { fg = colors.cyan, bg = colors.surface0 },
+          NeoTreeFloatTitle          = { fg = colors.yellow, bg = colors.bg },
 
           -- Neogit
           NeogitDiffContextHighlight = { fg = colors.fg, bg = colors.mantle },
 
+          -- Menu
           Pmenu                      = { bg = colors.mantle },
 
           -- Navbuddy
-          -- NavbuddyName               = { fg = colors.mantle },
-          -- NavbuddyScope              = { fg = colors.rosewater },
-          NavbuddyFloatBorder        = { fg = colors.cyan, bg = colors.mantle },
-          NavbuddyNormalFloat        = { fg = colors.cyan, bg = colors.mantle },
+          -- NavbuddyBoolean            = { fg = colors.mantle },
+          -- NavbuddyEvent              = { fg = colors.mantle },
           -- NavbuddyFile               = { fg = colors.mantle },
-          NavbuddyModule             = { fg = colors.mauve },
+          -- NavbuddyKey                = { fg = colors.mantle },
+          -- NavbuddyName               = { fg = colors.mantle },
           -- NavbuddyNamespace          = { fg = colors.mantle },
-          NavbuddyPackage            = { fg = colors.sky },
-          NavbuddyClass              = { fg = colors.yellow },
-          NavbuddyMethod             = { fg = colors.blue },
+          -- NavbuddyNull               = { fg = colors.mantle },
           -- NavbuddyProperty           = { fg = colors.mantle },
-          NavbuddyField              = { fg = colors.sky },
+          -- NavbuddyScope              = { fg = colors.rosewater },
+          -- NavbuddyStruct             = { fg = colors.mantle },
+          NavbuddyArray              = { fg = colors.mauve },
+          NavbuddyClass              = { fg = colors.yellow },
+          NavbuddyConstant           = { fg = colors.peach },
           NavbuddyConstructor        = { fg = colors.peach },
           NavbuddyEnum               = { fg = colors.yellow },
-          NavbuddyInterface          = { fg = colors.yellow },
-          NavbuddyFunction           = { fg = colors.blue },
-          NavbuddyVariable           = { fg = colors.sapphire },
-          NavbuddyConstant           = { fg = colors.peach },
-          NavbuddyString             = { fg = colors.green },
-          NavbuddyNumber             = { fg = colors.peach },
-          -- NavbuddyBoolean            = { fg = colors.mantle },
-          NavbuddyArray              = { fg = colors.mauve },
-          NavbuddyObject             = { fg = colors.mauve },
-          -- NavbuddyKey                = { fg = colors.mantle },
-          -- NavbuddyNull               = { fg = colors.mantle },
           NavbuddyEnumMember         = { fg = colors.yellow },
-          -- NavbuddyStruct             = { fg = colors.mantle },
-          -- NavbuddyEvent              = { fg = colors.mantle },
+          NavbuddyField              = { fg = colors.sky },
+          NavbuddyFloatBorder        = { fg = colors.cyan, bg = colors.mantle },
+          NavbuddyFunction           = { fg = colors.blue },
+          NavbuddyInterface          = { fg = colors.yellow },
+          NavbuddyMethod             = { fg = colors.blue },
+          NavbuddyModule             = { fg = colors.mauve },
+          NavbuddyNormalFloat        = { fg = colors.cyan, bg = colors.mantle },
+          NavbuddyNumber             = { fg = colors.peach },
+          NavbuddyObject             = { fg = colors.mauve },
           NavbuddyOperator           = { fg = colors.sky },
+          NavbuddyPackage            = { fg = colors.sky },
+          NavbuddyString             = { fg = colors.green },
           NavbuddyTypeParameter      = { fg = colors.yellow },
+          NavbuddyVariable           = { fg = colors.sapphire },
 
           -- Eyeliner
           EyelinerPrimary            = { fg = colors.red, underline = true, bold = true },
           EyelinerSecondary          = { fg = colors.sky, underline = true, bold = true },
 
-          MiniIndentScopeSymbol      = { fg = '#39536c', bold = true },
+          -- GitSigns
+          GitSignsAddLnInline        = { fg = colors.green, underline = true },
+          GitSignsChangeLnInline     = { fg = colors.yellow, underline = true, bold = true },
+          GitSignsDeleteLnInline     = { fg = colors.red, underline = true },
         }
       end
     })
