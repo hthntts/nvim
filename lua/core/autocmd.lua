@@ -1,54 +1,52 @@
 local utils = require('core.utils')
 local fn = vim.fn
 local api = vim.api
+local autocmd = api.nvim_create_autocmd
+local augroup = api.nvim_create_augroup
 
--- Display a message when the current file is not in utf-8 format.
--- Note that we need to use `unsilent` command here because of this issue:
--- https://github.com/vim/vim/issues/4379
-api.nvim_create_autocmd({ "BufRead" }, {
-  pattern = "*",
-  group = api.nvim_create_augroup("non_utf8_file", { clear = true }),
+autocmd({ 'BufRead' }, {
+  desc = 'Display a message when the current file is not in utf-8 format',
+  group = augroup('non_utf8_file', { clear = true }),
+  pattern = '*',
   callback = function()
-    if vim.bo.fileencoding ~= "utf-8" then
-      vim.notify("File not in UTF-8 format!", vim.log.levels.WARN, { title = "nvim-config" })
+    if vim.bo.fileencoding ~= 'utf-8' then
+      vim.notify('File not in UTF-8 format!', vim.log.levels.WARN, { title = 'nvim-config' })
     end
   end,
 })
 
--- highlight yanked region, see `:h lua-highlight`
+-- Highlight yanked region
 local yank_group = api.nvim_create_augroup("highlight_yank", { clear = true })
-api.nvim_create_autocmd({ "TextYankPost" }, {
-  pattern = "*",
+autocmd({ 'TextYankPost' }, {
+  pattern = '*',
   group = yank_group,
   callback = function()
-    vim.highlight.on_yank({ higroup = "YankColor", timeout = 300 })
+    vim.highlight.on_yank({ higroup = 'YankColor', timeout = 300 })
   end,
 })
-
-api.nvim_create_autocmd({ "CursorMoved" }, {
-  pattern = "*",
+autocmd({ 'CursorMoved' }, {
+  pattern = '*',
   group = yank_group,
   callback = function()
-    vim.g.current_cursor_pos = vim.fn.getcurpos()
+    vim.g.current_cursor_pos = fn.getcurpos()
   end,
 })
-
-api.nvim_create_autocmd("TextYankPost", {
-  pattern = "*",
+autocmd('TextYankPost', {
+  pattern = '*',
   group = yank_group,
-  callback = function(ev)
-    if vim.v.event.operator == "y" then
-      vim.fn.setpos(".", vim.g.current_cursor_pos)
+  callback = function()
+    if vim.v.event.operator == 'y' then
+      fn.setpos('.', vim.g.current_cursor_pos)
     end
   end,
 })
 
--- Auto-create dir when saving a file, in case some intermediate directory does not exist
-api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = "*",
-  group = api.nvim_create_augroup("auto_create_dir", { clear = true }),
+autocmd({ 'BufWritePre' }, {
+  desc = 'Auto-create dir when saving a file',
+  pattern = '*',
+  group = augroup('auto_create_dir', { clear = true }),
   callback = function(ctx)
-    local dir = fn.fnamemodify(ctx.file, ":p:h")
+    local dir = fn.fnamemodify(ctx.file, ':p:h')
     utils.may_create_dir(dir)
   end,
 })
@@ -56,87 +54,69 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Automatically reload the file if it is changed outside of Nvim, see https://unix.stackexchange.com/a/383044/221410.
 -- It seems that `checktime` does not work in command line. We need to check if we are in command
 -- line before executing this command, see also https://vi.stackexchange.com/a/20397/15292 .
-api.nvim_create_augroup("auto_read", { clear = true })
-
-api.nvim_create_autocmd({ "FileChangedShellPost" }, {
-  pattern = "*",
-  group = "auto_read",
+augroup('auto_read', { clear = true })
+autocmd({ 'FileChangedShellPost' }, {
+  pattern = '*',
+  group = 'auto_read',
   callback = function()
-    vim.notify("File changed on disk. Buffer reloaded!", vim.log.levels.WARN, { title = "nvim-config" })
+    vim.notify('File changed on disk. Buffer reloaded!', vim.log.levels.WARN, { title = 'nvim-config' })
   end,
 })
-
-api.nvim_create_autocmd({ "FocusGained", "CursorHold" }, {
-  pattern = "*",
-  group = "auto_read",
+autocmd({ 'FocusGained', 'CursorHold' }, {
+  pattern = '*',
+  group = 'auto_read',
   callback = function()
-    if fn.getcmdwintype() == "" then
-      vim.cmd("checktime")
+    if fn.getcmdwintype() == '' then
+      vim.cmd('checktime')
     end
   end,
 })
 
--- Resize all windows when we resize the terminal
-api.nvim_create_autocmd("VimResized", {
-  group = api.nvim_create_augroup("win_autoresize", { clear = true }),
-  desc = "Autoresize windows on resizing operation",
-  command = "wincmd =",
+autocmd('VimResized', {
+  desc = 'Autoresize windows on resizing operation',
+  group = augroup('win_autoresize', { clear = true }),
+  command = 'wincmd =',
 })
 
--- local function open_nvim_tree(data)
---   -- check if buffer is a directory
---   local directory = vim.fn.isdirectory(data.file) == 1
---
---   if not directory then
---     return
---   end
---
---   -- create a new, empty buffer
---   vim.cmd.enew()
---
---   -- wipe the directory buffer
---   vim.cmd.bw(data.buf)
---
---   -- open the tree
---   require('nvim-tree.api').tree.open()
--- end
--- api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+local function open_nvim_tree(data)
+  -- check if buffer is a directory
+  local directory = fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  -- create a new, empty buffer
+  vim.cmd.enew()
+
+  -- wipe the directory buffer
+  vim.cmd.bw(data.buf)
+
+  require('nvim-tree.api').tree.open()
+end
+autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
 
 -- Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
-api.nvim_create_augroup("dynamic_smartcase", { clear = true })
-api.nvim_create_autocmd("CmdLineEnter", {
-  group = "dynamic_smartcase",
-  pattern = ":",
+augroup('dynamic_smartcase', { clear = true })
+autocmd('CmdLineEnter', {
+  group = 'dynamic_smartcase',
+  pattern = ':',
   callback = function()
     vim.o.smartcase = false
   end,
 })
-
-api.nvim_create_autocmd("CmdLineLeave", {
-  group = "dynamic_smartcase",
-  pattern = ":",
+autocmd('CmdLineLeave', {
+  group = 'dynamic_smartcase',
+  pattern = ':',
   callback = function()
     vim.o.smartcase = true
   end,
 })
 
-api.nvim_create_autocmd("TermOpen", {
-  group = api.nvim_create_augroup("term_start", { clear = true }),
-  pattern = "*",
-  callback = function()
-    -- Do not use number and relative number for terminal inside nvim
-    vim.wo.relativenumber = false
-    vim.wo.number = false
-
-    -- Go to insert mode by default to start typing command
-    vim.cmd("startinsert")
-  end,
-})
-
 -- Return to last cursor position when opening a file
 -- see: https://github.com/ethanholz/nvim-lastplace/blob/main/lua/nvim-lastplace/init.lua
-local ignore_buftype = { "quickfix", "nofile", "help" }
-local ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" }
+local ignore_buftype = { 'quickfix', 'nofile', 'help' }
+local ignore_filetype = { 'gitcommit', 'gitrebase', 'svn', 'hgcommit' }
 
 local function run()
   if vim.tbl_contains(ignore_buftype, vim.bo.buftype) then
@@ -151,17 +131,17 @@ local function run()
 
   -- If a line has already been specified on the command line, we are done
   --   nvim file +num
-  if vim.fn.line(".") > 1 then
+  if fn.line('.') > 1 then
     return
   end
 
-  local last_line = vim.fn.line([['"]])
-  local buff_last_line = vim.fn.line("$")
+  local last_line = fn.line([['"]])
+  local buff_last_line = fn.line('$')
 
   -- If the last line is set and the less than the last line in the buffer
   if last_line > 0 and last_line <= buff_last_line then
-    local win_last_line = vim.fn.line("w$")
-    local win_first_line = vim.fn.line("w0")
+    local win_last_line = fn.line('w$')
+    local win_first_line = fn.line('w0')
     -- Check if the last line of the buffer is the same as the win
     if win_last_line == buff_last_line then
       -- Set line to last line edited
@@ -175,16 +155,16 @@ local function run()
   end
 end
 
-vim.api.nvim_create_autocmd({ 'BufWinEnter', 'FileType' }, {
-  group    = vim.api.nvim_create_augroup('nvim-lastplace', {}),
+autocmd({ 'BufWinEnter', 'FileType' }, {
+  group    = augroup('nvim-lastplace', {}),
   callback = run
 })
 
-local number_toggle_group = api.nvim_create_augroup("numbertoggle", { clear = true })
-api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
-  pattern = "*",
+local number_toggle_group = augroup('numbertoggle', { clear = true })
+autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
+  desc = 'Togger line number',
   group = number_toggle_group,
-  desc = "Togger line number",
+  pattern = '*',
   callback = function()
     if vim.wo.number then
       vim.wo.relativenumber = true
@@ -192,9 +172,9 @@ api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }
   end,
 })
 
-api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' }, {
+  desc = 'Togger line number',
   group = number_toggle_group,
-  desc = "Togger line number",
   callback = function()
     if vim.wo.number then
       vim.wo.relativenumber = false
@@ -202,39 +182,38 @@ api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, 
   end,
 })
 
-api.nvim_create_autocmd("ColorScheme", {
-  group = api.nvim_create_augroup("custom_highlight", { clear = true }),
-  pattern = "*",
-  desc = "Define or overrride some highlight groups",
+autocmd('ColorScheme', {
+  desc = 'Define or overrride some highlight groups',
+  group = augroup('custom_highlight', { clear = true }),
+  pattern = '*',
   callback = function()
     -- For yank highlight
-    vim.api.nvim_set_hl(0, "YankColor", { fg = "#34495E", bg = "#2ECC71", ctermfg = 59, ctermbg = 41 })
+    api.nvim_set_hl(0, 'YankColor', { fg = '#34495E', bg = '#f9e2af', ctermfg = 59, ctermbg = 41 })
 
     -- For cursor colors
-    vim.api.nvim_set_hl(0, "Cursor", { fg = "black", bg = "#00c918", bold = true })
-    vim.api.nvim_set_hl(0, "Cursor2", { fg = "red", bg = "red" })
+    api.nvim_set_hl(0, 'TermCursor', { fg = 'black', bg = '#74c7ec', bold = true })
+    api.nvim_set_hl(0, 'Cursor', { fg = 'black', bg = '#74c7ec', bold = true })
 
     -- For floating windows border highlight
-    -- vim.api.nvim_set_hl(0, "FloatBorder", { fg = "LightGreen" })
+    -- api.nvim_set_hl(0, 'FloatBorder', { fg = 'LightGreen' })
 
     -- highlight for matching parentheses
-    vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true })
+    api.nvim_set_hl(0, 'MatchParen', { bold = true, underline = true })
   end,
 })
 
-api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  group = api.nvim_create_augroup("auto_close_win", { clear = true }),
-  desc = "Quit Nvim if we have only one window, and its filetype match our pattern",
-  callback = function(ev)
-    local quit_filetypes = { "qf", "vista", "NvimTree" }
-
+autocmd('BufEnter', {
+  desc = 'Quit Nvim if we have only one window, and its filetype match our pattern',
+  pattern = '*',
+  group = augroup('auto_close_win', { clear = true }),
+  callback = function()
+    local quit_filetypes = { 'qf', 'fern', 'neo-tree' }
     local should_quit = true
     local tabwins = api.nvim_tabpage_list_wins(0)
 
     for _, win in pairs(tabwins) do
       local buf = api.nvim_win_get_buf(win)
-      local bf = fn.getbufvar(buf, "&filetype")
+      local bf = fn.getbufvar(buf, '&filetype')
 
       if fn.index(quit_filetypes, bf) == -1 then
         should_quit = false
@@ -242,13 +221,13 @@ api.nvim_create_autocmd("BufEnter", {
     end
 
     if should_quit then
-      vim.cmd("qall")
+      vim.cmd('qall')
     end
   end,
 })
 
--- Show cursorline only on active windows
-vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
+autocmd({ 'InsertLeave', 'WinEnter' }, {
+  desc = 'Show cursorline only on active windows',
   callback = function()
     if vim.w.auto_cursorline then
       vim.wo.cursorline = true
@@ -257,7 +236,8 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
+autocmd({ 'InsertEnter', 'WinLeave' }, {
+  desc = 'Hide cursorline when inactive windows',
   callback = function()
     if vim.wo.cursorline then
       vim.w.auto_cursorline = true
@@ -266,95 +246,77 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
   end,
 })
 
-api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
-  group = api.nvim_create_augroup("git_repo_check", { clear = true }),
-  pattern = "*",
-  desc = "Check if we are inside Git repo",
-  command = "call utils#InsideGitRepo()",
+autocmd({ 'VimEnter', 'DirChanged' }, {
+  desc = 'Check if we are inside Git repo',
+  group = augroup('git_repo_check', { clear = true }),
+  pattern = '*',
+  command = 'call utils#InsideGitRepo()',
 })
 
--- ref: https://vi.stackexchange.com/a/169/15292
-api.nvim_create_autocmd("BufReadPre", {
-  group = api.nvim_create_augroup("large_file", { clear = true }),
-  pattern = "*",
-  desc = "Check if we are inside Git repo",
+autocmd('BufReadPre', {
+  desc = 'Check if we are inside Git repo',
+  group = augroup('large_file', { clear = true }),
+  pattern = '*',
   callback = function(ev)
     local file_size_limit = 524288 -- 0.5MB
     local f = ev.file
-
     if fn.getfsize(f) > file_size_limit or fn.getfsize(f) == -2 then
-      vim.o.eventignore = "all"
-      --  turning off relative number helps a lot
+      vim.o.eventignore = 'all'
       vim.wo.relativenumber = false
-
       vim.bo.swapfile = false
-      vim.bo.bufhidden = "unload"
+      vim.bo.bufhidden = 'unload'
       vim.bo.undolevels = -1
     end
   end,
 })
 
-vim.api.nvim_create_autocmd('CmdlineEnter', {
-  group = vim.api.nvim_create_augroup(
-    'gmr_cmdheight_1_on_cmdlineenter',
-    { clear = true }
-  ),
-  desc = 'Don\'t hide the status line when typing a command',
+autocmd('CmdlineEnter', {
+  desc = 'Do not hide the status line when typing a command',
+  group = augroup('gmr_cmdheight_1_on_cmdlineenter', { clear = true }),
   command = ':set cmdheight=1',
 })
 
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-  group = vim.api.nvim_create_augroup(
-    'gmr_cmdheight_0_on_cmdlineleave',
-    { clear = true }
-  ),
+autocmd('CmdlineLeave', {
   desc = 'Hide cmdline when not typing a command',
+  group = augroup('gmr_cmdheight_0_on_cmdlineleave', { clear = true }),
   command = ':set cmdheight=0',
 })
 
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = vim.api.nvim_create_augroup(
-    'gmr_hide_message_after_write',
-    { clear = true }
-  ),
+autocmd('BufWritePost', {
   desc = 'Get rid of message after writing a file',
+  group = augroup('gmr_hide_message_after_write', { clear = true }),
   pattern = { '*' },
   command = 'redrawstatus',
 })
 
-
-vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
-  desc = "Remove hl search when enter Insert",
+autocmd({ 'InsertEnter', 'CmdlineEnter' }, {
+  desc = 'Remove hl search when enter Insert',
   callback = vim.schedule_wrap(function()
     vim.cmd.nohlsearch()
   end),
 })
 
--- Create an autocmd group to avoid duplicate autocmds
-vim.api.nvim_create_augroup('SpectrePanelSettings', { clear = true })
-
--- Add an autocmd to disable relative numbers for the spectre_panel filetype
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'SpectrePanelSettings',
-  pattern = 'spectre_panel',
-  callback = function()
-    vim.wo.relativenumber = false -- Disable relative numbers for this buffer
-    vim.wo.number = false         -- Disable numbers for this buffer
-  end
-})
-
--- Updates scrolloff on startup and when window is resized
--- https://github.com/tonymajestro/smart-scrolloff.nvim/
-vim.api.nvim_create_autocmd({ "WinResized" }, {
-  group = vim.api.nvim_create_augroup("smart-scrolloff", { clear = true }),
+autocmd({ 'WinResized' }, {
+  desc = 'Updates scrolloff on startup and when window is resized',
+  group = augroup('smart-scrolloff', { clear = true }),
   callback = function()
     local scrolloffPercentage = 0.2
     vim.opt.scrolloff = math.floor(vim.o.lines * scrolloffPercentage)
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  desc = "Automatically Split help Buffers to the right",
-  pattern = "help",
-  command = "wincmd L",
+autocmd('FileType', {
+  desc = 'Add an autocmd to disable relative numbers for the special filetype',
+  group = augroup('spectial-filetype', { clear = true }),
+  pattern = { 'spectre_panel', 'qf' },
+  callback = function()
+    vim.wo.relativenumber = false
+    vim.wo.number = false
+  end,
+})
+
+autocmd('FileType', {
+  desc = 'Automatically Split help Buffers to the right',
+  pattern = 'help',
+  command = 'wincmd L',
 })
