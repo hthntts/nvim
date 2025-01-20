@@ -308,11 +308,28 @@ autocmd({ 'WinResized' }, {
 autocmd('FileType', {
   desc = 'Add an autocmd to disable relative numbers for the special filetype',
   group = augroup('spectial-filetype', { clear = true }),
-  pattern = { 'spectre_panel', 'qf' },
+  pattern = { 'spectre_panel', 'qf', 'vim' },
   callback = function()
     vim.wo.relativenumber = false
     vim.wo.number = false
   end,
+})
+
+autocmd("FileType", {
+  desc = 'Close on "q"',
+  pattern = {
+    'help',
+    'qf',
+    'man',
+    'checkhealth',
+    'lazy',
+    'vim',
+  },
+  command = [[
+          nnoremap <buffer><silent> q :close<CR>
+          nnoremap <buffer><silent> <ESC> :close<CR>
+          set nobuflisted
+      ]],
 })
 
 autocmd('FileType', {
