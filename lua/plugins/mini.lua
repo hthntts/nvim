@@ -58,7 +58,7 @@ return {
       -- - gsip
       require('mini.operators').setup()
 
-      require('mini.jump2d').setup({ mappings = { start_jumping = '<F1>' } })
+      require('mini.jump2d').setup()
 
       require('mini.files').setup()
 
