@@ -318,11 +318,12 @@ autocmd('FileType', {
 autocmd("FileType", {
   desc = 'Close on "q"',
   pattern = {
-    'help',
-    'qf',
-    'man',
     'checkhealth',
+    'gitsigns-blame',
+    'help',
     'lazy',
+    'man',
+    'qf',
     'vim',
   },
   command = [[
