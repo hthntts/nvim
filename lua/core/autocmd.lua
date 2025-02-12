@@ -78,23 +78,23 @@ autocmd('VimResized', {
   command = 'wincmd =',
 })
 
-local function open_nvim_tree(data)
-  -- check if buffer is a directory
-  local directory = fn.isdirectory(data.file) == 1
+-- local function open_nvim_tree(data)
+--   -- check if buffer is a directory
+--   local directory = fn.isdirectory(data.file) == 1
 
-  if not directory then
-    return
-  end
+--   if not directory then
+--     return
+--   end
 
-  -- create a new, empty buffer
-  vim.cmd.enew()
+--   -- create a new, empty buffer
+--   vim.cmd.enew()
 
-  -- wipe the directory buffer
-  vim.cmd.bw(data.buf)
+--   -- wipe the directory buffer
+--   vim.cmd.bw(data.buf)
 
-  require('nvim-tree.api').tree.open()
-end
-autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
+--   require('nvim-tree.api').tree.open()
+-- end
+-- autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
 
 -- Do not use smart case in command line mode, extracted from https://vi.stackexchange.com/a/16511/15292.
 augroup('dynamic_smartcase', { clear = true })
