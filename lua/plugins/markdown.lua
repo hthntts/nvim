@@ -80,4 +80,13 @@ return {
     dependencies = 'nvim-treesitter/nvim-treesitter',
   },
 
+  {
+    'jubnzv/mdeval.nvim',
+    config = function()
+      map('n', '<leader>om', '<cmd>MdEval<cr>', 'Markdown Code Block')
+      require('mdeval').setup({
+        require_confirmation = false,
+      })
+    end,
+  },
 }
