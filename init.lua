@@ -1,7 +1,7 @@
 vim.loader.enable()
 local utils = require('core.utils')
 local use = utils.use
-utils.is_compatible_version('0.10.2')
+utils.is_compatible_version('0.11.5')
 
 require('core.globals')
 require('core.options')
