@@ -28,7 +28,7 @@ local plugins = {
   use 'gitlinker',
   use 'lazygit',
   -- use 'lualine',
-  use 'feline',
+  -- use 'feline',
   use 'bufferline',
   use 'hlslens',
   use 'neo-tree',
