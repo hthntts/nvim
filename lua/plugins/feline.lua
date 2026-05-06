@@ -1,5 +1,5 @@
 return {
-  'freddiehaddad/feline.nvim',
+  'famiu/feline.nvim',
   event = 'VeryLazy',
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
